@@ -27,7 +27,17 @@ window.onload = () => {
             console.log('Response from server:', result);
 
             if (result.success) {
+                const certificationType = result.user.certification_type;
+                console.log('User Certification Type:', certificationType);
+                if (certificationType === 'Medical' || certificationType === 'Security')
+                {
+                    console.log('Specific handling for certification type:', certificationType);
+                    window.location.href = 'eventLive.html';
+                }
+                else{
+                localStorage.setItem('userDetails', JSON.stringify(result.user));
                 window.location.href = 'madaHomePage.html';
+                }
             } else {
                 alert(result.message || 'Login failed');
             }
