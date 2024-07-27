@@ -1848,3 +1848,12 @@ textarea {
     position: relative;
     right: 10px;
 }
+.event-map {
+    position: absolute;
+    top: 30%; /* מיקום התמונה מתחת לטקסט */
+    left: 45%;
+    transform: translateX(-50%);
+    margin-top: 60px; /* רווח בין המשפט לתמונה */
+    width: 300px; /* גודל התמונה, ניתן להתאים לפי הצורך */
+    height: 600px; /* שמירה על יחס התמונה */
+}
