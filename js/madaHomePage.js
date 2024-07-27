@@ -34,8 +34,8 @@ async function getAllNotification() {
                 dateElement.appendChild(dateDiv);
 
                 const eventDiv = document.createElement('div');
-                eventDiv.classList.add('eventDiv'); // הוספת מחלקה
-                eventDiv.textContent = `${notification.notfication}`;
+                eventDiv.classList.add('eventDiv'); 
+                eventDiv.innerHTML = `<span class="bullet-point">•</span> ${notification.notfication}`;
                 highPossibilityEventsElement.appendChild(eventDiv);
 
                 const mapDiv = document.createElement('div');
