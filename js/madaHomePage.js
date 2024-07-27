@@ -44,18 +44,10 @@ async function getAllNotification() {
             mapPointsElement.innerHTML = '';
 
             result.eventNotification.forEach(notification => {
-                const dateDiv = document.createElement('div');
-                dateDiv.textContent =` ${new Date(notification.date).toLocaleDateString()}`;
-                dateElement.appendChild(dateDiv);
-
                 const eventDiv = document.createElement('div');
                 eventDiv.classList.add('eventDiv');
                 eventDiv.innerHTML =` <span class="bullet-point">•</span> ${notification.notfication}`;
-                highPossibilityEventsElement.appendChild(eventDiv);
-
-                const mapDiv = document.createElement('div');
-                mapDiv.innerHTML = `<img src="${notification.day_map}" alt="Day Map">`;
-                mapPointsElement.appendChild(mapDiv);
+                highPossibilityEventsElement.appendChild(eventDiv);                
             });
         } else {
             alert(result.message || 'Load details failed');

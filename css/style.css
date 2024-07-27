@@ -1834,7 +1834,7 @@ textarea {
     position: relative;
     margin: 0 50px; 
     color: black; 
-    bottom: 20px;
+    bottom: 80px;
 }
 .aid-kit-icon {
     position: relative;
@@ -1850,10 +1850,10 @@ textarea {
 }
 .event-map {
     position: absolute;
-    top: 30%; /* מיקום התמונה מתחת לטקסט */
+    top: 30%; 
     left: 45%;
     transform: translateX(-50%);
-    margin-top: 60px; /* רווח בין המשפט לתמונה */
-    width: 300px; /* גודל התמונה, ניתן להתאים לפי הצורך */
-    height: 600px; /* שמירה על יחס התמונה */
+    margin-top: 60px; 
+    width: 300px; 
+    height: 580px; 
 }
