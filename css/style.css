@@ -19,26 +19,19 @@ body {
     overflow-y: auto;
     background: linear-gradient(to bottom right, #000, #BB1717);
 }
-
-
-
 #user-info {
     direction: rtl;
  }
- 
  #user-name {
      margin-right: 10px;
  }
- 
  #site-logo {
      display: flex;
      justify-content: center;
  }
- 
  #site-logo img {
      margin-left: 10px;
  }
- 
  .navbar-nav {
      margin-top: 20px;
  }
@@ -48,7 +41,6 @@ body {
  .navbar .container-fluid .container-fluid-man {
      --bs-gutter-x: 0;
  }
- 
  .navbar-brand , .navbar-brand-man{
      color: #fff;
  }
@@ -59,21 +51,17 @@ body {
  .navbar-nav:hover {
      color: #fff;
  }
- 
  .navbar-nav .nav-link.active {
      color: #fff;
  }
- 
  .navbar-collapse:hover {
      color: #fff;
  }
- 
  #wrapper {
      margin: 23px 23px;
      min-height: 100vh;
      overflow: hidden;
  }
- 
  #logo {
      width: 38px;
      height: 39px;
@@ -81,72 +69,100 @@ body {
      background-image: url("../images/logo_1.png");
      background-size: cover;
  }
- 
  #UserImage {
      background-color: #fff;
      width: 36px;
      height: 36px;
      border-radius: 50%;
  }
- 
  [title~="user_photo"] {
      width: 30px;
      height: 30px;
  }
- 
  @media (max-width: 992px) {
      .navbar-brand {
          position: absolute;
          left: 50%;
          transform: translateX(-50%);
      }
- 
      #logo {
          order: 2;
      }
- 
      .navbar-toggler {
          order: 1;
      }
- 
      #UserImage {
          order: 3;
      }
- 
      .navbar-collapse {
          order: 4;
          margin-top: 20px;
      }
  }
- 
  @media (min-width: 992px) {
      .navbar-collapse {
          justify-content: center;
          margin-top: 20px;
      }
- 
      .navbar-brand {
          position: static;
          transform: none;
      }
- 
      #logo {
          order: 1;
      }
- 
      .navbar-toggler {
          order: 2;
      }
- 
      #UserImage {
          order: 3;
      }
- 
      .navbar-collapse {
          order: 4;
      }
  }
+ /*****************************************************************************************************************************/
+ .mainContainer {
+    width: 100%;
+    margin-top: 0;
+    background-color: #ddd;
+    border-radius: 32px;
+}
+#dateAndTime {
+    display: flex;
+    width: 100%;
+    padding-right: 20px;
+}
+#eventForm{
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+}
+#addEventForm{
+    display: flex;
+    width: 50%;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+.eventDetails{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    direction: rtl;
+    width: 100%;
+}
 
+#addEventFormButton {
+    padding: 10px;
+    background-color: #326ff1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 20px;
+    width: 185px;
+}
+/********************************************************************************************************************************/
 #sort-container {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;

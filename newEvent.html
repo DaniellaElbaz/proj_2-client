@@ -31,7 +31,7 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                         <ul class="navbar-nav mb-2 mb-lg-0">
                             <li class="nav-item"><a class="nav-link" href="madaHomePage.html">דף הבית</a></li>
-                            <li class="nav-item"><a class="nav-link" href="newEvent.html">פתיחת אירוע חדש</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">פתיחת אירוע חדש</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">אירועים פעילים</a></li>
                         </ul>
                     </div>
@@ -40,13 +40,31 @@
         </header>
         <main>
             <div class="mainContainer">
-                <section id ="dataAndTime"></section>
-                <section id ="highPossibilityEvents"></section>
-                <section id ="mapPoints"></section>
-                <div id ="wetter">
-                    <section id ="temp"></section>
-                    <section id ="UV"></section>
+                <div id="eventForm">
+                    <form id="addEventForm">
+                            <div class="eventDetails">
+                                <label for="eventName">שם האירוע:</label>
+                                <input type="text" id="eventName" name="eventName" required>
+                            </div>
+                            <div class="eventDetails">
+                                <label for="eventPlace">מיקום האירוע:</label>
+                                <input type="text" id="eventPlace" name="eventPlace" required>
+                            </div>
+                            <div class="eventDetails">
+                                <label for="maxHelper">כמות משתתפים מקסימלי:</label>
+                                <input type="number" id="maxHelper" name="maxHelper" required>
+                            </div>
+                            <div class="eventDetails">
+                                <label for="eventType">סוג האירוע:</label>
+                                <select id="eventType"></select>
+                            </div>
+                            <div class="eventDetails">
+                                <label for="eventPhotos">הוספת תמונות:</label>
+                                <input type="text" id="eventPhotos" name="eventPhotos" required>
+                            </div>
+                    </form>
                 </div>
+                <button type="submit" id="addEventFormButton">אישור ושליחה</button>
             </div>
         </main>
     </div>
