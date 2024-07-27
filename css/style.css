@@ -1830,3 +1830,15 @@ textarea {
     color: black; 
     bottom: 20px;
 }
+.aid-kit-icon {
+    position: relative;
+    width: 16px; 
+    height: 16px; 
+    right: 10px;
+
+    
+}
+.alert1-icon {
+    position: relative;
+    right: 10px;
+}
