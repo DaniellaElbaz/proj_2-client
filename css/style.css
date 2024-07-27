@@ -145,11 +145,15 @@ body {
         order: 4;
     }
 }
-#map {
-    height: 600px;
+#mainContainer {
+    width: 100%;
+    margin-top: 0;
+    background-color: #ddd;
+    height: 70vh;
+    border-radius: 32px;
 }
-#search {
-    margin: 20px;
+#dateAndTime {
+    
 }
 #sort-container {
     font-family: "Inter", sans-serif;
