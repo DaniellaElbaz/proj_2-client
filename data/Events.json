@@ -1,0 +1,84 @@
+{
+    "category": "Events history",
+    "members": [
+    {
+        "name": "נועה לוינסון",
+        "user_photo":"images/noa_1.png",
+        "events": [
+            {
+                "id": "123",
+                "event_map":"images/noaNewEvent2.png",
+                "event_name": "תאונה קטלנית",
+                "date_and_time": " 29.3.2024 שעה 15:00",
+                "event_place": "כביש 2, סמוך למחלף קיסריה",
+                "event_status": "האירוע הסתיים, 3 הרוגים ו2 פצועים קל",
+                "event_photo": "images/repportImage2.jpg",
+                "type_event":"תאונה",
+                "distance_event":"400 M"
+            },
+            {
+                "id": "124",
+                "event_map":"images/noaTerorEvent1.png",
+                "event_name": "ניסיון דריסה",
+                "date_and_time": " 20.3.2024 שעה 19:00",
+                "event_place": "רחוב הרב קוק, ירושלים",
+                "event_status": "האירוע הסתיים ללא נפגעים",
+                "event_photo": "images/noaTeror2.jpg",
+                "type_event":"טרור"
+            },
+            {
+            "id": "125",
+                "event_map":"images/noaBabyInCar2.png",
+                "event_name": "תינוק נשכח ברכב",
+                "date_and_time": " 19.3.2024 שעה 10:00",
+                "event_place": "רחוב הרצל 34, נתניה",
+                "event_status": "האירוע הסתיים ללא נפגעים",
+                "event_photo": "images/noaBaby2.jpg",
+                "type_event":"תינוק ברכב"
+            }
+        ]
+    },
+    {
+        "name": "יובל כהן",
+        "user_photo":"images/yuval.jpg",
+        "events": [
+            {
+                "id": "123",
+                "event_map":"images/noaNewEvent2.png",
+                "event_name": "תאונה קטלנית",
+                "date_and_time": " 29.3.2024 שעה 15:00",
+                "event_place": "כביש 2, סמוך למחלף קיסריה",
+                "event_status": "האירוע הסתיים, 3 הרוגים ו2 פצועים קל",
+                "event_photo": "images/repportImage2.jpg",
+                "type_event":"תאונה"
+            }
+        ]
+    },
+    {
+        "name": "לידור סלח",
+        "user_photo":"images/lidor.jpg",
+        "events": [
+            {
+                "id": "123",
+                "event_map":"images/noaNewEvent2.png",
+                "event_name": "תאונה קטלנית",
+                "date_and_time": " 29.3.2024 שעה 15:00",
+                "event_place": "כביש 2, סמוך למחלף קיסריה",
+                "event_status": "האירוע הסתיים,3 הרוגים ו2 פצועים קל",
+                "event_photo": "images/repportImage2.jpg",
+                "type_event":"תאונה"
+            },
+            {
+                "id": "129",
+                "event_map":"images/lidorNewEvent3.png",
+                "event_name": "ניסיון דריסה",
+                "date_and_time": " 20.3.2024 שעה 19:00",
+                "event_place": "רחוב הרב קוק, ירושלים",
+                "event_status": "האירוע הסתיים ללא נפגעים",
+                "event_photo": "images/repportImage3.jpg",
+                "type_event":"טרור"
+            }
+        ]
+    }
+]
+}
