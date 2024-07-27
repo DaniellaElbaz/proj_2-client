@@ -22,18 +22,16 @@ body {
 
 
 #user-info {
-    display: flex;
-    align-items: center;
-    margin-right: auto;
+   direction: rtl;
 }
 
 #user-name {
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #site-logo {
     display: flex;
-    align-items: center;
+    justify-content: center;
 }
 
 #site-logo img {
@@ -41,17 +39,22 @@ body {
 }
 
 .navbar-nav {
-    margin-top: 20px; /* Adjust the distance here */
+    margin-top: 20px;
 }
-
-.navbar .container-fluid {
+.navbar .container-fluid-man{
+    width: 100%;
+}
+.navbar .container-fluid .container-fluid-man {
     --bs-gutter-x: 0;
 }
 
-.navbar-brand {
+.navbar-brand , .navbar-brand-man{
     color: #fff;
 }
-
+.navbar-brand-man{
+    margin-top: 10px;
+    margin-right: 10px;
+}
 .navbar-nav:hover {
     color: #fff;
 }
