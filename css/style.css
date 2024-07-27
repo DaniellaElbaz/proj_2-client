@@ -75,6 +75,12 @@ body {
      height: 36px;
      border-radius: 50%;
  }
+ #user-image {
+    background-color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
  [title~="user_photo"] {
      width: 30px;
      height: 30px;
