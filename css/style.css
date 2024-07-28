@@ -1858,18 +1858,22 @@ textarea {
     right: 10px;
     top: 5px;
 }
-.contentWrapper .header-item {
-    margin-left: 100px; 
-}
-.highlighted-container .header-item {
-    margin-left: 120px;
-}
-.event-map-container{
-    margin-left: 30px;
-}
 .divider {
     width: 1px; 
     background-color: black; 
-    height: 100%; 
+    height: 100px;
     margin: 0 20px; 
+}
+.header-and-map {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+    justify-content: center;  
+}
+.highlighted-container {
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100%; 
 }
