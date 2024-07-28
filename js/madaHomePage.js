@@ -47,7 +47,7 @@ async function getAllNotification() {
                 const eventDiv = document.createElement('div');
                 eventDiv.classList.add('eventDiv');
                 eventDiv.innerHTML =` <span class="bullet-point">•</span> ${notification.notfication}`;
-                highPossibilityEventsElement.appendChild(eventDiv);                
+                highPossibilityEventsElement.appendChild(eventDiv);
             });
         } else {
             alert(result.message || 'Load details failed');
