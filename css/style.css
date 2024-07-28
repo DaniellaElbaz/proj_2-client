@@ -1928,15 +1928,18 @@ textarea {
 
 }
 /***************************************************newEvent**************************************************************************/
-.eventPage, .eventPageBody {
+.eventPageBody {
     height: 100%;
     margin: 0;
+}
+.contentWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 
-.newEventmainContainer {
+.newEventMainContainer {
     display: flex;
     flex-direction: column;
     background: linear-gradient(135deg, #B3B3B3, #E6E6E6);
