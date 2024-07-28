@@ -1822,7 +1822,8 @@ textarea {
 .bullet-point {
     color: black;
     font-size: 60px;
-    margin-left: 30px; 
+    margin-left: 30px;
+    margin-right: 30px; 
     line-height: 23px;
     vertical-align: middle; 
 }
@@ -1833,8 +1834,9 @@ textarea {
     font-weight: bold; 
     color: black; 
     margin-top: 30px;
-    margin-right: 150px;
-    margin-left: 150px;
+    margin-left: 100px;
+    
+    
 }
 
 .header-item {
@@ -1850,14 +1852,24 @@ textarea {
     height: 16px; 
     right: 10px;
     top: 8px;
-
-    
 }
 .alert1-icon {
     position: relative;
     right: 10px;
     top: 5px;
 }
-.event-map {
-   
+.contentWrapper .header-item {
+    margin-left: 100px; 
+}
+.highlighted-container .header-item {
+    margin-left: 120px;
+}
+.event-map-container{
+    margin-left: 30px;
+}
+.divider {
+    width: 1px; 
+    background-color: black; 
+    height: 100%; 
+    margin: 0 20px; 
 }
