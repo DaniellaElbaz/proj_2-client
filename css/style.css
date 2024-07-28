@@ -1926,7 +1926,7 @@ textarea {
     background: linear-gradient(135deg, #B3B3B3, #E6E6E6);
     border-radius: 10px;
     height: 60vh;
-    width: 120vh; /* הגדלת הרוחב של המיכל */
+    width: 120vh; 
     padding: 20px;
     box-sizing: border-box;
     align-items: center;
@@ -1935,7 +1935,7 @@ textarea {
 .flexContainer {
     display: flex;
     justify-content: space-between; 
-    gap: 30px; /* רווח גדול יותר בין העמודות */
+    gap: 30px; 
 }
 
 .flexColumn {
@@ -1960,7 +1960,7 @@ textarea {
 .eventDetails input[type="number"],
 .eventDetails select {
     width: 50vh;
-    min-width: 300px; /* הגדרת רוחב מינימלי לשדות הקלט */
+    min-width: 300px; 
     padding: 10px;
     box-sizing: border-box;
 }
@@ -1973,7 +1973,7 @@ textarea {
 .headerContent {
     display: flex;
     align-items: center;
-    margin-bottom: 20px; /* רווח תחתון */
+    margin-bottom: 20px; 
 }
 
 .headerContent p {
