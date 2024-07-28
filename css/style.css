@@ -1928,7 +1928,7 @@ textarea {
 
 }
 /***************************************************newEvent**************************************************************************/
-.event-page, .event-page-body {
+.eventPage, .eventPageBody {
     height: 100%;
     margin: 0;
     display: flex;
@@ -1948,16 +1948,16 @@ textarea {
     align-items: center;
 }
 
-.flex-container {
+.flexContainer {
     display: flex;
     justify-content: space-between; 
     gap: 30px; /* רווח גדול יותר בין העמודות */
 }
 
-.flex-column {
+.flexColumn {
     display: flex;
     flex-direction: column;
-    margin-top: 60px;
+    margin-top: 20px;
     position: relative;
     right: 100%;
 }
@@ -1965,7 +1965,7 @@ textarea {
 .eventDetails {
     display: flex;
     flex-direction: column;
-    margin-bottom: 40px; 
+    margin-top: 30px; 
 }
 
 .eventDetails label {
@@ -1982,7 +1982,18 @@ textarea {
 }
 
 #addEventFormButton {
-    margin-top: 20px;
+    margin-top: 40px;
     padding: 10px 20px;
     align-self: center;
+}
+.headerContent {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* רווח תחתון */
+}
+
+.headerContent p {
+    font-size: 24px; 
+    margin-left: 10px; 
+    margin-bottom: 2px;
 }
