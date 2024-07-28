@@ -1867,8 +1867,20 @@ textarea {
     flex-direction: column;
     align-items: flex-end; 
     justify-content: center; 
-    margin-left: 20vw; 
+    margin-left: 10vw; 
 }
 .eventMap {
     height: 80vh;
+}
+.dividerLeft{
+    width: 2px; 
+    background-color: white; 
+    height:28px;
+    position: relative;
+    left: 13%;
+    height:85vh
+}
+.headerItemWether {
+    position: relative;
+    left: 15%;
 }
