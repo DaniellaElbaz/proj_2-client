@@ -1877,10 +1877,37 @@ textarea {
     background-color: white; 
     height:28px;
     position: relative;
-    left: 13%;
+    left: 14%;
     height:85vh
 }
 .headerItemWether {
     position: relative;
     left: 10%;
+}
+.horizontalDivider {
+    width: 100%;
+    height: 2px; 
+    background-color: white; 
+    position: relative;
+    top: 30px;
+}
+.horizontalDivider2 {
+    height: 2px; 
+    background-color: white;
+    margin-top: 20%;
+}
+.weather-title {
+    position: relative;
+    left: 14%;
+}
+
+.high-events-title {
+    position: relative;
+    right: 15%;
+}
+
+.high-possibility-title {
+    font-size: 20px;
+    font-weight: bold;
+
 }
