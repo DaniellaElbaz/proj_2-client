@@ -14,11 +14,13 @@ window.onload = () => {
     } else {
         console.log('User details not found in local storage.');
     }
+    getEvents();
 };
-async function getEventsType() {
-    const eventType = document.getElementById('eventType');
+async function getEvents() {
+    const eventMDAList = document.getElementById('eventMDAList');
+    
     try {
-        const response = await fetch('https://proj-2-ffwz.onrender.com/api/eventType/', {
+        const response = await fetch('https://proj-2-ffwz.onrender.com/api/eventType/MDA', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,14 +36,12 @@ async function getEventsType() {
         console.log('Response from server:', result);
 
         if (result.success) {
-            eventType.innerHTML = '';
-
-            result.type.forEach(types => {
-                const eventOption = document.createElement('option');
-                eventOption.classList.add('eventOption');
-                eventOption.value =`${types.name}`;
-                eventOption.text =`${types.name}`;
-                eventType.appendChild(eventOption);
+            eventMDAList.innerHTML = '';
+            result.events.forEach(event => {
+                const eventDivMDA = document.createElement('div');
+                eventDivMDA.classList.add('eventMDAListItem');
+                eventDivMDA.innerHTML = createEventHTML(event);
+                eventMDAList.appendChild(eventDivMDA);
             });
         } else {
             alert(result.message || 'Load types failed');
@@ -50,4 +50,15 @@ async function getEventsType() {
         console.error('Error:', error);
         alert('An error occurred while loading types.');
     }
+}
+
+function createEventHTML(event) {
+    return `
+        <h3 class="eventTitle">${event.event_name}</h3>
+        <p class="eventPlace">Place: ${event.place}</p>
+        <p class="eventDate">Date: ${new Date(event.date).toLocaleDateString()}</p>
+        <p class="eventTime">Time: ${event.time}</p>
+        <p class="eventStatus">Status: ${event.status}</p>
+        <img src="images/${event.map}" alt="Event Map" class="eventMapImage">
+    `;
 };

@@ -128,12 +128,6 @@ body {
      }
  }
  /*****************************************************************************************************************************/
- .mainContainer {
-    width: 100%;
-    margin-top: 0;
-    background-color: #ddd;
-    border-radius: 32px;
-}
 #dateAndTime {
     display: flex;
     width: 100%;
@@ -182,6 +176,20 @@ body {
     padding: 15px;
     border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.69);
+}
+.eventMapImage {
+    width: 144px;
+    height: 144px;
+}
+.eventTitle {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+.eventPlace,
+.eventDate,
+.eventTime,
+.eventStatus {
+    margin: 5px;
 }
 
 /******************************************************************************************************************************************/
@@ -1877,6 +1885,14 @@ textarea {
     width: 2px; 
     background-color: white; 
     height:85vh;
+}
+.eventItemMDA {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.eventListMDA {
+    margin-bottom: 10px;
 }
 .header-and-map {
     display: flex;
