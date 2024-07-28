@@ -1798,15 +1798,14 @@ textarea {
 }
 
 .eventDiv {
-    font-size:23px;
+    font-size:2.5vh;
     color: #444;
     padding-top: 30px;
     border-radius: 5px;
     direction: rtl; 
     text-align: right; 
-    margin-bottom: 30px;
     margin-right: 70px;
-    margin-top: 80px;
+    margin-top: 160px;
     
 }
 .mainContainer {
@@ -1830,13 +1829,11 @@ textarea {
 .headerRow {
     display: flex;
     justify-content:space-between; 
-    font-size: 20px; 
+    font-size: 2vh; 
     font-weight: bold; 
     color: black; 
     margin-top: 30px;
     margin-left: 100px;
-    
-    
 }
 
 .header-item {
@@ -1847,32 +1844,31 @@ textarea {
 }
 
 .aid-kit-icon {
-    position: relative;
-    width: 16px; 
-    height: 16px; 
-    right: 10px;
-    top: 8px;
+    width: 2vh; 
+    height: 2vh; 
+    margin-top: 5px;
+    margin-right: 15px;
+
 }
 .alert1-icon {
-    position: relative;
-    right: 10px;
-    top: 5px;
+    margin-right: 15px;
+    margin-top: 5px;
+    width: 2vh; 
+    height: 2vh;
+
 }
 .divider {
     width: 2px; 
     background-color: white; 
-    height: 900px; 
+    height:85vh;
 }
 .header-and-map {
     display: flex;
     flex-direction: column;
     align-items: flex-end; 
-    justify-content: center;  
-}
-.highlighted-container {
-    display: flex;
-    flex-direction: row; 
-    align-items: center; 
     justify-content: center; 
-    height: 100%; 
+    margin-left: 20vw; 
+}
+.eventMap {
+    height: 80vh;
 }
