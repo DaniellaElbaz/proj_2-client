@@ -1812,7 +1812,7 @@ textarea {
     justify-content: center;
     text-align: center;
 }
-/*****************************************************************************************************************************/
+/*************************************************************homepageMada****************************************************************/
 
 #highPossibilityEvents {
     display: flex;
@@ -1942,4 +1942,74 @@ textarea {
     font-size: 20px;
     font-weight: bold;
 
+}
+/***************************************************newEvent**************************************************************************/
+.eventPage, .eventPageBody {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.newEventmainContainer {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #B3B3B3, #E6E6E6);
+    border-radius: 10px;
+    height: 60vh;
+    width: 120vh; 
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.flexContainer {
+    display: flex;
+    justify-content: space-between; 
+    gap: 30px; 
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    position: relative;
+    right: 100%;
+}
+
+.eventDetails {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px; 
+}
+
+.eventDetails label {
+    margin-bottom: 10px;
+}
+
+.eventDetails input[type="text"],
+.eventDetails input[type="number"],
+.eventDetails select {
+    width: 50vh;
+    min-width: 300px; 
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#addEventFormButton {
+    margin-top: 40px;
+    padding: 10px 20px;
+    align-self: center;
+}
+.headerContent {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; 
+}
+
+.headerContent p {
+    font-size: 24px; 
+    margin-left: 10px; 
+    margin-bottom: 2px;
 }
