@@ -75,13 +75,13 @@ function setupFormSubmission() {
     const formButton = document.getElementById('addEventFormButton');
     formButton.addEventListener('click', (event) => {
         event.preventDefault();
-        console.log('Button clicked');  // Log the button click event
+        console.log('Button clicked');
         const inputs = document.querySelectorAll('#addEventForm input[required]');
         let allFilled = true;
         let emptyFields = [];
 
         inputs.forEach(input => {
-            console.log(`Checking field: ${input.id}, value: "${input.value.trim()}"`);  // Log field values
+            console.log(`Checking field: ${input.id}, value: "${input.value.trim()}"`);
             if (!input.value.trim()) {
                 allFilled = false;
                 const label = document.querySelector(`label[for="${input.id}"]`);
@@ -95,6 +95,7 @@ function setupFormSubmission() {
 
         if (allFilled) {
             alert('פרטי האירוע הוזנו בהצלחה', function() {
+                addEvent();
                 window.location.href = 'madaHomePage.html';
             });
         } else {
@@ -123,3 +124,44 @@ function alert(message, callback) {
     
     document.body.appendChild(alertBox);
 }
+async function addEvent(){
+    const eventName = document.getElementById('eventName').value;
+    const eventPlace = document.getElementById('eventPlace').value;
+    const eventDate = "2024-07-24";
+    const eventTime = "15:50";
+    const eventStatus = document.getElementById('eventStatus').value;
+    const eventType = document.getElementById('eventType').value;
+    const maxHelper = document.getElementById('maxHelper').value;
+    const eventPhotos = document.getElementById('eventPhotos').files;
+
+    const formData = new FormData();
+    formData.append('eventName', eventName);
+    formData.append('eventPlace', eventPlace);
+    formData.append('eventDate', eventDate);
+    formData.append('eventTime', eventTime);
+    formData.append('eventStatus', eventStatus);
+    formData.append('eventType', eventType);
+    formData.append('maxHelper', maxHelper);
+
+    for (let i = 0; i < eventPhotos.length; i++) {
+        formData.append('eventPhotos', eventPhotos[i]);
+    }
+
+    try {
+        const response = await fetch('https://proj-2-ffwz.onrender.com/api/eventType/add', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert('Event added successfully');
+        } else {
+            alert(result.message || 'Failed to add event');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while adding the event.');
+    }
+};
