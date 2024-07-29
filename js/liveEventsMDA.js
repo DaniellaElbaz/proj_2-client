@@ -54,11 +54,15 @@ async function getEvents() {
 
 function createEventHTML(event) {
     return `
-        <h3 class="eventTitle">${event.event_name}</h3>
-        <p class="eventPlace">Place: ${event.place}</p>
-        <p class="eventDate">Date: ${new Date(event.date).toLocaleDateString()}</p>
-        <p class="eventTime">Time: ${event.time}</p>
-        <p class="eventStatus">Status: ${event.status}</p>
-        <img src="images/${event.map}" alt="Event Map" class="eventMapImage">
+        <div class="event-details">
+            <h3 class="eventTitle">${event.event_name}</h3>
+            <p class="eventPlace">מקום האירוע: ${event.place}</p>
+            <p class="eventDate">תאריך: ${new Date(event.date).toLocaleDateString()}</p>
+            <p class="eventTime">שעה: ${event.time}</p>
+            <p class="eventStatus">סטטוס: ${event.status}</p>
+        </div>
+        <div class="image-container">
+            <img src="images/${event.map}" alt="Event Map" class="eventMapImage">
+        </div>
     `;
-};
+}
