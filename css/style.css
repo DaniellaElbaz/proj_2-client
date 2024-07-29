@@ -2121,8 +2121,13 @@ textarea {
     gap: 18px;
     position: relative;
     bottom: 240px;
-
-    
+}
+.eventMainParagraph {
+    text-align: right; 
+    margin-right: 50px; 
+    font-size: 1.5em; 
+    color: #F8F9FA; 
+    margin-bottom: 20px; 
 }
 
 
