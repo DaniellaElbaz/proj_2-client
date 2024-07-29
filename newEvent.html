@@ -54,21 +54,25 @@
                                 </div>
                                 <div class="eventDetails">
                                     <label for="eventStatus">סטטוס האירוע:</label>
-                                    <input type="text" id="eventStatus" name="eventStatus" required>
+                                    <input type="text" id="eventStatus" name="eventStatus" maxlength="45" required>
+                                    <span id="eventStatusCounter" class="charCounter">0/45</span>
                                 </div>
                                 <div class="eventDetails">
                                     <label for="eventPhotos">הוספת תמונות:</label>
-                                    <input type="text" id="eventPhotos" name="eventPhotos" required>
+                                    <input type="text" id="eventPhotos" name="eventPhotos" maxlength="45" required>
+                                    <span id="eventPhotosCounter" class="charCounter">0/45</span>
                                 </div>
                             </div>
                             <div class="flexColumn">
                                 <div class="eventDetails">
                                     <label for="eventName">שם האירוע:</label>
-                                    <input type="text" id="eventName" name="eventName" required>
+                                    <input type="text" id="eventName" name="eventName" maxlength="45" required>
+                                    <span id="eventNameCounter" class="charCounter">0/45</span>
                                 </div>
                                 <div class="eventDetails">
                                     <label for="eventPlace">מיקום האירוע:</label>
-                                    <input type="text" id="eventPlace" name="eventPlace" required>
+                                    <input type="text" id="eventPlace" name="eventPlace" maxlength="45" required>
+                                    <span id="eventPlaceCounter" class="charCounter">0/45</span>
                                 </div>
                                 <div class="eventDetails">
                                     <label for="maxHelper">כמות משתתפים מקסימלי:</label>

@@ -15,7 +15,9 @@ window.onload = () => {
         console.log('User details not found in local storage.');
     }
     getEventsType();
+    setupCharacterCounters();
 };
+
 async function getEventsType() {
     const eventType = document.getElementById('eventType');
     try {
@@ -40,8 +42,8 @@ async function getEventsType() {
             result.type.forEach(types => {
                 const eventOption = document.createElement('option');
                 eventOption.classList.add('eventOption');
-                eventOption.value =`${types.name}`;
-                eventOption.text =`${types.name}`;
+                eventOption.value = `${types.name}`;
+                eventOption.text = `${types.name}`;
                 eventType.appendChild(eventOption);
             });
         } else {
@@ -51,4 +53,20 @@ async function getEventsType() {
         console.error('Error:', error);
         alert('An error occurred while loading types.');
     }
+}
+
+function setupCharacterCounters() {
+    const inputs = [
+        { input: document.getElementById('eventStatus'), counter: document.getElementById('eventStatusCounter') },
+        { input: document.getElementById('eventPhotos'), counter: document.getElementById('eventPhotosCounter') },
+        { input: document.getElementById('eventName'), counter: document.getElementById('eventNameCounter') },
+        { input: document.getElementById('eventPlace'), counter: document.getElementById('eventPlaceCounter') }
+    ];
+
+    inputs.forEach(({ input, counter }) => {
+        input.addEventListener('input', () => {
+            const length = input.value.length;
+            counter.textContent = `${length}/45`;
+        });
+    });
 }

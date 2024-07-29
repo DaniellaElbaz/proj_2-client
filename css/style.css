@@ -1948,6 +1948,7 @@ textarea {
     height: 100%;
     margin: 0;
 }
+
 .contentWrapper {
     display: flex;
     justify-content: center;
@@ -2005,6 +2006,7 @@ textarea {
     padding: 10px 20px;
     align-self: center;
 }
+
 .headerContent {
     display: flex;
     align-items: center;
@@ -2015,4 +2017,11 @@ textarea {
     font-size: 24px; 
     margin-left: 10px; 
     margin-bottom: 2px;
+}
+
+.charCounter {
+    font-size: 12px;
+    color: #555;
+    align-self: flex-end;
+    margin-top: 5px;
 }
