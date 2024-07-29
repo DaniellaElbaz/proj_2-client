@@ -71,7 +71,7 @@ function setupCharacterCounters() {
     });
 }
 
-function setupFormSubmission() {
+ function setupFormSubmission() {
     const formButton = document.getElementById('addEventFormButton');
     formButton.addEventListener('click', (event) => {
         event.preventDefault();
@@ -94,8 +94,8 @@ function setupFormSubmission() {
         });
 
         if (allFilled) {
-            alert('פרטי האירוע הוזנו בהצלחה', function() {
-                addEvent();
+            alert('פרטי האירוע הוזנו בהצלחה', async function() {
+                await  addEvent();
                 window.location.href = 'madaHomePage.html';
             });
         } else {
@@ -107,11 +107,9 @@ function setupFormSubmission() {
 function alert(message, callback) {
     const alertBox = document.createElement('div');
     alertBox.classList.add('custom-alert-box');
-    
     const alertMessage = document.createElement('p');
     alertMessage.innerText = message;
     alertBox.appendChild(alertMessage);
-    
     const alertButton = document.createElement('button');
     alertButton.innerText = 'סגור';
     alertButton.addEventListener('click', () => {
@@ -121,7 +119,6 @@ function alert(message, callback) {
         }
     });
     alertBox.appendChild(alertButton);
-    
     document.body.appendChild(alertBox);
 }
 async function addEvent(){
