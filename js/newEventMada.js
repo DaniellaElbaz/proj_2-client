@@ -75,13 +75,13 @@ function setupFormSubmission() {
     const formButton = document.getElementById('addEventFormButton');
     formButton.addEventListener('click', (event) => {
         event.preventDefault();
-        console.log('Button clicked');  
+        console.log('Button clicked');  // Log the button click event
         const inputs = document.querySelectorAll('#addEventForm input[required]');
         let allFilled = true;
         let emptyFields = [];
 
         inputs.forEach(input => {
-            console.log(`Checking field: ${input.id}, value: "${input.value.trim()}"`);  
+            console.log(`Checking field: ${input.id}, value: "${input.value.trim()}"`);  // Log field values
             if (!input.value.trim()) {
                 allFilled = false;
                 const label = document.querySelector(`label[for="${input.id}"]`);
@@ -94,9 +94,32 @@ function setupFormSubmission() {
         });
 
         if (allFilled) {
-            alert('פרטי האירוע הוזנו בהצלחה');
+            alert('פרטי האירוע הוזנו בהצלחה', function() {
+                window.location.href = 'madaHomePage.html';
+            });
         } else {
             alert(`נא למלא את השדות הבאים: ${emptyFields.join(', ')}`);
         }
     });
+}
+
+function alert(message, callback) {
+    const alertBox = document.createElement('div');
+    alertBox.classList.add('custom-alert-box');
+    
+    const alertMessage = document.createElement('p');
+    alertMessage.innerText = message;
+    alertBox.appendChild(alertMessage);
+    
+    const alertButton = document.createElement('button');
+    alertButton.innerText = 'סגור';
+    alertButton.addEventListener('click', () => {
+        document.body.removeChild(alertBox);
+        if (callback) {
+            callback();
+        }
+    });
+    alertBox.appendChild(alertButton);
+    
+    document.body.appendChild(alertBox);
 }
