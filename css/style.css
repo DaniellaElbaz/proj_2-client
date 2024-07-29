@@ -2169,3 +2169,26 @@ textarea {
     position: relative;
     left: 28px;
 }
+
+/**********************************************************************MDAUptade***********************************************/
+.eventNavigator{
+    display: flex;
+    justify-content: flex-end;
+}
+.liveEventPageSign{
+    text-align: right; 
+    margin-right: 50px; 
+    margin-top: 60px; 
+    font-size: 1.5em; 
+    color: #999;
+    font-family: "Inter", sans-serif;
+}
+.updatePageSign{
+    text-align: right; 
+    margin-right: 10px; 
+    margin-top: 60px; 
+    font-size: 1.5em; 
+    color: white;
+    font-family: "Inter", sans-serif;
+    
+}
