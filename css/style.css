@@ -2403,11 +2403,18 @@ textarea {
     align-items: center;
     margin-top: 20px;
     position: relative;
-    left: 65%;
+    left: 75%;
     top: 50%;
     gap: 2vh;
 }
 .dot {
     font-size: 8vh;
     color: #6C757D;
+}
+.numberOfUsers{
+    font-size: 22px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    right: 90%;
+    margin-top: 110px;
 }
