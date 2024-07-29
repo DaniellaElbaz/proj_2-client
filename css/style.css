@@ -151,17 +151,6 @@ body {
     direction: rtl;
     width: 100%;
 }
-
-#addEventFormButton {
-    padding: 10px;
-    background-color: #326ff1;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 20px;
-    width: 185px;
-}
 /********************************************************************************************************************************/
 #eventMDAList {
     margin-top: 16px;
@@ -2001,24 +1990,6 @@ textarea {
     box-sizing: border-box;
 }
 
-#addEventFormButton {
-    margin-top: 40px;
-    padding: 10px 20px;
-    align-self: center;
-}
-
-.headerContent {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px; 
-}
-
-.headerContent p {
-    font-size: 24px; 
-    margin-left: 10px; 
-    margin-bottom: 2px;
-}
-
 .inputContainer {
     position: relative;
 }
@@ -2031,4 +2002,28 @@ textarea {
     left: 8px;
     transform: translateY(-50%);
     pointer-events: none;
+}
+
+#addEventFormButton {
+    margin-top: 40px;
+    padding: 10px 20px;
+    align-self: center;
+    background-color: #326ff1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 185px;
+}
+
+.headerContent {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; 
+}
+
+.headerContent p {
+    font-size: 24px; 
+    margin-left: 10px; 
+    margin-bottom: 2px;
 }

@@ -16,6 +16,7 @@ window.onload = () => {
     }
     getEventsType();
     setupCharacterCounters();
+    setupFormSubmission();
 };
 
 async function getEventsType() {
@@ -58,7 +59,6 @@ async function getEventsType() {
 function setupCharacterCounters() {
     const inputs = [
         { input: document.getElementById('eventStatus'), counter: document.getElementById('eventStatusCounter') },
-        { input: document.getElementById('eventPhotos'), counter: document.getElementById('eventPhotosCounter') },
         { input: document.getElementById('eventName'), counter: document.getElementById('eventNameCounter') },
         { input: document.getElementById('eventPlace'), counter: document.getElementById('eventPlaceCounter') }
     ];
@@ -68,5 +68,35 @@ function setupCharacterCounters() {
             const length = input.value.length;
             counter.textContent = `${length}/45`;
         });
+    });
+}
+
+function setupFormSubmission() {
+    const formButton = document.getElementById('addEventFormButton');
+    formButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        console.log('Button clicked');  
+        const inputs = document.querySelectorAll('#addEventForm input[required]');
+        let allFilled = true;
+        let emptyFields = [];
+
+        inputs.forEach(input => {
+            console.log(`Checking field: ${input.id}, value: "${input.value.trim()}"`);  
+            if (!input.value.trim()) {
+                allFilled = false;
+                const label = document.querySelector(`label[for="${input.id}"]`);
+                if (label) {
+                    emptyFields.push(label.innerText);
+                } else {
+                    emptyFields.push(input.id);
+                }
+            }
+        });
+
+        if (allFilled) {
+            alert('פרטי האירוע הוזנו בהצלחה');
+        } else {
+            alert(`נא למלא את השדות הבאים: ${emptyFields.join(', ')}`);
+        }
     });
 }
