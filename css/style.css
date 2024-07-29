@@ -2029,6 +2029,7 @@ textarea {
     cursor: pointer;
 }
 /**********************************************************************liveEventMDA***********************************************/
+
 .eventTitle {
     font-size: 1.5em;
     margin-bottom: 0.5em;
@@ -2091,7 +2092,9 @@ textarea {
     color: #F8F9FA;
 }
 .btn-red {
-    background-color: red;
+    background-color: #BB1717;
+    width: 140px;
+    height: 40px;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -2102,7 +2105,9 @@ textarea {
 }
 
 .btn-blue {
-    background-color: blue;
+    background-color: #2196F3;
+    width: 140px;
+    height: 40px;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -2114,7 +2119,10 @@ textarea {
 
 .button-container {
     text-align: center;
-    
+    gap: 18px;
+    position: relative;
+    bottom: 240px;
+
     
 }
 
