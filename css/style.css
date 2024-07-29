@@ -2029,6 +2029,10 @@ textarea {
     cursor: pointer;
 }
 /**********************************************************************liveEventMDA***********************************************/
+#eventMDAList {
+    position: relative;
+    right: 1%;
+}
 .eventTitle {
     font-size: 1.5em;
     margin-bottom: 0.5em;
@@ -2127,7 +2131,40 @@ textarea {
     margin-right: 50px; 
     font-size: 1.5em; 
     color: #F8F9FA; 
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
+    margin-top: 17px; 
+    font-size: 27px;
+    font-family: "Inter", sans-serif;
+}
+.eventPageSign{
+    text-align: right; 
+    margin-right: 50px; 
+    margin-top: 60px; 
+    font-size: 1.5em; 
+    color: #F8F9FA; 
+    font-family: "Inter", sans-serif;
+}
+.searchContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+    margin-top: 50px;
 }
 
+.searchInput {
+    width: 20%;
+    max-width: 600px;
+    padding: 10px 20px;
+    border-radius: 50px; /* קצוות עגולים */
+    border: 1px solid #ccc; /* גבול */
+    outline: none;
+    font-size: 16px;
+    text-align: right;
+}
 
+.searchIcon {
+    margin-left: -20px; /* מיקום האייקון בתוך שדה הטקסט */
+    color: #ccc;
+    cursor: pointer;
+}
