@@ -2047,12 +2047,16 @@ textarea {
     width: 144px;
     height: 144px;
 }
-.eventItemMDA {
+.eventListMDA {
     list-style-type: disc;
-    padding-left: 20px;
+    padding-left: 0;
+    padding-right: 20px;
+    direction: rtl;
+    list-style-position: inside;
 }
 
-.eventListMDA {
+.eventItemMDA {
     margin-bottom: 10px;
+    text-align: right;
 }
 
