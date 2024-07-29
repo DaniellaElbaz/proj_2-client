@@ -122,6 +122,7 @@ function alert(message, callback) {
     document.body.appendChild(alertBox);
 }
 async function addEvent(){
+    
     const eventName = document.getElementById('eventName').value;
     const eventPlace = document.getElementById('eventPlace').value;
     const eventDate = "2024-07-24";
@@ -150,12 +151,21 @@ async function addEvent(){
             body: formData
         });
 
-        const result = await response.json();
+        // Log the raw response
+        const text = await response.text();
+        console.log('Raw response:', text);
 
-        if (response.ok) {
-            alert('Event added successfully');
-        } else {
-            alert(result.message || 'Failed to add event');
+        // Check if response is JSON
+        try {
+            const result = JSON.parse(text);
+            if (response.ok) {
+                alert('Event added successfully');
+            } else {
+                alert(result.message || 'Failed to add event');
+            }
+        } catch (e) {
+            console.error('Failed to parse JSON:', e);
+            alert('An error occurred while adding the event.');
         }
     } catch (error) {
         console.error('Error:', error);
