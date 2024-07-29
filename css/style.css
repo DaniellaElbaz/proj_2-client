@@ -1748,20 +1748,7 @@ textarea {
     text-align: center;
 }
 /*************************************************************homepageMada****************************************************************/
-#eventMDAList {
-    margin-top: 16px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 20px;
-}
-.eventMDAListItem {
-    width: 595px;
-    height: 190px;
-    padding: 15px;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.69);
-}
+
 #highPossibilityEvents {
     display: flex;
     flex-direction: column;
@@ -1887,11 +1874,23 @@ textarea {
     font-weight: bold;
 
 }
+.eventListMDA {
+    list-style-type: disc;
+    padding-left: 0;
+    padding-right: 20px;
+    direction: rtl;
+    list-style-position: inside;
+}
+
+.eventItemMDA {
+    margin-bottom: 50px;
+    text-align: right; 
+}
 /***************************************************newEvent**************************************************************************/
 #eventForm{
     display: flex;
     justify-content: flex-end;
-    padding: 20px;
+    flex-wrap: wrap;
 }
 #addEventForm{
     display: flex;
@@ -2043,11 +2042,17 @@ textarea {
     width: 144px;
     height: 144px;
 }
-.eventItemMDA {
-    list-style-type: disc;
-    padding-left: 20px;
+#eventMDAList {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 20px;
 }
-
-.eventListMDA {
-    margin-bottom: 10px;
+.eventMDAListItem {
+    width: 595px;
+    height: 190px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.69);
 }
