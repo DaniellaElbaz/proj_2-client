@@ -1748,7 +1748,20 @@ textarea {
     text-align: center;
 }
 /*************************************************************homepageMada****************************************************************/
-
+#eventMDAList {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 20px;
+}
+.eventMDAListItem {
+    width: 595px;
+    height: 190px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.69);
+}
 #highPossibilityEvents {
     display: flex;
     flex-direction: column;
@@ -1873,18 +1886,6 @@ textarea {
     font-size: 20px;
     font-weight: bold;
 
-}
-.eventListMDA {
-    list-style-type: disc;
-    padding-left: 0;
-    padding-right: 20px;
-    direction: rtl;
-    list-style-position: inside;
-}
-
-.eventItemMDA {
-    margin-bottom: 50px;
-    text-align: right; 
 }
 /***************************************************newEvent**************************************************************************/
 #eventForm{
@@ -2027,32 +2028,31 @@ textarea {
     border-radius: 5px;
     cursor: pointer;
 }
-/**********************************************************************live event***********************************************/
+/**********************************************************************liveEventMDA***********************************************/
 .eventTitle {
     font-size: 1.5em;
     margin-bottom: 0.5em;
+    color: #F8F9FA;
+    margin-top: 60px;
 }
+
 .eventPlace,
 .eventDate,
 .eventTime,
 .eventStatus {
     margin: 5px;
 }
+
 .eventMapImage {
     width: 144px;
     height: 144px;
 }
-#eventMDAList {
-    margin-top: 16px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 20px;
+.eventItemMDA {
+    list-style-type: disc;
+    padding-left: 20px;
 }
-.eventMDAListItem {
-    width: 595px;
-    height: 190px;
-    padding: 15px;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.69);
+
+.eventListMDA {
+    margin-bottom: 10px;
 }
+
