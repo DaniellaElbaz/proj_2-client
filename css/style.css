@@ -2090,4 +2090,32 @@ textarea {
     gap: 6px;
     color: #F8F9FA;
 }
+.btn-red {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.btn-blue {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.button-container {
+    text-align: center;
+    
+    
+}
+
 
