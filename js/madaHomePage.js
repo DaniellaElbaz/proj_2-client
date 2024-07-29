@@ -49,7 +49,7 @@ async function getAllNotification() {
             eventMapContainer.innerHTML = '';
 
             const dateDiv = document.createElement('div');
-            dateDiv.textContent = `Date: ${new Date(result.eventNotification[0].date).toLocaleDateString()}`;
+            dateDiv.textContent = `${new Date(result.eventNotification[0].date).toLocaleDateString()}`;
             dateElement.appendChild(dateDiv);
 
             const mapDiv = document.createElement('div');

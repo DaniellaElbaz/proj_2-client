@@ -127,61 +127,7 @@ body {
          order: 4;
      }
  }
- /*****************************************************************************************************************************/
-#dateAndTime {
-    display: flex;
-    width: 100%;
-    padding-right: 20px;
-}
-#eventForm{
-    display: flex;
-    justify-content: flex-end;
-    padding: 20px;
-}
-#addEventForm{
-    display: flex;
-    width: 50%;
-    justify-content: flex-end;
-    flex-direction: column;
-}
-.eventDetails{
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    direction: rtl;
-    width: 100%;
-}
-/********************************************************************************************************************************/
-#eventMDAList {
-    margin-top: 16px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 20px;
-}
-.eventMDAListItem {
-    width: 595px;
-    height: 190px;
-    padding: 15px;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.69);
-}
-.eventMapImage {
-    width: 144px;
-    height: 144px;
-}
-.eventTitle {
-    font-size: 1.5em;
-    margin-bottom: 0.5em;
-}
-.eventPlace,
-.eventDate,
-.eventTime,
-.eventStatus {
-    margin: 5px;
-}
-
-/******************************************************************************************************************************************/
+ 
 #sort-container {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -1802,14 +1748,30 @@ textarea {
     text-align: center;
 }
 /*************************************************************homepageMada****************************************************************/
-
+#eventMDAList {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 20px;
+}
+.eventMDAListItem {
+    width: 595px;
+    height: 190px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.69);
+}
 #highPossibilityEvents {
     display: flex;
     flex-direction: column;
     align-items: flex-end; 
-    
 }
-
+#dataAndTime{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .eventDiv {
     font-size:2.5vh;
     color: #444;
@@ -1819,8 +1781,8 @@ textarea {
     text-align: right; 
     margin-right: 70px;
     margin-top: 160px;
-    
 }
+
 .mainContainer {
     display: flex;
     flex-direction: column;
@@ -1875,14 +1837,7 @@ textarea {
     background-color: white; 
     height:85vh;
 }
-.eventItemMDA {
-    list-style-type: disc;
-    padding-left: 20px;
-}
 
-.eventListMDA {
-    margin-bottom: 10px;
-}
 .header-and-map {
     display: flex;
     flex-direction: column;
@@ -1933,6 +1888,24 @@ textarea {
 
 }
 /***************************************************newEvent**************************************************************************/
+#eventForm{
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+}
+#addEventForm{
+    display: flex;
+    width: 50%;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+.eventDetails{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    direction: rtl;
+    width: 100%;
+}
 .eventPageBody {
     height: 100%;
     margin: 0;
@@ -2054,4 +2027,27 @@ textarea {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+/**********************************************************************live event***********************************************/
+.eventTitle {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+.eventPlace,
+.eventDate,
+.eventTime,
+.eventStatus {
+    margin: 5px;
+}
+.eventMapImage {
+    width: 144px;
+    height: 144px;
+}
+.eventItemMDA {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.eventListMDA {
+    margin-bottom: 10px;
 }
