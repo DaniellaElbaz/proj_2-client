@@ -2033,21 +2033,28 @@ textarea {
     font-size: 1.5em;
     margin-bottom: 0.5em;
     color: #F8F9FA;
-    margin-top: 60px;
+    margin-bottom: 50px;
     font-weight: bold;
+    text-align: right;
+    position: relative;
+    bottom: 25px;
 }
 
 .eventPlace,
-.eventDate,
-.eventTime,
 .eventStatus {
-    margin: 5px;
+    margin: 10px;
+    text-align: right;
+    position: relative;
+    bottom: 60px;
 }
 
 .eventMapImage {
     width: 144px;
     height: 144px;
+    margin-left: 10px; 
+    border-radius: 8px;
 }
+
 .eventListMDA {
     list-style-type: disc;
     padding-left: 0;
@@ -2060,4 +2067,62 @@ textarea {
     margin-bottom: 10px;
     text-align: right;
 }
+
+.event-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.event-details {
+    flex-grow: 1;
+}
+
+.image-container {
+    position: relative;
+    bottom: 160px;
+}
+.timeDate {
+    display: flex;
+    position: relative;
+    bottom: 10px;
+    gap: 6px;
+    color: #F8F9FA;
+}
+.btn-red {
+    background-color: #BB1717;
+    width: 140px;
+    height: 40px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.btn-blue {
+    background-color: #2196F3;
+    width: 140px;
+    height: 40px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.button-container {
+    text-align: center;
+    gap: 18px;
+    position: relative;
+    bottom: 240px;
+
+    
+}
+
 

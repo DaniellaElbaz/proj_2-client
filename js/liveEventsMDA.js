@@ -18,7 +18,7 @@ window.onload = () => {
 };
 async function getEvents() {
     const eventMDAList = document.getElementById('eventMDAList');
-    
+
     try {
         const response = await fetch('https://proj-2-ffwz.onrender.com/api/eventType/MDA', {
             method: 'GET',
@@ -55,14 +55,20 @@ async function getEvents() {
 function createEventHTML(event) {
     return `
         <div class="event-details">
+            <div class="timeDate">
+                <p class="eventTime">שעה: ${event.time}</p>
+                <p class="eventDate">תאריך: ${new Date(event.date).toLocaleDateString()}</p>
+            </div>
             <h3 class="eventTitle">${event.event_name}</h3>
             <p class="eventPlace">מקום האירוע: ${event.place}</p>
-            <p class="eventDate">תאריך: ${new Date(event.date).toLocaleDateString()}</p>
-            <p class="eventTime">שעה: ${event.time}</p>
             <p class="eventStatus">סטטוס: ${event.status}</p>
-        </div>
         <div class="image-container">
             <img src="images/${event.map}" alt="Event Map" class="eventMapImage">
+        </div>
+        <div class="button-container">
+            <button class="btn-red">מחיקת אירוע</button>
+            <button class="btn-blue">עריכת אירוע</button>
+        </div>
         </div>
     `;
 }
