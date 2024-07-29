@@ -2164,7 +2164,8 @@ textarea {
 }
 
 .searchIcon {
-    margin-left: -20px; /* מיקום האייקון בתוך שדה הטקסט */
     color: #ccc;
     cursor: pointer;
+    position: relative;
+    left: 28px;
 }
