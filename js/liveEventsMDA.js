@@ -55,10 +55,12 @@ async function getEvents() {
 function createEventHTML(event) {
     return `
         <div class="event-details">
+        <div class = "timeDate">
+            <p class="eventTime">שעה: ${event.time}</p>
+            <p class="eventDate">תאריך: ${new Date(event.date).toLocaleDateString()}</p>
+            </div>
             <h3 class="eventTitle">${event.event_name}</h3>
             <p class="eventPlace">מקום האירוע: ${event.place}</p>
-            <p class="eventDate">תאריך: ${new Date(event.date).toLocaleDateString()}</p>
-            <p class="eventTime">שעה: ${event.time}</p>
             <p class="eventStatus">סטטוס: ${event.status}</p>
         </div>
         <div class="image-container">
