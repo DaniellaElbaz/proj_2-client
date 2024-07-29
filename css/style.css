@@ -1747,7 +1747,21 @@ textarea {
     justify-content: center;
     text-align: center;
 }
-/*************************************************************madaHomePage****************************************************************/
+/*************************************************************homepageMada****************************************************************/
+#eventMDAList {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 20px;
+}
+.eventMDAListItem {
+    width: 595px;
+    height: 190px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.69);
+}
 #highPossibilityEvents {
     display: flex;
     flex-direction: column;
@@ -1873,19 +1887,11 @@ textarea {
     font-weight: bold;
 
 }
-.eventItemMDA {
-    list-style-type: disc;
-    padding-left: 20px;
-}
-
-.eventListMDA {
-    margin-bottom: 10px;
-}
 /***************************************************newEvent**************************************************************************/
 #eventForm{
     display: flex;
     justify-content: flex-end;
-    padding: 20px;
+    flex-wrap: wrap;
 }
 #addEventForm{
     display: flex;
@@ -2041,40 +2047,17 @@ textarea {
 .eventMapImage {
     width: 144px;
     height: 144px;
-    border-radius: 8px;
 }
-
-#eventMDAList {
-    margin-top: 16px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 20px;
-}
-
-.eventMDAListItem {
-    width: 595px;
-    height: 190px;
-    padding: 15px;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.69);
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.eventListMDA {
+    list-style-type: disc;
+    padding-left: 0;
+    padding-right: 20px;
     direction: rtl;
-    white-space: nowrap;
-    justify-content: flex-start;
+    list-style-position: inside;
 }
 
-.image-container {
-    flex-shrink: 0;
-    margin-left: 0;
-    margin-right: auto; /* מבטיח שהתמונה תהיה בצד השמאלי ביותר */
-}
-
-.event-details {
-    display: flex;
-    flex-direction: column;
-    white-space: nowrap;
+.eventItemMDA {
+    margin-bottom: 10px;
+    text-align: right;
 }
 
