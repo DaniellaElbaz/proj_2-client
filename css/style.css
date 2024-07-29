@@ -1747,21 +1747,7 @@ textarea {
     justify-content: center;
     text-align: center;
 }
-/*************************************************************homepageMada****************************************************************/
-#eventMDAList {
-    margin-top: 16px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 20px;
-}
-.eventMDAListItem {
-    width: 595px;
-    height: 190px;
-    padding: 15px;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.69);
-}
+/*************************************************************madaHomePage****************************************************************/
 #highPossibilityEvents {
     display: flex;
     flex-direction: column;
@@ -1886,6 +1872,14 @@ textarea {
     font-size: 20px;
     font-weight: bold;
 
+}
+.eventItemMDA {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.eventListMDA {
+    margin-bottom: 10px;
 }
 /***************************************************newEvent**************************************************************************/
 #eventForm{
@@ -2028,7 +2022,7 @@ textarea {
     border-radius: 5px;
     cursor: pointer;
 }
-/**********************************************************************live event***********************************************/
+/**********************************************************************liveEventMDA***********************************************/
 .eventTitle {
     font-size: 1.5em;
     margin-bottom: 0.5em;
@@ -2043,11 +2037,25 @@ textarea {
     width: 144px;
     height: 144px;
 }
-.eventItemMDA {
-    list-style-type: disc;
-    padding-left: 20px;
+#eventMDAList {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 20px;
 }
-
-.eventListMDA {
-    margin-bottom: 10px;
+.eventMDAListItem {
+    width: 595px;
+    height: 190px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.69);
+    display: flex;
+    align-items: center; 
+    gap: 15px; 
+    direction: rtl; 
+}
+.image-container {
+    flex-shrink: 0; 
+    margin-right: 15px; 
 }
