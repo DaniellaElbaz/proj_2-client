@@ -1,6 +1,6 @@
 window.onload = function() {
     initializeCharCount('.inputBox', '.charCount', 400);
-    setupSubmitButton('#addEventupdateFormButton', '.inputBox', '#errorMessage');
+    setupSubmitButton('#addEventUpdateFormButton', '.inputBox', '#errorMessage');
 };
 
 function initializeCharCount(inputSelector, countSelector, maxChars) {

@@ -77,39 +77,20 @@ async function getAllNotification() {
     }
 }
 async function fetchWeatherData() {
-    const apiKey = '58ed51c2b983534bd721c3b9c821b7a1';
-    const city = 'Tel Aviv';
-    const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
-    const lat = 32.0853;
-    const lon = 34.7818;
-    const uvApiUrl = `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-
     try {
-        const weatherResponse = await fetch(weatherApiUrl);
-        if (!weatherResponse.ok) {
-            throw new Error(`HTTP error! status: ${weatherResponse.status}`);
+        const response = await fetch('https://proj-2-ffwz.onrender.com/api/weather');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-        const weatherData = await weatherResponse.json();
-        const hourlyData = weatherData.list.slice(0, 24);
-
-        const uvResponse = await fetch(uvApiUrl);
-        if (!uvResponse.ok) {
-            throw new Error(`HTTP error! status: ${uvResponse.status}`);
-        }
-        const uvData = await uvResponse.json();
-
-        return {
-            hours: hourlyData.map(entry => new Date(entry.dt * 1000).getHours()),
-            temperature: hourlyData.map(entry => entry.main.temp),
-            humidity: hourlyData.map(entry => entry.main.humidity),
-            uvIndex: Array(24).fill(uvData.value),
-        };
+        const result = await response.json();
+        return result.data;
     } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching weather data:', error);
+        throw error;
     }
 }
 
-function createLineChart(ctx, data) {
+async function createLineChart(ctx, data) {
     return new Chart(ctx, {
         type: 'line',
         data: {
@@ -164,7 +145,7 @@ function createLineChart(ctx, data) {
     });
 }
 
-function createUVChart(ctx, data) {
+async function createUVChart(ctx, data) {
     return new Chart(ctx, {
         type: 'line',
         data: {
@@ -218,9 +199,10 @@ async function fetchAndDisplayCharts() {
         const weatherCtx = document.getElementById('weatherChart').getContext('2d');
         const uvCtx = document.getElementById('uvChart').getContext('2d');
 
-        createLineChart(weatherCtx, weatherData);
-        createUVChart(uvCtx, weatherData);
+        await createLineChart(weatherCtx, weatherData);
+        await createUVChart(uvCtx, weatherData);
     } catch (error) {
         console.error('Error fetching or displaying charts:', error);
     }
 }
+
