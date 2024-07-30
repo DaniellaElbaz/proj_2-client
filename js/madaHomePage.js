@@ -15,7 +15,7 @@ window.onload = () => {
         console.log('User details not found in local storage.');
     }
     getAllNotification();
-    fetchAndDisplayChart();
+    fetchAndDisplayCharts();
 };
 
 async function getAllNotification() {
@@ -78,18 +78,31 @@ async function getAllNotification() {
 }
 async function fetchWeatherData() {
     const apiKey = '58ed51c2b983534bd721c3b9c821b7a1';
-    const city = 'tel aviv';
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    const city = 'Tel Aviv';
+    const weatherApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+    const lat = 32.0853;
+    const lon = 34.7818;
+    const uvApiUrl = `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
     try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        const weatherResponse = await fetch(weatherApiUrl);
+        if (!weatherResponse.ok) {
+            throw new Error(`HTTP error! status: ${weatherResponse.status}`);
         }
-        const data = await response.json();
+        const weatherData = await weatherResponse.json();
+        const hourlyData = weatherData.list.slice(0, 24);
+
+        const uvResponse = await fetch(uvApiUrl);
+        if (!uvResponse.ok) {
+            throw new Error(`HTTP error! status: ${uvResponse.status}`);
+        }
+        const uvData = await uvResponse.json();
+
         return {
-            temperature: data.main.temp,
-            humidity: data.main.humidity,
+            hours: hourlyData.map(entry => new Date(entry.dt * 1000).getHours()),
+            temperature: hourlyData.map(entry => entry.main.temp),
+            humidity: hourlyData.map(entry => entry.main.humidity),
+            uvIndex: Array(24).fill(uvData.value),
         };
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -130,7 +143,7 @@ function createLineChart(ctx, data) {
             plugins: {
                 legend: {
                     display: true,
-                    position: 'top',
+                    position: 'center',
                 },
                 tooltip: {
                     callbacks: {
@@ -151,24 +164,63 @@ function createLineChart(ctx, data) {
     });
 }
 
-async function fetchAndDisplayChart() {
+function createUVChart(ctx, data) {
+    return new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: data.hours,
+            datasets: [
+                {
+                    label: 'UV Index',
+                    data: data.uvIndex,
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    fill: true,
+                }
+            ]
+        },
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true,
+                },
+                y: {
+                    beginAtZero: true,
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'center',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += context.parsed.y + ' units';
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+async function fetchAndDisplayCharts() {
     try {
         const weatherData = await fetchWeatherData();
-        const ctx = document.getElementById('weatherChart').getContext('2d');
+        const weatherCtx = document.getElementById('weatherChart').getContext('2d');
+        const uvCtx = document.getElementById('uvChart').getContext('2d');
 
-        // Generate data for 24 hours
-        const hours = Array.from({ length: 24 }, (_, i) => `${i}:00`);
-        const temperature = Array.from({ length: 24 }, () => weatherData.temperature + (Math.random() * 2 - 1));
-        const humidity = Array.from({ length: 24 }, () => weatherData.humidity + (Math.random() * 5 - 2.5));
-
-        const data = {
-            hours: hours,
-            temperature: temperature,
-            humidity: humidity
-        };
-
-        createLineChart(ctx, data);
+        createLineChart(weatherCtx, weatherData);
+        createUVChart(uvCtx, weatherData);
     } catch (error) {
-        console.error('Error fetching or displaying chart:', error);
+        console.error('Error fetching or displaying charts:', error);
     }
 }
