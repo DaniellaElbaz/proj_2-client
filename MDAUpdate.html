@@ -50,30 +50,31 @@
                 <h2 class="liveEventPageSign">
                     < אירועים פעילים </h2>
             </div>
-            <div class=updateContainerWrapper>
-                <div class=eventUserContainer>
-                    <h3 class="userInEvent">רשימת משתתפים באירוע</h3>
-                    <div class="dots">
-                        <div class="dot">•</div>
-                        <div class="dot">•</div>
-                        <div class="dot">•</div>
-                        <h4 class="numberOfUsers">:סה"כ משתתפים</h4>
-                    </div>
+            <div class=containersWrapper>
+                <div class=eventUserContainer>   
+                    <h3 class="userInEvent">רשימת משתתפים באירוע</h3> 
+                    <h4 class="numberOfUsers">:סה"כ משתתפים</h4>                
                 </div>
                 <div class="eventUpdateContainer">
                     <h5 class="updateEventDetails">עדכון פרטי אירוע</h5>
-                    <textarea class="inputBox" placeholder="הקלד/י את פרטי האירוע המחודשים כאן"></textarea>
-                    <div class="charCount">0/400</div>
-                    <button type="button" id="addEventupdateFormButton">אישור ושליחה</button>
-                    <div id="errorMessage" class="errorMessage">
-                        <span class="errorText">שגיאה: לא הוזן טקסט</span>
+                    <div class="textarea-container">
+                        <textarea class="inputBox" placeholder="הקלד/י את פרטי האירוע המחודשים כאן" maxlength="400"></textarea>
+                        <div class="charCount">0/400</div>
+                    </div>
+                    <div class="confirmButton">
+                        <button type="button" id="addEventupdateFormButton">אישור ושליחה</button>
+                    </div>
+                    <div id="errorMessage" class="messageContainer" style="display: none;">
+                        <div class="messageText">.אנא מלא/י את כל השדות</div>
                         <button type="button" class="closeBtn">סגור</button>
                     </div>
-                    <div id="successMessage" class="successMessage">
-                        <span class="successText">האירוע עודכן בהצלחה!</span>
+                    <div id="successMessage" class="messageContainer" style="display: none;">
+                        <div class="messageText">!העדכון נשלח בהצלחה</div>
                         <button type="button" class="closeBtnSuccess">סגור</button>
                     </div>
-                </div>
+                    
+                    
+                
             </div>
 
     </div>

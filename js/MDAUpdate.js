@@ -28,8 +28,8 @@ function setupSubmitButton(buttonSelector, inputSelector, errorSelector, success
     const inputBox = document.querySelector(inputSelector);
     const errorMessage = document.querySelector(errorSelector);
     const successMessage = document.querySelector(successSelector);
-    const closeErrorBtn = document.querySelector('.closeBtn');
-    const closeSuccessBtn = document.querySelector('.closeBtnSuccess');
+    const closeErrorBtn = errorMessage.querySelector('.closeBtn');
+    const closeSuccessBtn = successMessage.querySelector('.closeBtnSuccess');
 
     submitBtn.addEventListener('click', function(event) {
         if (inputBox.value.trim() === "") {
@@ -42,6 +42,7 @@ function setupSubmitButton(buttonSelector, inputSelector, errorSelector, success
         }
     });
 
+    // Add event listeners for closing the messages
     closeErrorBtn.addEventListener('click', function() {
         errorMessage.style.display = 'none';
     });
@@ -51,3 +52,4 @@ function setupSubmitButton(buttonSelector, inputSelector, errorSelector, success
         window.location.href = 'liveEventsMDA.html'; // Change this to the URL of the page you want to navigate to
     });
 }
+
