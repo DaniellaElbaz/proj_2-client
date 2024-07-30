@@ -2463,3 +2463,93 @@ textarea {
     font-weight: bold;
 }
 /**********************************************************************userHomePage***********************************************/
+#uniqueHtml, #uniqueBody {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.notifictionsSection{
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
+.userHomePageContainerWrapper {
+    display: flex;
+    justify-content: center;
+    align-items:self-end;
+    gap: 30px;
+}
+
+.personalMSGContainer {
+    background: linear-gradient(135deg, #B3B3B3, #E6E6E6);
+    border-radius: 10px;
+    height: 15vh;
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.personalMSGUpdateContainer {
+    background: linear-gradient(135deg, #B3B3B3, #E6E6E6);
+    border-radius: 10px;
+    width: 50%;
+    height: 33vh;
+}
+.updatePContainer{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5%;
+    margin-top: 5%;
+}
+.updateP{
+    font-weight: bold;
+    font-size: 20px;
+}
+.personalMessagePContainer{
+  margin-top: 5%;
+}
+.personalMSGP{
+    font-weight: bold;
+    font-size: 20px;
+}
+.PersonalMSGIcon{
+  margin-top: 5%;
+}
+.PersonalMSGIcon img {
+    width: 3vh; 
+    height: 3vh; 
+}
+.graphHeaderContainer{
+    background: linear-gradient(135deg, #a39e9e, #a5a5a5);
+    border-radius: 10px;
+    height: 25vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between; 
+    padding: 15px 10px; 
+}
+.graphP{
+    
+}
+.dateContainer{
+    display: flex;
+    background-color: white;
+    width: 25%;
+    height: 15%;
+    align-items: center;
+    justify-content: right;
+    border-radius: 5px;
+}
+.calenderIconContainer{
+}
+.calenderIconContainer img {
+    width: 3vh; 
+    height: 3vh;
+}
