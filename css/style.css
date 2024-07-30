@@ -815,11 +815,13 @@ textarea {
     margin-right: 10px;
 }
 
-.event-photo {
+
+#event-photo {
     display: flex;
 }
 
-.event-photo img {
+
+#event-photo img {
     width: 146px;
     height: 120px;
 }

@@ -1,56 +1,26 @@
 window.onload = () => {
-    fetch("data/Events.json")
-    .then(response => response.json())
-    .then(data => initMemberDetails(data));
-    fetch("data/reports.json")
-        .then(response => response.json())
-        .then(reports => {
-            drawFirstPart();
-            drawSecondPart(reports);
-            drawThirdPart();
-        });
-    fetch("data/eventsHistory.json")
-        .then(response => response.json())
-        .then(eventsHistory => {
-            addDescriptionElements(eventsHistory);
-        });
-    const hiddenImage = document.getElementById("hidden-image");
-    hiddenImage.src = "images/report-img.jpeg";
-    document.getElementById("text-with-image").addEventListener("click", toggleImage);
-};
-
-function initMemberDetails(data){
-    const name = 'נועה לוינסון';
-    let userPhoto;
-    let user;
-    for (const memberKey in data.members) {
-        user = data.members[memberKey];
-        if (user.name == name) {
-            userPhoto = user.user_photo;
-            break;
+    const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    const userImage = localStorage.getItem('userImage');
+    const userName = localStorage.getItem('userName');
+    if (userDetails && userImage && userName) {
+        const managerImage = document.getElementById('user-image');
+        const userNameElement = document.getElementById('user-name');
+        if (managerImage) {
+            managerImage.src = userImage;
         }
+        if (userNameElement) {
+            userNameElement.innerText = userName;
+        }
+    } else {
+        console.log('User details not found in local storage.');
+       
     }
-    const userDetails = document.getElementById("UserImage");
-    const photo = document.createElement('img');
-    photo.src = userPhoto;
-    photo.alt = "user_photo";
-    photo.title = "user_photo";
-    userDetails.appendChild(photo);
-}
+    drawFirstPart();
+};
 function drawFirstPart() {
     const section1 = document.getElementById("first-part");
-    const alertParagraphIcon = document.createElement("div");
-    alertParagraphIcon.className = "alert-icon-paragraph";
-    const icon1 = document.createElement("i");
-    icon1.className = "fas fa-exclamation-triangle";
-    const noticeText = document.createElement("p");
-    noticeText.textContent = "שים לב אירוע חדש התווסף";
-    const icon2 = document.createElement("i");
-    icon2.className = "fas fa-exclamation-triangle";
-    alertParagraphIcon.appendChild(icon1);
-    alertParagraphIcon.appendChild(noticeText);
-    alertParagraphIcon.appendChild(icon2);
-    const eventPhoto = document.createElement("div");
+
+    const eventPhoto = document.getElementById("event-photo");
     eventPhoto.className = "event-photo";
     const img = document.createElement("img");
     img.src = "images/map_noa.png";
@@ -70,7 +40,7 @@ function drawFirstPart() {
     greenButton.href = "userDetails.html";
     rectangleContainer.appendChild(redButton);
     rectangleContainer.appendChild(greenButton);
-    section1.appendChild(alertParagraphIcon);
+ 
     section1.appendChild(eventPhoto);
     section1.appendChild(rectangleContainer);
 }
