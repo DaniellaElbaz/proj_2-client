@@ -2345,8 +2345,7 @@ textarea {
     text-align: right;
     direction: rtl;
     vertical-align: top;
-    box-sizing: border-box;
-    /* Ensures padding is included in the height */
+    box-sizing: border-box; /* Ensures padding is included in the height */
 }
 
 .updateEventDetails {
@@ -2397,6 +2396,7 @@ textarea {
     margin-right: 40px;
     margin-top: 25px;
 }
+
 .dots {
     display: flex;
     justify-content: center;
@@ -2407,18 +2407,22 @@ textarea {
     top: 50%;
     gap: 2vh;
 }
+
 .dot {
     font-size: 8vh;
     color: #6C757D;
 }
-.numberOfUsers{
+
+.numberOfUsers {
     font-size: 22px;
     font-family: Arial, Helvetica, sans-serif;
     position: relative;
     right: 90%;
     margin-top: 110px;
 }
-.errorMessage {
+
+/* Error and Success Messages */
+.errorMessage, .successMessage {
     display: none;
     position: relative;
     background-color: white;
@@ -2431,7 +2435,13 @@ textarea {
     bottom: 80%;
     left: 35%;
 }
-.errorMessage .closeBtn {
+
+.successMessage {
+    border-color: green;
+    color: green;
+}
+
+.errorMessage .closeBtn, .successMessage .closeBtnSuccess {
     background-color: #326ff1;
     color: #fff;
     border: none;
@@ -2443,12 +2453,12 @@ textarea {
     top: 70%;
     right: 20%;
 }
-.errorMessage .errorText {
+
+.errorMessage .errorText, .successMessage .successText {
     position: relative;
     left: 25%;
     top: 15%;
     color: #000;
     font-size: 2vh;
     font-weight: bold;
-
 }

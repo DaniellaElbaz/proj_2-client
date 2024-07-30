@@ -1,6 +1,6 @@
 window.onload = function() {
     initializeCharCount('.inputBox', '.charCount', 400);
-    setupSubmitButton('#addEventupdateFormButton', '.inputBox', '#errorMessage');
+    setupSubmitButton('#addEventupdateFormButton', '.inputBox', '#errorMessage', '#successMessage');
 };
 
 function initializeCharCount(inputSelector, countSelector, maxChars) {
@@ -23,22 +23,31 @@ function initializeCharCount(inputSelector, countSelector, maxChars) {
     }
 }
 
-function setupSubmitButton(buttonSelector, inputSelector, errorSelector) {
+function setupSubmitButton(buttonSelector, inputSelector, errorSelector, successSelector) {
     const submitBtn = document.querySelector(buttonSelector);
     const inputBox = document.querySelector(inputSelector);
     const errorMessage = document.querySelector(errorSelector);
-    const closeBtn = document.querySelector('.closeBtn');
+    const successMessage = document.querySelector(successSelector);
+    const closeErrorBtn = document.querySelector('.closeBtn');
+    const closeSuccessBtn = document.querySelector('.closeBtnSuccess');
 
     submitBtn.addEventListener('click', function(event) {
         if (inputBox.value.trim() === "") {
             event.preventDefault();
             errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
         } else {
             errorMessage.style.display = 'none';
+            successMessage.style.display = 'block';
         }
     });
 
-    closeBtn.addEventListener('click', function() {
+    closeErrorBtn.addEventListener('click', function() {
         errorMessage.style.display = 'none';
+    });
+
+    closeSuccessBtn.addEventListener('click', function() {
+        successMessage.style.display = 'none';
+        window.location.href = 'liveEventsMDA.html'; // Change this to the URL of the page you want to navigate to
     });
 }
