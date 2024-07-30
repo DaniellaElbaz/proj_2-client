@@ -2526,30 +2526,47 @@ textarea {
     width: 3vh; 
     height: 3vh; 
 }
-.graphHeaderContainer{
+.graphHeaderContainer {
     background: linear-gradient(135deg, #a39e9e, #a5a5a5);
     border-radius: 10px;
     height: 25vh;
     width: 100%;
     display: flex;
-    justify-content: space-between; 
-    padding: 15px 10px; 
+    flex-direction: column; /* מאפשר מיקום אנכי של ילדים */
+    justify-content: space-between;
+    padding: 15px 10px;
+    position: relative; /* מאפשר מיקום מוחלט של ילדים */
 }
-.graphP{
-    
+.topContent {
+    display: flex;
+    justify-content: space-between; /* מיקום האלמנטים בקצוות */
+    width: 100%;
+    align-items: center;
 }
-.dateContainer{
+.graphP {
+    font-weight: bold;
+    font-size: 20px;
+}
+.dateContainer {
     display: flex;
     background-color: white;
     width: 25%;
-    height: 15%;
+    height: 85%;
     align-items: center;
     justify-content: right;
     border-radius: 5px;
-}
-.calenderIconContainer{
+    padding: 5px;
 }
 .calenderIconContainer img {
     width: 3vh; 
     height: 3vh;
+}
+.graphBackColor {
+    background-color: white;
+    width: 100%;
+    height: 82%;
+    position: absolute; /* מיקום מוחלט בתוך הקונטיינר */
+    top: 40%; /* מיקום יחסית לתחתית הקונטיינר */
+    left: 50%; /* מיקום במרכז אופקי */
+    transform: translateX(-50%); /* מיקוד במרכז אופקי */
 }
