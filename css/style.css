@@ -2418,3 +2418,37 @@ textarea {
     right: 90%;
     margin-top: 110px;
 }
+.errorMessage {
+    display: none;
+    position: relative;
+    background-color: white;
+    border: 1px solid red;
+    color: red;
+    padding: 10px;
+    border-radius: 5px;
+    height: 20vh;
+    width: 35vh;
+    bottom: 80%;
+    left: 35%;
+}
+.errorMessage .closeBtn {
+    background-color: #326ff1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 11vh;
+    height: 5vh;
+    position: relative;
+    top: 70%;
+    right: 20%;
+}
+.errorMessage .errorText {
+    position: relative;
+    left: 25%;
+    top: 15%;
+    color: #000;
+    font-size: 2vh;
+    font-weight: bold;
+
+}

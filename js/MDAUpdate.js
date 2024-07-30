@@ -1,5 +1,6 @@
 window.onload = function() {
     initializeCharCount('.inputBox', '.charCount', 400);
+    setupSubmitButton('#addEventupdateFormButton', '.inputBox', '#errorMessage');
 };
 
 function initializeCharCount(inputSelector, countSelector, maxChars) {
@@ -15,9 +16,29 @@ function initializeCharCount(inputSelector, countSelector, maxChars) {
         
         if (currentLength > max) {
             input.value = input.value.substring(0, max);
-            currentLength = max;  // Adjust the length after truncation
+            currentLength = max; 
         }
 
         counter.textContent = `${currentLength}/${max}`;
     }
+}
+
+function setupSubmitButton(buttonSelector, inputSelector, errorSelector) {
+    const submitBtn = document.querySelector(buttonSelector);
+    const inputBox = document.querySelector(inputSelector);
+    const errorMessage = document.querySelector(errorSelector);
+    const closeBtn = document.querySelector('.closeBtn');
+
+    submitBtn.addEventListener('click', function(event) {
+        if (inputBox.value.trim() === "") {
+            event.preventDefault();
+            errorMessage.style.display = 'block';
+        } else {
+            errorMessage.style.display = 'none';
+        }
+    });
+
+    closeBtn.addEventListener('click', function() {
+        errorMessage.style.display = 'none';
+    });
 }
