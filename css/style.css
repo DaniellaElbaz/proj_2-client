@@ -2565,10 +2565,10 @@ textarea {
     background-color: white;
     width: 100%;
     height: 82%;
-    position: absolute; /* מיקום מוחלט בתוך הקונטיינר */
-    top: 28%; /* מיקום יחסית לתחתית הקונטיינר */
-    left: 50%; /* מיקום במרכז אופקי */
-    transform: translateX(-50%); /* מיקוד במרכז אופקי */
+    position: absolute; 
+    top: 28%; 
+    left: 50%; 
+    transform: translateX(-50%); 
 }
 .historyContainer{
     background: linear-gradient(135deg, #a39e9e, #a5a5a5);
@@ -2591,13 +2591,22 @@ textarea {
 }
 .detailsContainer {
     display: flex;
-    justify-content: space-between; /* מרווחים שווים בין האלמנטים */
+    justify-content: space-between; 
     align-items: center;
+    margin-bottom: 0; /* אין רווח תחתון */
+    padding-bottom: 0; /* אין רווח תחתון */
 }
 
 .detailItem {
     font-size: 18px;
     font-weight: bold;
     color: white;
-    margin: 0 10px; /* ריווח בין הפרטים */
+    margin: 0 10px; 
+}
+.historyDivider {
+    border: none;
+    border-top: 3px solid #ffffff; 
+    opacity: 1;
+    margin: 0; /* אין רווח סביב הקו */
+    padding: 0; /* אין רווח סביב הקו */
 }
