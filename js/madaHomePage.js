@@ -1,25 +1,6 @@
+
 window.onload = () => {
-    const socket = io('https://proj-2-ffwz.onrender.com');
-    
-    socket.on('connect', () => {
-        console.log('Connected to the server');
-    });
 
-    socket.on('disconnect', () => {
-        console.log('Disconnected from the server');
-    });
-
-    socket.on('reconnect_attempt', () => {
-        console.log('Attempting to reconnect');
-    });
-
-    socket.on('reconnect', (attemptNumber) => {
-        console.log(`Reconnected on attempt ${attemptNumber}`);
-    });
-
-    socket.on('reconnect_error', (error) => {
-        console.error('Reconnection error:', error);
-    });
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
     const userImage = localStorage.getItem('userImage');
     const userName = localStorage.getItem('userName');
