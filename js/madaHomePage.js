@@ -15,6 +15,7 @@ window.onload = () => {
         console.log('User details not found in local storage.');
     }
     getAllNotification();
+    fetchAndDisplayChart();
 };
 
 async function getAllNotification() {
@@ -73,5 +74,101 @@ async function getAllNotification() {
     } catch (error) {
         console.error('Error:', error);
         alert('An error occurred while loading details.');
+    }
+}
+async function fetchWeatherData() {
+    const apiKey = '58ed51c2b983534bd721c3b9c821b7a1';
+    const city = 'tel aviv';
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return {
+            temperature: data.main.temp,
+            humidity: data.main.humidity,
+        };
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+function createLineChart(ctx, data) {
+    return new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: data.hours,
+            datasets: [
+                {
+                    label: 'Temperature (°C)',
+                    data: data.temperature,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    fill: true,
+                },
+                {
+                    label: 'Humidity (%)',
+                    data: data.humidity,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    fill: true,
+                }
+            ]
+        },
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true,
+                },
+                y: {
+                    beginAtZero: true,
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.y !== null) {
+                                label += context.parsed.y + ' units';
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+async function fetchAndDisplayChart() {
+    try {
+        const weatherData = await fetchWeatherData();
+        const ctx = document.getElementById('weatherChart').getContext('2d');
+
+        // Generate data for 24 hours
+        const hours = Array.from({ length: 24 }, (_, i) => `${i}:00`);
+        const temperature = Array.from({ length: 24 }, () => weatherData.temperature + (Math.random() * 2 - 1));
+        const humidity = Array.from({ length: 24 }, () => weatherData.humidity + (Math.random() * 5 - 2.5));
+
+        const data = {
+            hours: hours,
+            temperature: temperature,
+            humidity: humidity
+        };
+
+        createLineChart(ctx, data);
+    } catch (error) {
+        console.error('Error fetching or displaying chart:', error);
     }
 }
