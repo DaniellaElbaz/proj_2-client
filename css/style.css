@@ -2463,17 +2463,6 @@ textarea {
     font-weight: bold;
 }
 /**********************************************************************userHomePage***********************************************/
-#uniqueHtml, #uniqueBody {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-#wrapper {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
 .notifictionsSection{
     margin-bottom: 5%;
     margin-top: 5%;
@@ -2532,14 +2521,14 @@ textarea {
     height: 25vh;
     width: 100%;
     display: flex;
-    flex-direction: column; /* מאפשר מיקום אנכי של ילדים */
+    flex-direction: column; 
     justify-content: space-between;
     padding: 15px 10px;
-    position: relative; /* מאפשר מיקום מוחלט של ילדים */
+    position: relative; 
 }
 .topContent {
     display: flex;
-    justify-content: space-between; /* מיקום האלמנטים בקצוות */
+    justify-content: space-between; 
     width: 100%;
     align-items: center;
 }
@@ -2593,8 +2582,8 @@ textarea {
     display: flex;
     justify-content: space-between; 
     align-items: center;
-    margin-bottom: 0; /* אין רווח תחתון */
-    padding-bottom: 0; /* אין רווח תחתון */
+    margin-bottom: 0; 
+    padding-bottom: 0; 
 }
 
 .detailItem {
@@ -2607,6 +2596,15 @@ textarea {
     border: none;
     border-top: 3px solid #ffffff; 
     opacity: 1;
-    margin: 0; /* אין רווח סביב הקו */
-    padding: 0; /* אין רווח סביב הקו */
+    margin: 0; 
+    padding: 0; 
+}
+.middle-divider {
+    border: none;
+    border-top: 3px solid #ffffff;
+    opacity: 1;
+    margin: 0; 
+    padding: 0; 
+    position: relative;
+    top: 33%;
 }
