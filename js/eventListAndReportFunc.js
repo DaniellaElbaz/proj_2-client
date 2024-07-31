@@ -12,61 +12,57 @@ function initBottomReport(form) {
     }
 }
 function validateForm() {
-    let whenText = document.getElementById('textareaWhen').value;
-    if (whenText.trim() === "") {
+    let whenText = document.getElementById('textareaWhen').value.trim();
+    let explainText = document.getElementById('textareaExplain').value.trim();
+    let userId =t /* retrieve the user ID from your application context */;
+    let eventId =b /* retrieve the event ID from your application context */;
+    let userRegretsId =f /* retrieve the userRegretsId from your application context if applicable */;
+
+    if (whenText === "") {
         alert("חייב למלא איך ומתי שמעת שהאירוע התרחש");
         return false;
     }
 
-    let explainText = document.getElementById('textareaExplain').value;
-    if (explainText.trim() === "") {
+    if (explainText === "") {
         alert("חייב למלא איך פעלת באירוע");
         return false;
     }
-    let eventNameRequest = `GET http://127.0.0.1:5500/eventList.html?eventId=123&eventWhen=${encodeURIComponent(whenText)}`;
-    console.info(`Request for Event Name and Time: ${eventNameRequest}`);
 
-    let eventPlaceRequest = `GET http://127.0.0.1:5500/eventList.html?eventExplain=${encodeURIComponent(explainText)}`;
-    console.info(`Request for Event Explanation and Type: ${eventPlaceRequest}`);
-    alert("הדוח נשלח בהצלחה!");
-    window.location.href = "eventList.html";
+    const reportData = {
+        eventWhen: whenText,
+        eventExplain: explainText,
+        userId: userId,
+        eventId: eventId,
+        userRegretsId: userRegretsId // Include this if needed
+    };
+
+    // Replace with your actual API endpoint
+    const apiUrl = 'https://proj-2-ffwz.onrender.com/api/report';
+
+    fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reportData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("הדוח נשלח בהצלחה!");
+            window.location.href = "eventList.html";
+        } else {
+            alert("שגיאה בשליחת הדוח: " + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("שגיאה בשליחת הדוח");
+    });
+
+    return false; 
 }
-function newEventCheck() {
-    let eventNameInput = document.getElementById('textareaWhenE').value;
-    if (eventNameInput.trim() === "") {
-        alert("חייב למלא מתי ואיפה האירוע  ");
-        return false;
-    }
-    else{
-        let eventNameRequest = `GET http://127.0.0.1:5500/eventList.html?eventId=123&eventWhen=${encodeURIComponent(eventNameInput)}`;
-        console.info(`מיקום וזמן האירוע  ${eventNameRequest}`);
-    }
-    let eventExplain = document.getElementById('textareaExplainE').value;
-    if (eventExplain.trim() === "") {
-        alert("חייב להסביר על האירוע");
-        return false;
-    }
-    else{
-        let eventExplainRequest = `GET http://127.0.0.1:5500/eventList.html?eventId=123&eventexplain=${encodeURIComponent(eventExplain)}`;
-        console.info(`פרטי האירוע  ${eventExplainRequest}`);
-    }
-    let type = document.getElementById('NewSelectType').value;
-    if (type.trim() === "") {
-        alert("חייב למלא סוג אירוע");
-        return false;
-    }
-    else{
-        let eventTypeRequest = `GET http://127.0.0.1:5500/eventList.html?eventId=123&eventtype=${encodeURIComponent(type)}`;
-          console.info(`סוג האירוע  ${eventTypeRequest}`);
-    }
-    const userConfirmed = confirm("האם אתה בטוח שתרצה לדווח?");
-    if (userConfirmed) {
-        alert("הדוח נשלח בהצלחה!");
-        window.location.href = "eventList.html";
-    } else {
-        return false;
-    }
-}
+
 function buttonBeck(){
     const userConfirmed = confirm(" הזהרה! ביציאה מהדף הדו''ח לא ישמר");
     if (userConfirmed) {
@@ -79,42 +75,49 @@ function buttonAdd(){
         window.location.href = "eventList.html";
     }
 }
+async function fetchEventUsers(eventId) {
+    const url = new URL('https://proj-2-ffwz.onrender.com/api/eventUsers');
+    url.searchParams.append('eventId', eventId);
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
+        const result = await response.json();
+        console.log('Response from server:', result);
+        if (result.success) {
+            showMembersEvent(result.data); // Pass the retrieved data to showMembersEvent
+        } else {
+            console.error('Error in response:', result.message);
+        }
+    } catch (error) {
+        console.error('Error fetching event users:', error);
+    }
+}
 function showMembersEvent(data) {
     const selectionEventId = getEventId();
-    const userName = 'נועה לוינסון';
     let inputRegretsContainer = document.createElement('div');
     inputRegretsContainer.classList.add('inputregretsContainer');
     let inputName = document.createElement('div');
     inputName.classList.add('members-input');
     const eventMembers = document.createElement('select');
     eventMembers.classList.add('help-selected');
-    for (const member of data.members) {
-        if (member.name == userName) {
-            const option = document.createElement('option');
-            option.value = "לא";
-            option.text = "לא";
-            option.selected = true;
-            eventMembers.appendChild(option);
-        }
-        else{
-            for (const event of member.events) {
-                if (event.id == selectionEventId) {
-                    const option = document.createElement('option');
-                    option.value = member.name;
-                    option.text = member.name;
-                    eventMembers.appendChild(option);
-                }
-            }
-        }
+
+    // Populate the select element with user names
+    for (const member of data) {
+        const option = document.createElement('option');
+        option.value = member.user_id;
+        option.text = `${member.first_name} ${member.last_name}`;
+        eventMembers.appendChild(option);
     }
+
     let inputDetails = document.createElement('div');
     inputDetails.classList.add('help-input');
     eventMembers.addEventListener('change', function() {
         openRegrets = isValueSelectedNotNo(eventMembers);
-
-        inputDetails.innerHTML="";
+        inputDetails.innerHTML = "";
         initMembersBox(inputDetails);
     });
+
     inputName.appendChild(eventMembers);
     const names = document.createElement('p');
     names.textContent = "אדם שתרצה/י לשבח בפועלו";
@@ -123,6 +126,7 @@ function showMembersEvent(data) {
     inputRegretsContainer.appendChild(initMembersBox(inputDetails));
     return inputRegretsContainer;
 }
+
 function isValueSelectedNotNo(selectElement) {
     return selectElement.value !== "לא";
 }
