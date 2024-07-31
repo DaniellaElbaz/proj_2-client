@@ -1,4 +1,5 @@
 let chartInstance = null;
+
 window.onload = () => {
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
     const userImage = localStorage.getItem('userImage');
@@ -15,13 +16,15 @@ window.onload = () => {
     } else {
         console.log('User details not found in local storage.');
     }
+
     const monthInput = document.getElementById('month');
     const currentDate = new Date();
-    const startOfYear = new Date(currentDate.getFullYear(), 0, 1);
-    const formattedMonth = `${startOfYear.getFullYear()}-01`; // Format as YYYY-MM
+    const oneYearAgo = new Date(currentDate);
+    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+    const formattedMonth = `${oneYearAgo.getFullYear()}-${String(oneYearAgo.getMonth() + 1).padStart(2, '0')}`; // Format as YYYY-MM
     monthInput.value = formattedMonth;
 
-    fetchEventStats('', formattedMonth);
+    fetchEventStats('all', formattedMonth);
     getEventsType();
     getAllUserNotification();
     document.getElementById('calcGraf').addEventListener('click', async () => {
@@ -73,12 +76,18 @@ async function getAllUserNotification() {
         alert('An error occurred while loading details.');
     }
 }
-async function fetchEventStats(eventType = '', month = '') {
+
+async function fetchEventStats(eventType, month) {
     const url = new URL('https://proj-2-ffwz.onrender.com/api/eventHistory/eventStats');
     const params = new URLSearchParams();
-    
-    if (eventType) params.append('eventType', eventType);
-    if (month) params.append('date_and_time', month);
+
+    // אם בחרת באפשרות 'ALL', שלח את התאריך כערך ריק
+    if (eventType === 'all') {
+        params.append('date_and_time', ''); // קבל את כל הנתונים
+    } else {
+        params.append('eventType', eventType);
+        params.append('date_and_time', month);
+    }
 
     url.search = params.toString();
 
@@ -97,16 +106,50 @@ async function fetchEventStats(eventType = '', month = '') {
         console.error('Error fetching event stats:', error);
     }
 }
+
+
 function createChart(data) {
-    if (!data || data.length === 0) {
+    if (!data) {
         console.log('No data received for chart');
         return;
     }
+
     const ctx = document.getElementById('eventStatsChart').getContext('2d');
-    const labels = data.map(item => item.month);
-    const counts = data.map(item => item.event_count);
-    new Chart(ctx, {
-        type: 'bar',
+    
+    // Prepare data
+    const labels = [];
+    const counts = [];
+    
+    // Create a map to store counts by month
+    const dataMap = new Map();
+    data.forEach(item => {
+        dataMap.set(item.month, parseInt(item.event_count, 10));
+    });
+
+    // Determine the range of months to show
+    const startDate = new Date(); // Use current date to determine range
+    startDate.setFullYear(startDate.getFullYear() - 1); // Look back one year
+    const endDate = new Date();
+    endDate.setMonth(endDate.getMonth() + 1); // End of the current month
+    
+    let currentDate = new Date(startDate);
+    
+    while (currentDate <= endDate) {
+        const monthLabel = currentDate.toISOString().slice(0, 7); // Format as YYYY-MM
+        labels.push(monthLabel);
+        counts.push(dataMap.get(monthLabel) || 0); // Default to 0 if no data for this month
+        currentDate.setMonth(currentDate.getMonth() + 1); // Move to next month
+    }
+
+    console.log('Labels:', labels);
+    console.log('Counts:', counts);
+
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
+
+    chartInstance = new Chart(ctx, {
+        type: 'line',
         data: {
             labels: labels,
             datasets: [{
@@ -114,26 +157,33 @@ function createChart(data) {
                 data: counts,
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
+                borderWidth: 1,
+                tension: 0.1,
+                fill: true,
             }]
         },
         options: {
             scales: {
+                x: {
+                    type: 'category', // Use 'category' scale for simple labels
+                    title: {
+                        display: true,
+                        text: 'Month'
+                    }
+                },
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Event Count'
+                    },
+                    ticks: {
+                        stepSize: 1 // Ensure the y-axis increments by 1
+                    }
                 }
             }
         }
     });
-}
-
-function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
 }
 
 async function getEventsType() {
@@ -156,6 +206,13 @@ async function getEventsType() {
 
         if (result.success) {
             eventType.innerHTML = '';
+
+            // Add default option for all events
+            const allEventsOption = document.createElement('option');
+            allEventsOption.classList.add('eventOption');
+            allEventsOption.value = 'all';
+            allEventsOption.text = 'All Events';
+            eventType.appendChild(allEventsOption);
 
             result.type.forEach(types => {
                 const eventOption = document.createElement('option');
