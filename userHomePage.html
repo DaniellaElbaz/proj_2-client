@@ -14,6 +14,9 @@
     <title>Daniella and Eitan - proj_1 Save A Life</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="js/userHomePage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+
 </head>
 
 <body>
@@ -41,7 +44,10 @@
                             <li class="nav-item"><a class="nav-link" href="#">הגדרות</a></li>
                         </ul>
                     </div>
-                    <div id="UserImage" class="order-5 order-lg-3 ms-auto"></div>
+                    <div id="UserImage" class="order-5 order-lg-3 ms-auto">
+                        <img id="user-image" title="user_photo" alt="User Photo"
+                        style="width: 40px; height: 40px; border-radius: 50%;">
+                    </div>
                 </div>
             </nav>
         </header>
@@ -60,26 +66,27 @@
                         <div class="updatePContainer">
                             <h2 class="updateP">עדכונים</h2>
                         </div>
+                        <div id="notification"></div>
                     </div>
                 </div>
             </section>
             <section class="graphSection">
                 <div class="graphHeaderContainer">
                     <div class="topContent">
-                        <div class="dateContainer">
-                            <div class="dayDateContainer">
-                                <p class="dayDate"></p>
-                            </div>
-                            <div class="calenderIconContainer">
-                                <img src="images/calendar-icon.png" alt="Calender Icon">
-                            </div>
+                        <div>
+                            <label for="eventTypeUser">סוג אירוע:</label>
+                            <select id="eventTypeUser"></select>
+                            <label for="month">חודש:</label>
+                            <input type="month" id="month">
+                            <button id="calcGraf">Apply Filters</button>
                         </div>
-                        <div class="graphP">
-                            <h2 class="updateP">תמונת מצב חודשית</h2>
-                        </div>
-                    </div>
-                    <div class="graphBackColor">
+                        <h2 class="updateP">תמונת מצב חודשית</h2>
 
+                    </div>
+                    <div class="graphP">
+                        <div id="graphContainer">
+                            <canvas id="eventStatsChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </section>

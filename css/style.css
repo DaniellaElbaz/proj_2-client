@@ -2457,6 +2457,18 @@ textarea {
     margin-top: 20%;
 }
 /**********************************************************************userHomePage***********************************************/
+.eventNotificationUsr {
+    list-style-type: disc;
+
+    padding-right: 90px;
+    direction: rtl;
+    list-style-position: inside;
+}
+
+.eventItemNotificationUsr {
+    margin-bottom: 10px;
+    text-align: right;
+}
 .notifictionsSection{
     margin-bottom: 5%;
     margin-top: 5%;
@@ -2524,11 +2536,14 @@ textarea {
     display: flex;
     justify-content: space-between; 
     width: 100%;
-    align-items: center;
 }
 .graphP {
     font-weight: bold;
     font-size: 20px;
+}
+.graphSection{
+    display: flex;
+    justify-content: space-between; 
 }
 .dateContainer {
     display: flex;
@@ -2543,15 +2558,6 @@ textarea {
 .calenderIconContainer img {
     width: 3vh; 
     height: 3vh;
-}
-.graphBackColor {
-    background-color: white;
-    width: 100%;
-    height: 82%;
-    position: absolute; 
-    top: 28%; 
-    left: 50%; 
-    transform: translateX(-50%); 
 }
 .historyContainer{
     background: linear-gradient(135deg, #a39e9e, #a5a5a5);
@@ -2601,4 +2607,18 @@ textarea {
     padding: 0; 
     position: relative;
     top: 33%;
+}
+
+#graphContainer {
+    background-color: #fff; /* White background */
+    width: 100%; /* Full width */
+    padding: 20px; /* Optional: Add padding for spacing */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+    height: 20vh;
+}
+#eventStatsChart {
+    width: 100%;
+    height: 15vh;
+    background-color: #fff;
+    display: block;
 }

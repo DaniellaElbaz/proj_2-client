@@ -27,7 +27,7 @@ window.onload = () => {
                 localStorage.setItem('userImage', userImage);
                 localStorage.setItem('userName', userName);
                 if (certificationType === 'Medical' || certificationType === 'Security') {
-                    window.location.href = 'eventLive.html';
+                    window.location.href = 'userHomePage.html';
                 } else {
                     window.location.href = 'madaHomePage.html';
                 }
