@@ -1,3 +1,7 @@
+window.onload = () => {
+    fetchEventData();
+};
+
 async function fetchEventData() {
     try {
         const response = await fetch('https://proj-2-ffwz.onrender.com/api/eventLive/', {
