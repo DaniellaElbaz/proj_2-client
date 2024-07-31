@@ -1,5 +1,4 @@
 let chartInstance = null;
-
 window.onload = () => {
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
     const userImage = localStorage.getItem('userImage');
@@ -16,24 +15,15 @@ window.onload = () => {
     } else {
         console.log('User details not found in local storage.');
     }
-
-    const monthInput = document.getElementById('month');
-    const currentDate = new Date();
-    const oneYearAgo = new Date(currentDate);
-    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-    const formattedMonth = `${oneYearAgo.getFullYear()}-${String(oneYearAgo.getMonth() + 1).padStart(2, '0')}`; // Format as YYYY-MM
-    monthInput.value = formattedMonth;
-
-    fetchEventStats('all', formattedMonth);
+    fetchEventStats('all');
     getEventsType();
     getAllUserNotification();
     document.getElementById('calcGraf').addEventListener('click', async () => {
         const eventType = document.getElementById('eventTypeUser').value;
-        const month = document.getElementById('month').value;
-        await fetchEventStats(eventType, month);
+
+        await fetchEventStats(eventType);
     });
 };
-
 async function getAllUserNotification() {
     const userNotification = document.getElementById('notification');
 
@@ -41,7 +31,6 @@ async function getAllUserNotification() {
         console.error('One or more elements not found in the DOM.');
         return;
     }
-
     try {
         const response = await fetch('https://proj-2-ffwz.onrender.com/api/madaHomePage/', {
             method: 'GET',
@@ -49,11 +38,9 @@ async function getAllUserNotification() {
                 'Content-Type': 'application/json'
             },
         });
-
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-
         const result = await response.json();
         console.log('Response from server:', result);
         if (result.success) {
@@ -76,24 +63,19 @@ async function getAllUserNotification() {
         alert('An error occurred while loading details.');
     }
 }
-
-async function fetchEventStats(eventType, month) {
+async function fetchEventStats(eventType) {
     const url = new URL('https://proj-2-ffwz.onrender.com/api/eventHistory/eventStats');
     const params = new URLSearchParams();
-
-    // אם בחרת באפשרות 'ALL', שלח את התאריך כערך ריק
     if (eventType === 'all') {
-        params.append('date_and_time', ''); // קבל את כל הנתונים
+        params.append('date_and_time', '');
     } else {
         params.append('eventType', eventType);
-        params.append('date_and_time', month);
     }
-
     url.search = params.toString();
 
     try {
         const response = await fetch(url);
-        console.log('URL:', url.toString()); // Debug URL
+        console.log('URL:', url.toString());
         if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
         const result = await response.json();
         console.log('Response from server:', result);
@@ -106,48 +88,32 @@ async function fetchEventStats(eventType, month) {
         console.error('Error fetching event stats:', error);
     }
 }
-
-
 function createChart(data) {
     if (!data) {
         console.log('No data received for chart');
         return;
     }
-
     const ctx = document.getElementById('eventStatsChart').getContext('2d');
-    
-    // Prepare data
     const labels = [];
     const counts = [];
-    
-    // Create a map to store counts by month
     const dataMap = new Map();
     data.forEach(item => {
         dataMap.set(item.month, parseInt(item.event_count, 10));
     });
-
-    // Determine the range of months to show
-    const startDate = new Date(); // Use current date to determine range
-    startDate.setFullYear(startDate.getFullYear() - 1); // Look back one year
+    const startDate = new Date();
+    startDate.setFullYear(startDate.getFullYear() - 1);
     const endDate = new Date();
-    endDate.setMonth(endDate.getMonth() + 1); // End of the current month
-    
+    endDate.setMonth(endDate.getMonth() + 1);
     let currentDate = new Date(startDate);
-    
     while (currentDate <= endDate) {
-        const monthLabel = currentDate.toISOString().slice(0, 7); // Format as YYYY-MM
+        const monthLabel = currentDate.toISOString().slice(0, 7);
         labels.push(monthLabel);
-        counts.push(dataMap.get(monthLabel) || 0); // Default to 0 if no data for this month
-        currentDate.setMonth(currentDate.getMonth() + 1); // Move to next month
+        counts.push(dataMap.get(monthLabel) || 0);
+        currentDate.setMonth(currentDate.getMonth() + 1);
     }
-
-    console.log('Labels:', labels);
-    console.log('Counts:', counts);
-
     if (chartInstance) {
         chartInstance.destroy();
     }
-
     chartInstance = new Chart(ctx, {
         type: 'line',
         data: {
@@ -165,7 +131,7 @@ function createChart(data) {
         options: {
             scales: {
                 x: {
-                    type: 'category', // Use 'category' scale for simple labels
+                    type: 'category',
                     title: {
                         display: true,
                         text: 'Month'
@@ -178,14 +144,13 @@ function createChart(data) {
                         text: 'Event Count'
                     },
                     ticks: {
-                        stepSize: 1 // Ensure the y-axis increments by 1
+                        stepSize: 1
                     }
                 }
             }
         }
     });
 }
-
 async function getEventsType() {
     const eventType = document.getElementById('eventTypeUser');
     try {
@@ -199,21 +164,14 @@ async function getEventsType() {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-
         const result = await response.json();
-
-        console.log('Response from server:', result);
-
         if (result.success) {
             eventType.innerHTML = '';
-
-            // Add default option for all events
             const allEventsOption = document.createElement('option');
             allEventsOption.classList.add('eventOption');
             allEventsOption.value = 'all';
             allEventsOption.text = 'All Events';
             eventType.appendChild(allEventsOption);
-
             result.type.forEach(types => {
                 const eventOption = document.createElement('option');
                 eventOption.classList.add('eventOption');
