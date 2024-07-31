@@ -1,26 +1,24 @@
 window.onload = () => {
-    const userDetails = JSON.parse(localStorage.getItem('userDetails'));
-    const userImage = localStorage.getItem('userImage');
-    const userName = localStorage.getItem('userName');
-    if (userDetails && userImage && userName) {
-        const managerImage = document.getElementById('user-image');
-        const userNameElement = document.getElementById('user-name');
-        if (managerImage) {
-            managerImage.src = userImage;
-        }
-        if (userNameElement) {
-            userNameElement.innerText = userName;
-        }
-    } else {
-        console.log('User details not found in local storage.');
-       
-    }
+    document.getElementById("text-with-image").addEventListener("click", toggleImage);
     drawFirstPart();
+    drawSecondPart();
+    drawThirdPart();
 };
+
 function drawFirstPart() {
     const section1 = document.getElementById("first-part");
-
-    const eventPhoto = document.getElementById("event-photo");
+    const alertParagraphIcon = document.createElement("div");
+    alertParagraphIcon.className = "alert-icon-paragraph";
+    const icon1 = document.createElement("i");
+    icon1.className = "fas fa-exclamation-triangle";
+    const noticeText = document.createElement("p");
+    noticeText.textContent = "שים לב אירוע חדש התווסף";
+    const icon2 = document.createElement("i");
+    icon2.className = "fas fa-exclamation-triangle";
+    alertParagraphIcon.appendChild(icon1);
+    alertParagraphIcon.appendChild(noticeText);
+    alertParagraphIcon.appendChild(icon2);
+    const eventPhoto = document.createElement("div");
     eventPhoto.className = "event-photo";
     const img = document.createElement("img");
     img.src = "images/map_noa.png";
@@ -31,16 +29,18 @@ function drawFirstPart() {
     const redButton = document.createElement("a");
     redButton.className = "red-rectangle";
     redButton.innerHTML = "<p>סירוב</p>";
+    redButton.style.textDecoration = 'none';
     redButton.addEventListener("click", function() {
-        changeButton(redButton, greenButton); // 
+        changeButton(redButton, greenButton);
     });
     const greenButton = document.createElement("a");
     greenButton.className = "green-rectangle";
     greenButton.innerHTML = "<p>קבלת אירוע</p>";
     greenButton.href = "userDetails.html";
+    greenButton.style.textDecoration = 'none';
     rectangleContainer.appendChild(redButton);
     rectangleContainer.appendChild(greenButton);
- 
+    section1.appendChild(alertParagraphIcon);
     section1.appendChild(eventPhoto);
     section1.appendChild(rectangleContainer);
 }
@@ -50,7 +50,8 @@ function changeButton(redButton, greenButton) {
     greenButton.classList.add('new-accept-button'); 
     greenButton.innerHTML = "<p>אירוע פעיל, באפשרותך להכנס בכל רגע נתון</p>";
 }
-function drawSecondPart(reports) {
+
+function drawSecondPart() {
     const section2 = document.getElementById("second-part");
     const p2ElementContainer = document.createElement("div");
     p2ElementContainer.className = "p2-element-container";
@@ -67,9 +68,10 @@ function drawSecondPart(reports) {
         const reportContainer = createReportContainer(startTime, i);
         p2ElementContainer.appendChild(reportContainer);
     }
-    const lastReportContainer = createLastReportContainer(reports);
+    const lastReportContainer = createLastReportContainer();
     p2ElementContainer.appendChild(lastReportContainer);
 }
+
 function createRealTimeText() {
     const realTimeText = document.createElement("div");
     realTimeText.className = "real-time-text";
@@ -80,6 +82,7 @@ function createRealTimeText() {
     realTimeText.appendChild(alertIcon);
     return realTimeText;
 }
+
 function createReportContainer(startTime, index) {
     const reportContainer = document.createElement("div");
     reportContainer.className = "report-container";
@@ -103,9 +106,13 @@ function createReportContainer(startTime, index) {
     dotWrapper.appendChild(horizontalLine);
     dotsContainer.appendChild(dotWrapper);
     reportContainer.appendChild(dotsContainer);
+    reportTime.style.color = "black";
+    reportTime.style.fontWeight = "bold";
+    reportTime.style.fontFamily = "Inter";
     return reportContainer;
 }
-function createLastReportContainer(reports) {
+
+function createLastReportContainer() {
     const lastReportContainer = document.createElement("div");
     lastReportContainer.className = "report-container";
     const dotsContainer = document.createElement("div");
@@ -117,27 +124,21 @@ function createLastReportContainer(reports) {
         dotsContainer.appendChild(dot);
     }
     const imgReport = document.createElement("img");
-    imgReport.src = "images/report-img.jpeg"
+    imgReport.src = "images/report-img.jpeg";
     imgReport.alt = "crash-photo";
     imgReport.className = "accident-photo";
     lastReportContainer.appendChild(imgReport);
-    const textDesign = createTextDesign(reports);
-    lastReportContainer.appendChild(textDesign);
+    const textStyle = createTextStyle();
+    lastReportContainer.appendChild(textStyle);
     lastReportContainer.appendChild(dotsContainer);
     return lastReportContainer;
 }
 
-function createTextDesign(reports) {
-    const textDesign = document.createElement("div");
-    textDesign.className = "text-design";
-    for (let i = 0; i < reports.length; i++) {
-        const report = reports[i];
-        const reportText = document.createElement("p");
-        reportText.className = "report-text";
-        reportText.textContent = report.text;
-        textDesign.appendChild(reportText);
-    }
-    return textDesign;
+function createTextStyle() {
+    const textStyle = document.createElement("div");
+    textStyle.className = "text-style";
+    // You can add static text here if needed
+    return textStyle;
 }
 
 function toggleImage() {
@@ -164,6 +165,7 @@ function drawThirdPart() {
     addTextElements();
     section3.appendChild(historyContainer);
 }
+
 function addTextElements() {
     const section3 = document.getElementById("third-part");
     const textContainer = document.createElement("div");
@@ -196,7 +198,7 @@ function addDescriptionElements(eventsHistory) {
             words.forEach(word => {
                 const span = document.createElement("span");
                 span.textContent = word;
-                span.className = "block-text";
+                span.style.display = "block";
                 reportDes.appendChild(span);
             });
         } else {
