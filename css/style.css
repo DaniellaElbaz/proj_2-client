@@ -2011,7 +2011,7 @@ textarea {
 .containersWrapper {
     display: flex;
     justify-content:space-around;
-    margin-top: 170px;
+    margin-top: 3%;
     gap: 20%;
 }
 .eventUserContainer {
@@ -2073,12 +2073,12 @@ textarea {
     background-color: #2196F3;
     color: rgb(255, 255, 255);
     padding: 15px 32px;
-    font-size: 1.5vh;
+    font-size: 15px;
     margin: 4px 2px;
     cursor: pointer;
     border: none;
-    width: 16%;
-    height: 5vh;
+    width: 35%;
+    height: 40%;
 }
 .confirmButton {
     display: flex;
