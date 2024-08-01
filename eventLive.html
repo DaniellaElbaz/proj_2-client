@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <title>Daniella and Eitan - proj_1 Save A Life</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="js/homePage.js"></script>
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <header>
+            <nav class="navbar navbar-expand-lg border-body" data-bs-theme="dark">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center">
+                        <button class="navbar-toggler order-1" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div id="logo" class="order-2 ms-2"></div>
+                        <a class="navbar-brand mx-auto order-3" href="index.html">SAVE A LIFE</a>
+                    </div>
+                    <div class="collapse navbar-collapse justify-content-center order-4 order-lg-2"
+                        id="navbarSupportedContent">
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item"><a class="nav-link" href="index.html">דף הבית</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">חיפוש אירועים</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">מבדקי ריענון ידע</a></li>
+                            <li class="nav-item"><a class="nav-link" href="eventList.html">היסטורית אירועים</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">עדכון סטטוס תעודה</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">הגדרות</a></li>
+
+                        </ul>
+                    </div>
+                    <div id="UserImage" class="order-5 order-lg-3 ms-auto"></div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <section id="notifictionDecision">
+                <div class="newEventAlertContainer">
+                    <i class="fas fa-exclamation-triangle alertIcon"></i>
+                    <h1 class="newEventAlertP"> שים לב אירוע חדש התווסף</h1>
+                    <i class="fas fa-exclamation-triangle alertIcon"></i>
+                </div>
+                <img src="images/map_noa.png" alt="Event Image" class="eventImage">
+                <!-- Replace with your image path -->
+                <div class="buttonContainer">
+                    <button class="declineButton">סירוב</button>
+                    <button class="acceptButton">קבלת אירוע</button>
+                </div>
+            </section>
+
+            <section id="timeLine">
+                <div class="timeLineAndReportContainer">
+                    <div class="headerContainer">
+                        <img id="reportNotifictionImg" src="images/alert-icon.png" title="notifictionImg" alt="notifictionHeader">
+                        <h2 class="reportheaderP"> דיווחים בזמן אמת</h2>
+                    </div>
+
+                    <div class="rectangleVerticalLineContainer">
+                        <div class="reportDetailsContainer">
+                            <div class="rectangle"></div>
+                            <div class="horizontalLine"></div>
+                            <div class="verticalLine">
+                                <div class="verticalLineDot"></div>
+                            </div>
+                            <div class="timeLabel">08:00</div>
+                        </div>
+                        <div class="reportDetailsContainer">
+                            <div class="rectangle"></div>
+                            <div class="horizontalLine"></div>
+                            <div class="verticalLine">
+                                <div class="verticalLineDot"></div>
+                            </div>
+                            <div class="timeLabel">08:00</div>
+                        </div>
+                        <div class="reportDetailsContainer">
+                            <div class="rectangle"></div>
+                            <div class="horizontalLine"></div>
+                            <div class="verticalLine">
+                                <div class="verticalLineDot"></div>
+                            </div>
+                            <div class="timeLabel">08:00</div>
+                        </div>
+                        <div class="reportDetailsContainer">
+                            <div class="rectangle">
+                                <div class="threeDotscontainer">
+                                    <div class="threeDot">•</div>
+                                    <div class="threeDot">•</div>
+                                    <div class="threeDot">•</div>
+                                </div>
+                            </div>
+                            <div class="lastHorizontalLine"></div>
+                            <div class="verticalLine">
+                                <div class="lastVerticalLineDot"></div>
+                            </div>
+                            <div class="LasTimeLabel">08:00</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="eventHistoryInfo">
+                <div class="eventHistoryContainer">
+                    <a href="eventList.html" class="allHistoryEventP">לכל היסטוריית האירועים</a>
+                    <div class="detailsContainer">
+                        <span class="detail">סוג אירוע</span>
+                        <span class="detail">סטטוס</span>
+                        <span class="detail">תיאור</span>
+                    </div>
+                    <div class="historyHorizontalLine"></div>
+                    <div class="threeSentences" id="threeSentences">
+                        <div class="sentence"></div>
+                        <div class="secondSentence"></div>
+                        <div class="sentence"></div>
+                    </div>
+               </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
