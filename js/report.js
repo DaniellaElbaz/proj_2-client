@@ -69,9 +69,9 @@ async function fetchAndPopulateUsers(eventId) {
     }
 }
 function populateUserSelectBoxes(users) {
-    const helpSelected = document.querySelector('.help-input');
-
-    if (helpSelected) {
+    const helpInput = document.querySelector('.help-input');
+    const helpSelected = document.querySelector('.help-selected');
+    if (helpInput) {
         const currentUserId = JSON.parse(localStorage.getItem('userDetails')).user_id;
         const noOption = document.createElement('option');
         const currentUser = users.find(user => user.user_id === currentUserId);
@@ -80,15 +80,25 @@ function populateUserSelectBoxes(users) {
             noOption.text = 'לא';
             noOption.selected = true;
         }
-        helpSelected.insertBefore(noOption, helpSelected.firstChild);
+        helpInput.insertBefore(noOption, helpInput.firstChild);
         users.forEach(user => {
             if (user.user_id !== currentUserId) {
                 const userOption = document.createElement('option');
                 userOption.value = `${user.first_name} ${user.last_name}`;
                 userOption.text = `${user.first_name} ${user.last_name}`;
-                helpSelected.appendChild(userOption);
+                helpInput.appendChild(userOption);
             }
         });
+        helpInput.addEventListener('change', () => {
+            if (helpInput.value === 'לא') {
+                helpSelected.disabled = true;
+            } else {
+                helpSelected.disabled = false;
+            }
+        });
+        if (helpInput.value === 'לא') {
+            helpSelected.disabled = true;
+        }
     } else {
         console.error('Select element with class "help-input" not found');
     }
