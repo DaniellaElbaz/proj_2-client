@@ -59,10 +59,10 @@ function addDescriptionElements(eventLiveReports, recentReports) {
         const reportContainer = document.getElementById(`report${index + 1}`);
         if (reportContainer) {
             const descriptionSpan = reportContainer.querySelector('.description');
-            descriptionSpan.textContent = report.report_description;
+            descriptionSpan.textContent = report.update_description;
 
             const timeSpan = reportContainer.querySelector('.time');
-            timeSpan.textContent = report.report_time;
+            timeSpan.textContent = report.time; // להציג את הזמן שמתקבל מהשרת
         }
     });
 }
