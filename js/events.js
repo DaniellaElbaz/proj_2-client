@@ -55,7 +55,8 @@ function populateEventDetails(events) {
     }
     eventsContainer.innerHTML = '';
     events.forEach(event => {
-        console.log('Processing event:', event);
+        console.log('Processing event:', event);  // Log the event object to verify properties
+
         const eventItem = eventTemplate.cloneNode(true);
         eventItem.style.display = 'block';
         eventItem.querySelector('h1').textContent = event.event_name;
@@ -91,10 +92,12 @@ function populateEventDetails(events) {
             console.error('Event item container not found in template');
         }
 
-        // Find the existing report button within the event item and set its onclick event
         const reportButton = eventItem.querySelector('#reportButton');
         if (reportButton) {
-            reportButton.onclick = () => navigateToReportPage(event);
+            reportButton.onclick = () => {
+                console.log("Event ID before navigation:", event.event_id);  // Use event.event_id
+                navigateToReportPage(event);
+            };
         } else {
             console.error('Report button not found in template');
         }
@@ -102,15 +105,18 @@ function populateEventDetails(events) {
         eventsContainer.appendChild(eventItem);
     });
 }
-
 function navigateToReportPage(event) {
+    console.log("Event ID before navigation:", event.event_id);  // Verify the correct property name
     const queryParams = new URLSearchParams({
         eventName: event.event_name,
         eventType: event.type_event,
         eventDate: event.date_and_time,
+        eventId: event.event_id,  // Use event.event_id
         eventAddress: event.address,
         eventStatus: event.event_status
     }).toString();
 
+    console.log("Constructed URL:", `event_report.html?${queryParams}`);
     window.location.href = `event_report.html?${queryParams}`;
 }
+

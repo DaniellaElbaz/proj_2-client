@@ -37,12 +37,14 @@ window.onload = async () => {
         }
         if (eventId) {
             await fetchAndPopulateUsers(eventId);
+            inputToTextBox();
+            populateStaticOptions();
         }
-        populateStaticOptions();
+        
     } else {
         console.log('User details not found in local storage.');
     }
-    inputToTextBox();
+    
 };
 async function fetchAndPopulateUsers(eventId) {
     try {
@@ -67,24 +69,31 @@ async function fetchAndPopulateUsers(eventId) {
     }
 }
 function populateUserSelectBoxes(users) {
-    const helpSelected = document.querySelector('.help-selected');
-    const helpInput = document.querySelector('.help-input');
-    if (helpSelected && helpInput) {
-        users.forEach(user => {
-            const userOption = document.createElement('option');
-            userOption.value = user.user_id;
-            userOption.text = `${user.first_name} ${user.last_name}`;
-            helpSelected.appendChild(userOption);
+    const helpSelected = document.querySelector('.help-input');
 
-            const inputOption = document.createElement('option');
-            inputOption.value = user.user_id;
-            inputOption.text = `${user.first_name} ${user.last_name}`;
-            helpInput.appendChild(inputOption);
+    if (helpSelected) {
+        const currentUserId = JSON.parse(localStorage.getItem('userDetails')).user_id;
+        const noOption = document.createElement('option');
+        const currentUser = users.find(user => user.user_id === currentUserId);
+        if (currentUser) {
+            noOption.value = 'לא';
+            noOption.text = 'לא';
+            noOption.selected = true;
+        }
+        helpSelected.insertBefore(noOption, helpSelected.firstChild);
+        users.forEach(user => {
+            if (user.user_id !== currentUserId) {
+                const userOption = document.createElement('option');
+                userOption.value = `${user.first_name} ${user.last_name}`;
+                userOption.text = `${user.first_name} ${user.last_name}`;
+                helpSelected.appendChild(userOption);
+            }
         });
     } else {
-        console.error('Select elements not found');
+        console.error('Select element with class "help-input" not found');
     }
 }
+
 function populateStaticOptions() {
     const helpSelected = document.querySelector('.help-selected');
     const options = [
