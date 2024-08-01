@@ -19,7 +19,7 @@ async function fetchEventData() {
         console.log('Response from server:', data);
 
         if (data.success) {
-            addDescriptionElements(data.eventLiveReports);
+            addDescriptionElements(data.eventLiveReports, data.recentReports);
         } else {
             console.error('Failed to fetch events:', data.message);
             alert(data.message || 'Failed to fetch events');
@@ -30,7 +30,7 @@ async function fetchEventData() {
     }
 }
 
-function addDescriptionElements(eventLiveReports) {
+function addDescriptionElements(eventLiveReports, recentReports) {
     const threeSentencesContainer = document.getElementById("threeSentences");
     console.log('threeSentences element:', threeSentencesContainer); // Log the element
     if (!threeSentencesContainer) {
@@ -46,11 +46,24 @@ function addDescriptionElements(eventLiveReports) {
         const sentenceDiv = document.createElement("div");
         sentenceDiv.className = sentenceClass;
         
-        // שימוש במפתחות קיימים עם הסדר הנכון
-        const eventDescription = `${report.event_name}, ${report.event_status}, ${report.type_event}`;
+        // Adding hyphens to distinguish between elements
+        const eventDescription = `${report.event_name} - ${report.event_status} - ${report.type_event}`;
         
         sentenceDiv.textContent = eventDescription;
         threeSentencesContainer.appendChild(sentenceDiv);
+        console.log('Added element:', sentenceDiv); // Log the added element
+    });
+
+    // Adding recent reports to the reportDetailsContainer
+    recentReports.forEach((report, index) => {
+        const reportContainer = document.getElementById(`report${index + 1}`);
+        if (reportContainer) {
+            const descriptionSpan = reportContainer.querySelector('.description');
+            descriptionSpan.textContent = report.update_description;
+
+            const timeSpan = reportContainer.querySelector('.time');
+            timeSpan.textContent = report.time; // להציג את הזמן שמתקבל מהשרת
+        }
     });
 }
 

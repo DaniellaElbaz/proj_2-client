@@ -38,7 +38,6 @@
                             <li class="nav-item"><a class="nav-link" href="eventList.html">היסטורית אירועים</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">עדכון סטטוס תעודה</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">הגדרות</a></li>
-
                         </ul>
                     </div>
                     <div id="UserImage" class="order-5 order-lg-3 ms-auto"></div>
@@ -49,11 +48,10 @@
             <section id="notifictionDecision">
                 <div class="newEventAlertContainer">
                     <i class="fas fa-exclamation-triangle alertIcon"></i>
-                    <h1 class="newEventAlertP"> שים לב אירוע חדש התווסף</h1>
+                    <h1 class="newEventAlertP">שים לב אירוע חדש התווסף</h1>
                     <i class="fas fa-exclamation-triangle alertIcon"></i>
                 </div>
                 <img src="images/map_noa.png" alt="Event Image" class="eventImage">
-                <!-- Replace with your image path -->
                 <div class="buttonContainer">
                     <button class="declineButton">סירוב</button>
                     <button class="acceptButton">קבלת אירוע</button>
@@ -64,33 +62,33 @@
                 <div class="timeLineAndReportContainer">
                     <div class="headerContainer">
                         <img id="reportNotifictionImg" src="images/alert-icon.png" title="notifictionImg" alt="notifictionHeader">
-                        <h2 class="reportheaderP"> דיווחים בזמן אמת</h2>
+                        <h2 class="reportheaderP">דיווחים בזמן אמת</h2>
                     </div>
-
-                    <div class="rectangleVerticalLineContainer">
-                        <div class="reportDetailsContainer">
-                            <div class="rectangle"></div>
+            
+                    <div class="rectangleVerticalLineContainer" id="rectangleVerticalLineContainer">
+                        <div class="reportDetailsContainer" id="report1">
+                            <div class="rectangle"><span class="description"></span></div>
                             <div class="horizontalLine"></div>
                             <div class="verticalLine">
                                 <div class="verticalLineDot"></div>
                             </div>
-                            <div class="timeLabel">08:00</div>
+                            <div class="timeLabel"><span class="time" id="time1"></span></div>
                         </div>
-                        <div class="reportDetailsContainer">
-                            <div class="rectangle"></div>
+                        <div class="reportDetailsContainer" id="report2">
+                            <div class="rectangle"><span class="description"></span></div>
                             <div class="horizontalLine"></div>
                             <div class="verticalLine">
                                 <div class="verticalLineDot"></div>
                             </div>
-                            <div class="timeLabel">08:00</div>
+                            <div class="timeLabel"><span class="time" id="time2"></span></div>
                         </div>
-                        <div class="reportDetailsContainer">
-                            <div class="rectangle"></div>
+                        <div class="reportDetailsContainer" id="report3">
+                            <div class="rectangle"><span class="description"></span></div>
                             <div class="horizontalLine"></div>
                             <div class="verticalLine">
                                 <div class="verticalLineDot"></div>
                             </div>
-                            <div class="timeLabel">08:00</div>
+                            <div class="timeLabel"><span class="time" id="time3"></span></div>
                         </div>
                         <div class="reportDetailsContainer">
                             <div class="rectangle">
@@ -99,6 +97,7 @@
                                     <div class="threeDot">•</div>
                                     <div class="threeDot">•</div>
                                 </div>
+                                <span class="description"></span>
                             </div>
                             <div class="lastHorizontalLine"></div>
                             <div class="verticalLine">
@@ -109,6 +108,7 @@
                     </div>
                 </div>
             </section>
+            
             <section id="eventHistoryInfo">
                 <div class="eventHistoryContainer">
                     <a href="eventList.html" class="allHistoryEventP">לכל היסטוריית האירועים</a>
@@ -119,11 +119,11 @@
                     </div>
                     <div class="historyHorizontalLine"></div>
                     <div class="threeSentences" id="threeSentences">
-                        <div class="sentence"></div>
+                        <div class="firstSentence"></div>
                         <div class="secondSentence"></div>
-                        <div class="sentence"></div>
+                        <div class="thirdSentence"></div>
                     </div>
-               </div>
+                </div>
             </section>
         </main>
     </div>
