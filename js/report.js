@@ -1,7 +1,9 @@
-let report;
 const form = document.createElement("form");
+
 window.onload = () => {
     form.classList.add('manege-necessary-data');
+    
+    // Retrieve user details from local storage
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
     const userImage = localStorage.getItem('userImage');
     const userName = localStorage.getItem('userName');
@@ -9,18 +11,23 @@ window.onload = () => {
     if (userDetails && userImage && userName) {
         const managerImage = document.getElementById('user-image');
         const userNameElement = document.getElementById('user-name');
+        
         if (managerImage) {
             managerImage.src = userImage;
         }
+        
         if (userNameElement) {
             userNameElement.innerText = userName;
         }
     } else {
         console.log('User details not found in local storage.');
     }
+
+    // Initialize form elements
     initBottomReport(form);
-    initReport(user,data);
+    initReport(userDetails, data);
 }
+
 function initReport(user, data) {
     const report = document.getElementById("report");
     report.innerHTML = '';
@@ -55,11 +62,13 @@ function initReport(user, data) {
     
     report.appendChild(reportItem);
 }
+
 function getEventId() {
     const queryString = window.location.search.substring(1);
     const urlParams = new URLSearchParams(queryString);
     return urlParams.get('eventId'); // Assumes 'eventId' is the key for the event ID
 }
+
 function showSelectedEvent(user) {
     const selectionEventId = getEventId();
     const eventD = document.createElement('div'); // Changed to 'div' for better structure
@@ -145,6 +154,7 @@ function inputFromJsonToTextBox(user) {
     };
     buttonBackFromReport.classList.add('button-back-report');
     reportItem.appendChild(buttonBackFromReport);
+    
     let eventFound = false;
     for (const eventKey in user.events) {
         let eventDetails = user.events[eventKey];
@@ -161,6 +171,7 @@ function inputFromJsonToTextBox(user) {
             break;
         }
     }
+    
     if (!eventFound) {
         const noEventFoundMessage = document.createElement('p');
         noEventFoundMessage.innerText = "אירוע לא נמצא";
@@ -175,29 +186,33 @@ function inputToTextBox() {
     inputItem.classList.add('report-input');
     const when = document.createElement('p');
     let star = document.createElement('span');
-    star.innerHTML ="*";
+    star.innerHTML = "*";
     let star2 = document.createElement('span');
-    star2.innerHTML ="*";
+    star2.innerHTML = "*";
     when.innerText = "?מתי ואיך שמעת שהאירוע התרחש";
     when.appendChild(star);
     inputItem.appendChild(when);
     const textWhen = document.createElement('textarea');
     textWhen.id = "textareaWhen";
-    textWhen.name="whenText";
+    textWhen.name = "whenText";
     textWhen.maxLength = 90;
     form.appendChild(textWhen);
     inputItem.appendChild(whenCount(textWhen));
+    
     const explain = document.createElement('p');
     explain.innerText = "הסבר/י על הדרך פעילות שלך באירוע";
     explain.appendChild(star2);
     inputItem.appendChild(explain);
+    
     const textExplain = document.createElement('textarea');
     textExplain.id = "textareaExplain";
-    textExplain.name="explainText";
+    textExplain.name = "explainText";
     textExplain.maxLength = 300;
     form.appendChild(textExplain);
     inputItem.appendChild(explainCount(textExplain));
+    
     textWhen.addEventListener('input', () => updateCharCount(textWhen, "whenCharCount"));
     textExplain.addEventListener('input', () => updateCharCount(textExplain, "explainCharCount"));
+    
     return inputItem;
 }

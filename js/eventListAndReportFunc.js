@@ -14,9 +14,11 @@ function initBottomReport(form) {
 function validateForm() {
     let whenText = document.getElementById('textareaWhen').value.trim();
     let explainText = document.getElementById('textareaExplain').value.trim();
-    let userId =t /* retrieve the user ID from your application context */;
-    let eventId =b /* retrieve the event ID from your application context */;
-    let userRegretsId =f /* retrieve the userRegretsId from your application context if applicable */;
+    
+    // Retrieve these values from local storage or other context
+    let userId = localStorage.getItem('userId'); // Ensure you store this when the user logs in
+    let eventId = getEventId(); // Function to get event ID from URL or other source
+    let userRegretsId = localStorage.getItem('userRegretsId'); // Store and retrieve similarly if applicable
 
     if (whenText === "") {
         alert("חייב למלא איך ומתי שמעת שהאירוע התרחש");
@@ -60,7 +62,7 @@ function validateForm() {
         alert("שגיאה בשליחת הדוח");
     });
 
-    return false; 
+    return false; // Prevent default form submission if used as an event handler
 }
 
 function buttonBeck(){
@@ -76,7 +78,7 @@ function buttonAdd(){
     }
 }
 async function fetchEventUsers(eventId) {
-    const url = new URL('https://proj-2-ffwz.onrender.com/api/eventUsers');
+    const url = new URL('https://proj-2-ffwz.onrender.com/api/user/');
     url.searchParams.append('eventId', eventId);
 
     try {

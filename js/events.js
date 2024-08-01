@@ -5,7 +5,7 @@ window.onload = () => {
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
     const userImage = localStorage.getItem('userImage');
     const userName = localStorage.getItem('userName');
-    
+
     if (userDetails && userImage && userName) {
         const managerImage = document.getElementById('user-image');
         const userNameElement = document.getElementById('user-name');
@@ -15,14 +15,65 @@ window.onload = () => {
         if (userNameElement) {
             userNameElement.innerText = userName;
         }
+
+        // Fetch userId from userDetails
+        const userId = userDetails.user_id; // Adjust based on actual property name
+        if (userId) {
+            fetchUserEvents(userId);
+        } else {
+            console.error('User ID not found in userDetails.');
+        }
     } else {
         console.log('User details not found in local storage.');
     }
-    
+
     fillSortContainer();
     eventErea = document.getElementById("events-container");
 };
 
+async function fetchUserEvents(userId) {
+    try {
+        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventHistory/?userId=${userId}`, {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.success) {
+            displayEvents(result.data);
+        } else {
+            console.error(result.message);
+        }
+    } catch (error) {
+        console.error('Error fetching user events:', error);
+    }
+}
+function displayEvents(events) {
+    const eventsContainer = document.getElementById('events-container');
+    eventsContainer.innerHTML = ''; // Clear any existing content
+
+    events.forEach(event => {
+        const eventElement = document.createElement('div');
+        eventElement.classList.add('event-item');
+        eventElement.innerHTML = `
+            <h3>${event.event_name}</h3>
+            <p>${event.address}</p>
+            <p>${event.date_and_time}</p>
+            <img src="${event.event_photo}" alt="${event.event_name}" />
+            <p>Status: ${event.event_status}</p>
+            <p>Type: ${event.type_event}</p>
+            <a href="${event.map}" target="_blank">View on Map</a>
+        `;
+        eventsContainer.appendChild(eventElement);
+    });
+}
 function fillSortContainer() {
     const sort = document.createElement('div');
     sort.classList.add('sort');
