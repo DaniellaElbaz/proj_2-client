@@ -23,9 +23,14 @@ window.onload = () => {
                 const certificationType = result.user.certification_type;
                 const userImage = `images/${result.user.user_photo}`;
                 const userName = `${result.user.first_name}`;
+
+                // שמירת userId ומידע נוסף ב-localStorage
+                localStorage.setItem('userId', result.user.user_id);
                 localStorage.setItem('userDetails', JSON.stringify(result.user));
                 localStorage.setItem('userImage', userImage);
                 localStorage.setItem('userName', userName);
+
+                // ניווט לדף המתאים לפי סוג ההסמכה של המשתמש
                 if (certificationType === 'Medical' || certificationType === 'Security') {
                     window.location.href = 'userHomePage.html';
                 } else {
