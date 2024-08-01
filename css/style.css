@@ -1263,8 +1263,8 @@ textarea {
     align-items: center;
     justify-content: center;
     text-align: center;
-    position: relative;
-    top: 50px;
+    margin-top: 5vh;
+    
     
 }
 
@@ -1335,8 +1335,7 @@ textarea {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    top: 100px;
+    margin-top: 5vh;
 }
 
 .timeLineAndReportContainer {
@@ -1442,8 +1441,7 @@ textarea {
     margin-top: 30px;
     display: flex;
     justify-content: center;
-    position: relative;
-    top: 120px;
+    margin-top: 5vh;
 }
 
 .eventHistoryContainer {
