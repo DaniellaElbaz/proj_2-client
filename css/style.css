@@ -1471,23 +1471,18 @@ textarea {
     height: 3px;
     background-color: white;
 }
-.threeSentences{
+.threeSentences {
     display: flex;
-     justify-content: space-between;
-     margin-left: 3%;
-     margin-right: 3%;
-     margin-top: 8%;
+    justify-content: space-between;
+    margin-left: 6%;
+    margin-top: 8%;
 }
-.sentence{
+
+.sentence, .secondSentence {
     font-size: 13px;
     color: white;
-    
 }
-.secondSentence{
-    font-size: 13px;
-    color: white;
-    white-space: pre-line;
-}
+
 /*************************************************************homepageMada****************************************************************/
 
 #weather {

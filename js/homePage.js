@@ -46,13 +46,16 @@ function addDescriptionElements(eventLiveReports) {
         const sentenceDiv = document.createElement("div");
         sentenceDiv.className = sentenceClass;
         
-        // שימוש במפתחות קיימים עם הסדר הנכון
-        const eventDescription = `${report.event_name}, ${report.event_status}, ${report.type_event}`;
+        // Adding hyphens to distinguish between elements
+        const eventDescription = `${report.event_name} - ${report.event_status} - ${report.type_event}`;
         
         sentenceDiv.textContent = eventDescription;
         threeSentencesContainer.appendChild(sentenceDiv);
+        console.log('Added element:', sentenceDiv); // Log the added element
     });
 }
+
+
 
 function setupButtonListener() {
     const declineButton = document.querySelector('.declineButton');
