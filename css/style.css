@@ -2100,6 +2100,8 @@ textarea {
     font-size: 3vh;
     padding: 10px;
     text-align: center;
+    position: relative;
+    bottom: 80%;
 }
 #successMessage {
     background-color: #d4edda;
