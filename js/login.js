@@ -26,6 +26,10 @@ window.onload = () => {
                 localStorage.setItem('userDetails', JSON.stringify(result.user));
                 localStorage.setItem('userImage', userImage);
                 localStorage.setItem('userName', userName);
+                if (result.hasEvent) {
+                    alert(`You have an upcoming event: ${result.event.event_name} at ${result.event.place} on ${result.event.date}`);
+                }
+
                 if (certificationType === 'Medical' || certificationType === 'Security') {
                     window.location.href = 'userHomePage.html';
                 } else {
