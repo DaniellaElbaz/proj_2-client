@@ -1,16 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-    fetchEventData();
+    const userId = localStorage.getItem('userId'); // קבלת userId מ-localStorage
+
+    if (userId) {
+        fetchEventData(userId);
+    } else {
+        console.error('User ID not found.');
+        alert('User not logged in. Please log in to view events.');
+    }
     setupButtonListener();
 });
 
-async function fetchEventData() {
+async function fetchEventData(userId) {
     try {
-        const response = await fetch('https://proj-2-ffwz.onrender.com/api/eventLive', {
+        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventLiveReports/${userId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         });
+
         if (!response.ok) {
             const errorData = await response.json();
             throw new Error(`Network response was not ok: ${errorData.message}`);
