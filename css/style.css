@@ -1692,7 +1692,238 @@ textarea {
     justify-content: center;
     text-align: center;
 }
+/*************************************************************eventLive****************************************************************/
 
+#notifictionDecision {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.newEventAlertContainer {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 5%;
+    white-space: nowrap;
+
+}
+
+.alertIcon {
+    display: flex;
+    font-size: 16px;
+    color: #FFC107;
+}
+
+.newEventAlertP {
+    font-size: 16px;
+    color: #FFC107;
+}
+
+.eventImage {
+    width: 146px;
+    height: 120px;
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+    gap: 15%;
+}
+
+.declineButton {
+    width: 110px;
+    height: 37px;
+    border-radius: 5px;
+    background: #ED173D;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.acceptButton {
+    width: 110px;
+    height: 37px;
+    border-radius: 5px;
+    background: #58D256;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.activeEventButton {
+    width: 220px;
+    height: 48px;
+    border-radius: 5px;
+    background: #58D256;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+#timeLine {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+}
+
+.timeLineAndReportContainer {
+    background: #FFFFFF75;
+    height: 290px;
+    width: 360px;
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reportheaderP {
+    font-size: 16px;
+    margin-right: 2%;
+    font-weight: bold;
+}
+
+.reportDetailsContainer {
+    align-items: center;
+    margin-left: 50px;
+}
+
+.rectangle {
+    background: #FFFFFFB8;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 70%;
+    height: 40px;
+    margin: 10px 0;
+}
+
+.horizontalLine {
+    width: 30px;
+    height: 2px;
+    background-color: black;
+    transform: rotate(25deg);
+    margin-top: 10px;
+}
+
+.lastHorizontalLine {
+    width: 30px;
+    height: 2px;
+    background-color: transparent;
+    transform: rotate(25deg);
+    margin-top: 10px;
+}
+
+.reportDetailsContainer {
+    display: flex;
+}
+
+.verticalLine {
+    width: 2px;
+    height: 59px;
+    background-color: black;
+}
+
+.verticalLineDot {
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    margin-top: 36px;
+    align-items: center;
+    justify-content: center;
+}
+
+.lastVerticalLineDot {
+    width: 8px;
+    height: 8px;
+    background-color: transparent;
+    border-radius: 50%;
+    margin-top: 36px;
+    align-items: center;
+    justify-content: center;
+}
+
+.timeLabel {
+    margin-left: 12px;
+    margin-top: 25px;
+}
+
+.LasTimeLabel {
+    margin-left: 12px;
+    margin-top: 25px;
+    color: transparent;
+}
+
+.threeDotscontainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.threeDot {
+    font-size: 35px;
+    color: #B2ADAD;
+}
+
+#eventHistoryInfo {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center
+}
+
+.eventHistoryContainer {
+    background: #FFFFFFB0;
+    width: 360px;
+    height: 170px;
+    text-align: right;
+    
+}
+.allHistoryEventP{
+     color: #2F7FF8;
+     font-weight: bold;
+}
+.detailsContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.detail{
+    font-size: 2vh;
+
+}
+.historyHorizontalLine{
+    width: 100%;
+    height: 3px;
+    background-color: white;
+}
+.threeSentences{
+    display: flex;
+     justify-content: space-between;
+     margin-left: 3%;
+     margin-right: 3%;
+     margin-top: 8%;
+
+     
+}
+.sentence{
+    font-size: 13px;
+    color: white;
+    
+}
+.secondSentence{
+    font-size: 13px;
+    color: white;
+    white-space: pre-line;
+}
 /*************************************************************homepageMada****************************************************************/
 
 #weather {
