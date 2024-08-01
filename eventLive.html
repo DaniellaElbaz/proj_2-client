@@ -64,12 +64,21 @@
                 <div class="timeLineAndReportContainer">
                     <div class="headerContainer">
                         <img id="reportNotifictionImg" src="images/alert-icon.png" title="notifictionImg" alt="notifictionHeader">
-                        <h2 class="reportheaderP"> דיווחים בזמן אמת</h2>
+                        <h2 class="reportheaderP">דיווחים בזמן אמת</h2>
                     </div>
-
-                    <div class="rectangleVerticalLineContainer">
+            
+                    <div class="rectangleVerticalLineContainer" id="rectangleVerticalLineContainer">
                         <div class="reportDetailsContainer">
-                            <div class="rectangle"></div>
+                            <div class="rectangle"><span class="description"></span></div>
+                            <div class="horizontalLine"></div>
+                            <div class="verticalLine">
+                                <div class="verticalLineDot"></div>
+                            </div>
+                            <div class="timeLabel">08:00</div>
+                        </div>
+                        <!-- Repeat the above block as needed -->
+                        <div class="reportDetailsContainer">
+                            <div class="rectangle"><span class="description"></span></div>
                             <div class="horizontalLine"></div>
                             <div class="verticalLine">
                                 <div class="verticalLineDot"></div>
@@ -77,15 +86,7 @@
                             <div class="timeLabel">08:00</div>
                         </div>
                         <div class="reportDetailsContainer">
-                            <div class="rectangle"></div>
-                            <div class="horizontalLine"></div>
-                            <div class="verticalLine">
-                                <div class="verticalLineDot"></div>
-                            </div>
-                            <div class="timeLabel">08:00</div>
-                        </div>
-                        <div class="reportDetailsContainer">
-                            <div class="rectangle"></div>
+                            <div class="rectangle"><span class="description"></span></div>
                             <div class="horizontalLine"></div>
                             <div class="verticalLine">
                                 <div class="verticalLineDot"></div>
@@ -99,6 +100,7 @@
                                     <div class="threeDot">•</div>
                                     <div class="threeDot">•</div>
                                 </div>
+                                <span class="description"></span>
                             </div>
                             <div class="lastHorizontalLine"></div>
                             <div class="verticalLine">
@@ -109,6 +111,7 @@
                     </div>
                 </div>
             </section>
+            
             <section id="eventHistoryInfo">
                 <div class="eventHistoryContainer">
                     <a href="eventList.html" class="allHistoryEventP">לכל היסטוריית האירועים</a>
