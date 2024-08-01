@@ -23,9 +23,13 @@ window.onload = () => {
                 const certificationType = result.user.certification_type;
                 const userImage = `images/${result.user.user_photo}`;
                 const userName = `${result.user.first_name}`;
+
+                // שמירת userId ב-localStorage
+                localStorage.setItem('userId', result.user.user_id); // הוספנו את שמירת userId כאן
                 localStorage.setItem('userDetails', JSON.stringify(result.user));
                 localStorage.setItem('userImage', userImage);
                 localStorage.setItem('userName', userName);
+
                 if (certificationType === 'Medical' || certificationType === 'Security') {
                     window.location.href = 'userHomePage.html';
                 } else {
