@@ -1,218 +1,133 @@
-const form = document.createElement("form");
-
-window.onload = () => {
-    form.classList.add('manege-necessary-data');
-    
-    // Retrieve user details from local storage
+window.onload = async () => {
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
     const userImage = localStorage.getItem('userImage');
     const userName = localStorage.getItem('userName');
-    
     if (userDetails && userImage && userName) {
         const managerImage = document.getElementById('user-image');
         const userNameElement = document.getElementById('user-name');
-        
         if (managerImage) {
             managerImage.src = userImage;
         }
-        
         if (userNameElement) {
             userNameElement.innerText = userName;
         }
+        const firstName = userDetails.first_name;
+        const lastName = userDetails.last_name;
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventName = urlParams.get('eventName');
+        const eventType = urlParams.get('eventType');
+        const eventDate = urlParams.get('eventDate');
+        const eventAddress = urlParams.get('eventAddress');
+        const eventStatus = urlParams.get('eventStatus');
+        const eventId = urlParams.get('eventId');
+        if (eventName && document.getElementById('eventName')) {
+            document.getElementById('eventName').innerText = `דו''ח אירוע: ${eventName}`;
+        }
+        if (eventType && document.getElementById('selectType')) {
+            document.getElementById('selectType').value = eventType;
+        }
+        if (eventDate && document.getElementById('inputDate')) {
+            document.getElementById('inputDate').value = eventDate.split('T')[0];
+        }
+        if (firstName && lastName && document.getElementById('userName')) {
+            document.getElementById('userName').value = `${firstName} ${lastName}`;
+        }
+        if (eventAddress && document.querySelector('h2')) {
+            document.querySelector('h2').innerText += eventAddress;
+        }
+        if (eventId) {
+            await fetchAndPopulateUsers(eventId);
+        }
+        populateStaticOptions();
     } else {
         console.log('User details not found in local storage.');
     }
-
-    // Initialize form elements
-    initBottomReport(form);
-    initReport(userDetails, data);
-}
-
-function initReport(user, data) {
-    const report = document.getElementById("report");
-    report.innerHTML = '';
-    
-    const reportItem = document.createElement('div');
-    reportItem.classList.add('report-item');
-    
-    // Append input from JSON to text box
-    const items = inputFromJsonToTextBox(user);
-    if (items) {
-        reportItem.appendChild(items);
-    }
-    
-    // Append selected event details
-    const selectedEvent = showSelectedEvent(user);
-    if (selectedEvent) {
-        reportItem.appendChild(selectedEvent);
-    }
-    
-    // Append separator lines
-    const separator1 = document.createElement('p');
-    separator1.classList.add('makeABlackLine');
-    reportItem.appendChild(separator1);
-
-    const separator2 = document.createElement('p');
-    separator2.classList.add('makeABlackLine');
-    reportItem.appendChild(separator2);
-
-    // Append form and members
-    reportItem.appendChild(inputToTextBox());
-    reportItem.appendChild(showMembersEvent(data));
-    
-    report.appendChild(reportItem);
-}
-
-function getEventId() {
-    const queryString = window.location.search.substring(1);
-    const urlParams = new URLSearchParams(queryString);
-    return urlParams.get('eventId'); // Assumes 'eventId' is the key for the event ID
-}
-
-function showSelectedEvent(user) {
-    const selectionEventId = getEventId();
-    const eventD = document.createElement('div'); // Changed to 'div' for better structure
-
-    for (const eventKey in user.events) {
-        let eventDetails = user.events[eventKey];
-        if (eventDetails.id == selectionEventId) {
-            // Initialize the select box with event details
-            eventD.appendChild(initSelectBox(eventDetails));
-            
-            // Create participant name input
-            const participantName = document.createElement('p');
-            participantName.classList.add('inline');
-            const nameInput = document.createElement('input');
-            nameInput.id = "userName";
-            nameInput.placeholder = eventDetails.participant_name || "No participant"; // Ensure placeholder has fallback
-            nameInput.disabled = true;
-            participantName.appendChild(nameInput);
-            participantName.appendChild(document.createTextNode(":שם המשתתף/ת"));
-            eventD.appendChild(participantName);
-            
-            // Add event date and other details
-            eventD.appendChild(initDate(eventDetails));
-            break;
+    inputToTextBox();
+};
+async function fetchAndPopulateUsers(eventId) {
+    try {
+        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/user/?eventId=${eventId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error('HTTP error! status: ' + response.status);
         }
-    }
-    
-    return eventD;
-}
+        const result = await response.json();
 
-function initDate(eventDetails) {
-    const p = document.createElement('p');
-    p.classList.add('inline');
-    
-    // Extract date and time parts
-    const dateAndTimeParts = eventDetails.date_and_time.trim().split(" שעה ");
-    const eventDate = dateAndTimeParts[0];
-    
-    // Create input element for date
-    const dateInput = document.createElement('input');
-    dateInput.id = "inputDate";
-    dateInput.placeholder = eventDate;
-    dateInput.disabled = true;
-    
-    // Append elements to paragraph
-    p.appendChild(dateInput);
-    p.appendChild(document.createTextNode(":תאריך האירוע"));
-    
-    return p;
-}
-
-function initSelectBox(eventDetails) {
-    const p = document.createElement('p');
-    p.classList.add('inline');
-    
-    // Create select element for event type
-    const typeSelect = document.createElement('select');
-    typeSelect.id = "selectType";
-    
-    const option = document.createElement('option');
-    option.value = eventDetails.type_event;
-    option.text = eventDetails.type_event;
-    option.selected = true;
-    
-    typeSelect.appendChild(option);
-    typeSelect.disabled = true;
-    
-    // Append elements to paragraph
-    p.appendChild(typeSelect);
-    p.appendChild(document.createTextNode(":סוג האירוע"));
-    
-    return p;
-}
-
-function inputFromJsonToTextBox(user) {
-    const selectionEventId = getEventId();
-    let reportItem = document.createElement('div');
-    const buttonBackFromReport = document.createElement('input');
-    buttonBackFromReport.type = "button";
-    buttonBackFromReport.value = "חזרה להיסטורית אירועים";
-    buttonBackFromReport.onclick = function () {
-        buttonBack();
-    };
-    buttonBackFromReport.classList.add('button-back-report');
-    reportItem.appendChild(buttonBackFromReport);
-    
-    let eventFound = false;
-    for (const eventKey in user.events) {
-        let eventDetails = user.events[eventKey];
-        if (eventDetails.id === selectionEventId) {
-            eventFound = true;
-            const eventName = eventDetails.event_name;
-            const eventPlace = eventDetails.event_place;
-            const h1 = document.createElement('h1');
-            h1.innerText = `דו''ח אירוע ${eventName}`;
-            reportItem.appendChild(h1);
-            const h2 = document.createElement('h2');
-            h2.innerText = `מיקום - ${eventPlace}`;
-            reportItem.appendChild(h2);
-            break;
+        if (result.success && Array.isArray(result.data)) {
+            populateUserSelectBoxes(result.data);
+        } else {
+            console.error('No users found or invalid data format');
         }
+    } catch (error) {
+        console.error('Error fetching users:', error);
     }
-    
-    if (!eventFound) {
-        const noEventFoundMessage = document.createElement('p');
-        noEventFoundMessage.innerText = "אירוע לא נמצא";
-        reportItem.appendChild(noEventFoundMessage);
-    }
-
-    return reportItem;
 }
+function populateUserSelectBoxes(users) {
+    const helpSelected = document.querySelector('.help-selected');
+    const helpInput = document.querySelector('.help-input');
+    if (helpSelected && helpInput) {
+        users.forEach(user => {
+            const userOption = document.createElement('option');
+            userOption.value = user.user_id;
+            userOption.text = `${user.first_name} ${user.last_name}`;
+            helpSelected.appendChild(userOption);
 
+            const inputOption = document.createElement('option');
+            inputOption.value = user.user_id;
+            inputOption.text = `${user.first_name} ${user.last_name}`;
+            helpInput.appendChild(inputOption);
+        });
+    } else {
+        console.error('Select elements not found');
+    }
+}
+function populateStaticOptions() {
+    const helpSelected = document.querySelector('.help-selected');
+    const options = [
+        { value: " ", text: " " },
+        { value: "נהג בנחישות ועזר לכולם", text: "נהג בנחישות ועזר לכולם" },
+        { value: "הציל חיים רבים", text: "הציל חיים רבים" },
+        { value: "דאג לעדכן את כוחות המשטרה וכוחות הביטחון", text: "דאג לעדכן את כוחות המשטרה וכוחות הביטחון" }
+    ];
+    if (helpSelected) {
+        options.forEach(opt => {
+            const option = document.createElement('option');
+            option.value = opt.value;
+            option.text = opt.text;
+            helpSelected.appendChild(option);
+        });
+    }
+}
 function inputToTextBox() {
-    let inputItem = document.createElement('div');
-    inputItem.classList.add('report-input');
-    const when = document.createElement('p');
-    let star = document.createElement('span');
-    star.innerHTML = "*";
-    let star2 = document.createElement('span');
-    star2.innerHTML = "*";
-    when.innerText = "?מתי ואיך שמעת שהאירוע התרחש";
-    when.appendChild(star);
-    inputItem.appendChild(when);
-    const textWhen = document.createElement('textarea');
-    textWhen.id = "textareaWhen";
-    textWhen.name = "whenText";
-    textWhen.maxLength = 90;
-    form.appendChild(textWhen);
-    inputItem.appendChild(whenCount(textWhen));
-    
-    const explain = document.createElement('p');
-    explain.innerText = "הסבר/י על הדרך פעילות שלך באירוע";
-    explain.appendChild(star2);
-    inputItem.appendChild(explain);
-    
-    const textExplain = document.createElement('textarea');
-    textExplain.id = "textareaExplain";
-    textExplain.name = "explainText";
-    textExplain.maxLength = 300;
-    form.appendChild(textExplain);
-    inputItem.appendChild(explainCount(textExplain));
-    
+    const textWhen = document.getElementById("textareaWhen");
+    const textExplain = document.getElementById("textareaExplain");
+    createCharCountElement(textWhen, "whenCharCount");
+    createCharCountElement(textExplain, "explainCharCount");
     textWhen.addEventListener('input', () => updateCharCount(textWhen, "whenCharCount"));
     textExplain.addEventListener('input', () => updateCharCount(textExplain, "explainCharCount"));
-    
-    return inputItem;
+    updateCharCount(textWhen, "whenCharCount");
+    updateCharCount(textExplain, "explainCharCount");
+}
+function createCharCountElement(textarea, placeholderId) {
+    if (!textarea) return;
+    let existingCountElement = document.getElementById(placeholderId);
+    if (existingCountElement) return;
+    let textareaContainer = textarea.parentElement;
+    const charCountElement = document.createElement('div');
+    charCountElement.classList.add('textarea-placeholder');
+    charCountElement.id = placeholderId;
+    charCountElement.textContent = `0/${textarea.maxLength} מילים`;
+    textareaContainer.appendChild(charCountElement);
+}
+function updateCharCount(textarea, placeholderId) {
+    const usedChars = textarea.value.length;
+    const maxChars = textarea.maxLength;
+    const placeholderElement = document.getElementById(placeholderId);
+    if (placeholderElement) {
+        placeholderElement.textContent = `${usedChars}/${maxChars}`;
+    }
 }

@@ -50,6 +50,64 @@
         </header>
         <main>
             <div id="report">
+                <div class="report-item">
+                    <div>
+                        <input class="button-back-report"  type = "button" value ="חזרה להיסטורית אירועים">
+                        <h1 id="eventName">דו''ח אירוע</h1>
+                        <h2>מיקום - </h2>
+                    </div>
+                    <div>
+                        <p class="inline">
+                            <select id="selectType">
+                                <option></option>
+                            </select>
+                            :סוג האירוע
+                        </p>
+                        <p class="inline">
+                            <input id="userName" type="text">
+                            :שם המשתתף/ת
+                        </p>
+                        <p class="inline">
+                            <input id="inputDate">
+                            :תאריך האירוע
+                        </p>
+                    </div>
+                    <p class="makeABlackLine"></p>
+                    <div class="report-input">
+                        <p>
+                            ?מתי ואיך שמעת שהאירוע התרחש
+                            <span>*</span>
+                        </p>
+                        <div class="textarea-container">
+                            <textarea id="textareaWhen" name="whenText" maxLength="90"></textarea>
+                        </div>
+                        <p>
+                            הסבר/י על הדרך פעילות שלך באירוע
+                            <span>*</span>
+                        </p>
+                        <div class="textarea-container">
+                            <textarea id="textareaExplain" name="explainText" maxLength="3000"></textarea>
+                        </div>
+                    </div>
+                    <p class="makeABlackLine"></p>
+                    <div class="inputregretsContainer">
+                        <div class="members-input">
+                            <select>
+                                <option></option>
+                            </select>
+                            <p>אדם שתרצה/י לשבח בפועלו</p>
+                        </div>
+                        <div class="help-input">
+                            <select class="help-selected">
+                                <option></option>
+                            </select>
+                            <p>?איך היא/הוא תרם/ה לאירוע</p>
+                        </div>
+                    </div>
+                    <form method = "post" name = 'reportForm'>
+                        <input type = "button" value = "הגשת דוח">
+                    </form>
+                </div>
             </div>
         </main>
     </div>

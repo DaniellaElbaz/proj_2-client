@@ -46,37 +46,71 @@ async function fetchUserEvents(userId) {
         console.error('Error fetching user events:', error);
     }
 }
-
-
 function populateEventDetails(events) {
     const eventsContainer = document.getElementById('events-container');
-    const eventTemplate = document.querySelector('.events-item'); // Use document.querySelector to get the template
-
-    // Clear any existing events except the template
+    const eventTemplate = document.querySelector('.events-item');
+    if (!eventTemplate) {
+        console.error('Event template not found');
+        return;
+    }
     eventsContainer.innerHTML = '';
-
     events.forEach(event => {
-        // Clone the template
+        console.log('Processing event:', event);
         const eventItem = eventTemplate.cloneNode(true);
         eventItem.style.display = 'block';
         eventItem.querySelector('h1').textContent = event.event_name;
         eventItem.querySelector('.spanDate').textContent = event.date_and_time;
         eventItem.querySelector('.spanPlace').textContent = event.address;
         eventItem.querySelector('.spanStatus').textContent = event.event_status;
-        const eventPhotoElement = eventItem.querySelector('.iconEventContainer img');
-        if (eventPhotoElement) {
-            eventPhotoElement.src = event.event_photo;
+
+        const mapElement = eventItem.querySelector('td img');
+        if (mapElement) {
+            mapElement.src = event.map || '';
+            mapElement.alt = 'Event Map';
+        } else {
+            console.error('Map image element not found in template');
+        }
+
+        const iconEventContainer = eventItem.querySelector('.iconEventContainer');
+        if (iconEventContainer) {
+            let eventPhotoElement = iconEventContainer.querySelector('img');
+            if (!eventPhotoElement) {
+                eventPhotoElement = document.createElement('img');
+                iconEventContainer.appendChild(eventPhotoElement);
+            }
+            eventPhotoElement.src = event.event_photo || '';
             eventPhotoElement.alt = 'Event Photo';
         } else {
-            const newImg = document.createElement('img');
-            newImg.src = event.event_photo;
-            newImg.alt = 'Event Photo';
-            document.querySelector('.iconEventContainer').appendChild(newImg);
+            console.error('IconEventContainer not found in template');
         }
+
         const eventPlaceElement = eventItem.querySelector('.event-item-container');
         if (eventPlaceElement) {
-            eventPlaceElement.innerHTML = `<p>:זירת האירוע</p>`;
+            eventPlaceElement.innerHTML = `<p>:זירת האירוע</p>${event.address}`;
+        } else {
+            console.error('Event item container not found in template');
         }
+
+        // Find the existing report button within the event item and set its onclick event
+        const reportButton = eventItem.querySelector('#reportButton');
+        if (reportButton) {
+            reportButton.onclick = () => navigateToReportPage(event);
+        } else {
+            console.error('Report button not found in template');
+        }
+
         eventsContainer.appendChild(eventItem);
     });
+}
+
+function navigateToReportPage(event) {
+    const queryParams = new URLSearchParams({
+        eventName: event.event_name,
+        eventType: event.type_event,
+        eventDate: event.date_and_time,
+        eventAddress: event.address,
+        eventStatus: event.event_status
+    }).toString();
+
+    window.location.href = `event_report.html?${queryParams}`;
 }

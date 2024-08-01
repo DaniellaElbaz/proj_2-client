@@ -694,7 +694,11 @@ textarea {
     align-items: center;
     margin-right: 9px;
 }
-
+.inputregretsContainer{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
 .members-input p {
     color: #000;
     margin: 0;
@@ -734,7 +738,6 @@ textarea {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    flex-direction: column;
     margin-right: 9px;
 }
 
@@ -2037,9 +2040,9 @@ textarea {
 }
 
 .charCount {
-    position: absolute; /* New: Positioning charCount absolutely within inputBox */
-    top: 90%; /* New: 10px from the bottom of the inputBox */
-    left: 10%; /* New: 10px from the right of the inputBox */
+    position: absolute;
+    top: 90%;
+    left: 10%;
     font-size: 2vh;
     color: #999;
     pointer-events: none;
@@ -2047,12 +2050,12 @@ textarea {
 }
 #addEventupdateFormButton {
     background-color: #2196F3;
-    color: rgb(255, 255, 255); /* White text */
-    padding: 15px 32px; /* Padding */
-    font-size: 1.5vh; /* Increase font size */
-    margin: 4px 2px; /* Margin */
-    cursor: pointer; /* Pointer cursor on hover */
-    border: none; /* Remove border */
+    color: rgb(255, 255, 255);
+    padding: 15px 32px;
+    font-size: 1.5vh;
+    margin: 4px 2px;
+    cursor: pointer;
+    border: none;
     width: 16%;
     height: 5vh;
 }
@@ -2067,25 +2070,21 @@ textarea {
 .messageContainer {
     display: flex;
     flex-direction: column;
-    background-color: #f8d7da; /* צבע רקע להודעת שגיאה */
-    color: #721c24; /* צבע טקסט להודעת שגיאה */
-    border: 1px solid #f5c6cb; /* צבע גבול להודעת שגיאה */
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
     width: 40vh;
     height: 20vh;
-    margin: auto; /* יישור למרכז */
-    font-size: 3vh; /* גודל פונט */
-    padding: 10px; /* ריווח פנימי */
-    text-align: center; /* יישור טקסט למרכז */
+    margin: auto;
+    font-size: 3vh;
+    padding: 10px;
+    text-align: center;
 }
-
-
-
 #successMessage {
-    background-color: #d4edda; /* צבע רקע להודעת הצלחה */
-    color: #155724; /* צבע טקסט להודעת הצלחה */
-    border: 1px solid #c3e6cb; /* צבע גבול להודעת הצלחה */
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
 }
-
 .closeBtn, .closeBtnSuccess {
     background-color: white;
     border: none;
@@ -2250,10 +2249,10 @@ textarea {
 }
 
 #graphContainer {
-    background-color: #fff; /* White background */
-    width: 100%; /* Full width */
-    padding: 20px; /* Optional: Add padding for spacing */
-    box-sizing: border-box; /* Ensure padding and border are included in width */
+    background-color: #fff;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
     height: 20vh;
 }
 #eventStatsChart {
