@@ -50,8 +50,51 @@
             </nav>
         </header>
         <main>
-            <div id="sort-container"></div>
-            <div id="events-container"></div>
+            <div id="sort-container">
+                <div class="sort">
+                    <input placeholder = "חיפוש" id="searchInput">
+                    <div class="sort-item">
+                        <img src="images/clock_down.png" alt="clock" title = "clock">
+                        <img src="images/un_filter.png" alt="filter" title = "filter">
+                        <img src="images/checkbox.png" alt="checkbox" title = "checkbox">
+                    </div>
+                </div>
+            </div>
+            <div id="events-container">
+                <div class="events-item">
+                    <h1></h1>
+                    <table>
+                        <tr>
+                            <td>
+                                <img src="" alt="Event Map">
+                            </td>
+                            <td>
+                                <p>
+                                    <p class="pDate">תאריך:
+                                        <span class="spanDate"></span>
+                                    </p>
+                                    <p class="pPlace">"מקום האירוע:
+                                        <span class="spanPlace"></span>
+                                    </p>
+                                    <p class="pStatus">"סטטוס:
+                                        <span class="spanStatus"></span>
+                                    </p>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="eventShow">
+                        <button>לחץ כאן</button>
+                        <p>מילוי דוח אירוע:</p>
+                    </div>
+                    <div class="iconEventContainer">
+                        <img src="" alt="Event Photo">
+                        <div class="event-item-container">
+                            <p>:זירת האירוע</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </body>
