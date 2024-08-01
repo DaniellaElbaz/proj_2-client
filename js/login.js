@@ -18,7 +18,6 @@ window.onload = () => {
             }
             const result = await response.json();
             console.log('Response from server:', result);
-
             if (result.success) {
                 const certificationType = result.user.certification_type;
                 const userImage = `images/${result.user.user_photo}`;
@@ -26,12 +25,15 @@ window.onload = () => {
                 localStorage.setItem('userDetails', JSON.stringify(result.user));
                 localStorage.setItem('userImage', userImage);
                 localStorage.setItem('userName', userName);
-                if (result.hasEvent) {
-                    alert(`You have an upcoming event: ${result.event.event_name} at ${result.event.place} on ${result.event.date}`);
-                }
-
                 if (certificationType === 'Medical' || certificationType === 'Security') {
-                    window.location.href = 'userHomePage.html';
+                    if (result.hasEvent) {
+                        alert(`You have an upcoming event: ${result.event.event_name} at ${result.event.place} on ${result.event.date}`);
+                        localStorage.setItem('eventData', JSON.stringify(result.event));
+                        window.location.href = 'eventLive.html';
+                    }
+                    else{
+                        window.location.href = 'userHomePage.html';
+                    }
                 } else {
                     window.location.href = 'madaHomePage.html';
                 }
