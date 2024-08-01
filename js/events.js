@@ -25,7 +25,7 @@ window.onload = () => {
 
 async function fetchUserEvents(userId) {
     try {
-        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventHistory/?userId=${userId}`, {
+        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventHistory/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
