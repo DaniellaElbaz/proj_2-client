@@ -95,10 +95,12 @@ async function fetchEventUsers(eventId) {
 }
 function showMembersEvent(data) {
     const selectionEventId = getEventId();
-    let inputRegretsContainer = document.createElement('div');
+    const inputRegretsContainer = document.createElement('div');
     inputRegretsContainer.classList.add('inputregretsContainer');
-    let inputName = document.createElement('div');
+    
+    const inputName = document.createElement('div');
     inputName.classList.add('members-input');
+    
     const eventMembers = document.createElement('select');
     eventMembers.classList.add('help-selected');
 
@@ -110,10 +112,10 @@ function showMembersEvent(data) {
         eventMembers.appendChild(option);
     }
 
-    let inputDetails = document.createElement('div');
+    const inputDetails = document.createElement('div');
     inputDetails.classList.add('help-input');
+    
     eventMembers.addEventListener('change', function() {
-        openRegrets = isValueSelectedNotNo(eventMembers);
         inputDetails.innerHTML = "";
         initMembersBox(inputDetails);
     });
@@ -122,8 +124,10 @@ function showMembersEvent(data) {
     const names = document.createElement('p');
     names.textContent = "אדם שתרצה/י לשבח בפועלו";
     inputName.appendChild(names);
+    
     inputRegretsContainer.appendChild(inputName);
-    inputRegretsContainer.appendChild(initMembersBox(inputDetails));
+    inputRegretsContainer.appendChild(inputDetails);
+    
     return inputRegretsContainer;
 }
 
