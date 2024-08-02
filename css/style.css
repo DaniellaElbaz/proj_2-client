@@ -2110,7 +2110,7 @@ textarea {
     border: 1px solid #c3e6cb;
 }
 .closeBtn, .closeBtnSuccess {
-    background-color: white;
+     color: white;
     border: none;
     color: inherit;
     font-size: 2vh;
