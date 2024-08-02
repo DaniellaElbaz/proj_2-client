@@ -41,11 +41,18 @@ window.onload = async () => {
             populateStaticOptions();
         }
         
+        // Add event listener for the report submission
+        const submitButton = document.querySelector('.button-send-report');
+        if (submitButton) {
+            submitButton.addEventListener('click', handleSubmitReport);
+        }
+
     } else {
         console.log('User details not found in local storage.');
     }
     
 };
+
 async function fetchAndPopulateUsers(eventId) {
     try {
         const response = await fetch(`https://proj-2-ffwz.onrender.com/api/user/?eventId=${eventId}`, {
@@ -68,6 +75,7 @@ async function fetchAndPopulateUsers(eventId) {
         console.error('Error fetching users:', error);
     }
 }
+
 function populateUserSelectBoxes(users) {
     const helpInput = document.querySelector('.help-input');
     const helpSelected = document.querySelector('.help-selected');
@@ -121,6 +129,7 @@ function populateStaticOptions() {
         });
     }
 }
+
 function inputToTextBox() {
     const textWhen = document.getElementById("textareaWhen");
     const textExplain = document.getElementById("textareaExplain");
@@ -131,6 +140,7 @@ function inputToTextBox() {
     updateCharCount(textWhen, "whenCharCount");
     updateCharCount(textExplain, "explainCharCount");
 }
+
 function createCharCountElement(textarea, placeholderId) {
     if (!textarea) return;
     let existingCountElement = document.getElementById(placeholderId);
@@ -142,6 +152,7 @@ function createCharCountElement(textarea, placeholderId) {
     charCountElement.textContent = `0/${textarea.maxLength} מילים`;
     textareaContainer.appendChild(charCountElement);
 }
+
 function updateCharCount(textarea, placeholderId) {
     const usedChars = textarea.value.length;
     const maxChars = textarea.maxLength;
@@ -149,4 +160,11 @@ function updateCharCount(textarea, placeholderId) {
     if (placeholderElement) {
         placeholderElement.textContent = `${usedChars}/${maxChars}`;
     }
+}
+
+function handleSubmitReport() {
+    alert('הדוח הוגש בהצלחה!');
+
+
+    window.location.href = 'eventList.html'; 
 }
