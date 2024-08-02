@@ -32,7 +32,7 @@ window.onload = () => {
 
 async function fetchEventData(eventId) {
     try {
-        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventLive/${eventId}`, {
+        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventLive/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -63,43 +63,41 @@ async function fetchEventData(eventId) {
 
 function addDescriptionElements(eventLiveReports, recentReports) {
     const threeSentencesContainer = document.getElementById("threeSentences");
-    console.log('threeSentences element:', threeSentencesContainer);
-
+    console.log('threeSentences element:', threeSentencesContainer); // Log the element
     if (!threeSentencesContainer) {
         console.error('threeSentences element not found');
         return;
     }
 
-    threeSentencesContainer.innerHTML = "";
+    threeSentencesContainer.innerHTML = ""; // Clear existing content
+
     eventLiveReports.forEach((report, index) => {
-        console.log('Adding report:', report);
+        console.log('Adding report:', report); // Log the report being added
         const sentenceClass = (index === 1) ? "secondSentence" : "sentence";
         const sentenceDiv = document.createElement("div");
         sentenceDiv.className = sentenceClass;
+        
+        // Adding hyphens to distinguish between elements
         const eventDescription = `${report.event_name} - ${report.event_status} - ${report.type_event}`;
+        
         sentenceDiv.textContent = eventDescription;
         threeSentencesContainer.appendChild(sentenceDiv);
-        console.log('Added element:', sentenceDiv);
+        console.log('Added element:', sentenceDiv); // Log the added element
     });
 
+    // Adding recent reports to the reportDetailsContainer
     recentReports.forEach((report, index) => {
         const reportContainer = document.getElementById(`report${index + 1}`);
-        
         if (reportContainer) {
             const descriptionSpan = reportContainer.querySelector('.description');
-            if (descriptionSpan) {
-                descriptionSpan.textContent = report.update_description;
-            }
-            
+            descriptionSpan.textContent = report.update_description;
+
             const timeSpan = reportContainer.querySelector('.time');
-            if (timeSpan) {
-                timeSpan.textContent = report.time;
-            }
-        } else {
-            console.error(`Report container with ID report${index + 1} not found`);
+            timeSpan.textContent = report.time; // להציג את הזמן שמתקבל מהשרת
         }
     });
 }
+
 
 function setupButtonListener(eventData, user_id) {
     const declineButton = document.querySelector('.declineButton');
