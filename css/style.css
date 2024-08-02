@@ -1516,7 +1516,6 @@ textarea {
     border-radius: 8px;
 }
 
-
 #uvChartContainer {
     display: block;
     margin: 0 auto;
@@ -1526,9 +1525,6 @@ textarea {
     border-radius: 8px;
 }
 
-
-
-
 #eventMDAList {
     margin-top: 16px;
     display: flex;
@@ -1536,7 +1532,25 @@ textarea {
     justify-content: flex-end;
     gap: 20px;
 }
-
+.temperatureContainer{
+    display: flex;
+    gap: 10px;
+}
+.radioactiveContainer{
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+.temperature-image{
+    width: 20px;
+    height: 30px;
+    margin-top: 10px;
+}
+.radioactive-image{
+    width: 23px;
+    height: 25px;
+    margin-top: 10px;
+}
 .eventMDAListItem {
     width: 595px;
     height: 190px;
@@ -1673,6 +1687,7 @@ textarea {
 
 }
 
+
 /***************************************************newEvent**************************************************************************/
 #eventForm {
     display: flex;
@@ -1802,7 +1817,7 @@ textarea {
     z-index: 1000;
     text-align: center;
     width: 45vh;
-    height: 12vh;
+    height: 20%;
 }
 
 .custom-alert-box p {
@@ -1811,12 +1826,14 @@ textarea {
 }
 
 .custom-alert-box button {
-    padding: 10px 20px;
     background: #326ff1;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 15vh;
+    height: 5vh;
+    font-size: 20px;
 }
 
 /**********************************************************************liveEventMDA***********************************************/
@@ -1996,7 +2013,7 @@ textarea {
 .containersWrapper {
     display: flex;
     justify-content:space-around;
-    margin-top: 170px;
+    margin-top: 3%;
     gap: 20%;
 }
 .eventUserContainer {
@@ -2058,12 +2075,12 @@ textarea {
     background-color: #2196F3;
     color: rgb(255, 255, 255);
     padding: 15px 32px;
-    font-size: 1.5vh;
+    font-size: 15px;
     margin: 4px 2px;
     cursor: pointer;
     border: none;
-    width: 16%;
-    height: 5vh;
+    width: 35%;
+    height: 40%;
 }
 .confirmButton {
     display: flex;
@@ -2085,6 +2102,8 @@ textarea {
     font-size: 3vh;
     padding: 10px;
     text-align: center;
+    position: relative;
+    bottom: 80%;
 }
 #successMessage {
     background-color: #d4edda;
