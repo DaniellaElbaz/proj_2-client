@@ -28,7 +28,6 @@ window.onload = () => {
         console.log('User details or event ID not found in local storage.');
     }
 };
-
 async function fetchEventData(eventId) {
     try {
         const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventLive/${eventId}`, {
@@ -165,7 +164,6 @@ async function setupButtonListener(eventData, user_id) {
         }
     });
 }
-
 async function fetchUserEvents(userId) {
     try {
         const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventHistory/`, {
