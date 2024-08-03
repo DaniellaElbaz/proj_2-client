@@ -46,7 +46,6 @@ window.onload = async () => {
             inputToTextBox();
             populateStaticOptions();
         }
-        
         const beckButton = document.querySelector('.button-back-report');
         if (beckButton) {
             beckButton.addEventListener('click', buttonBeck);
@@ -55,12 +54,9 @@ window.onload = async () => {
         if (submitButton) {
             submitButton.addEventListener('click', handleSubmitReport);
         }
-
     } else {
-        console.log('User details not found in local storage.');
     }
 };
-
 function buttonBeck(){
     const userConfirmed = confirm(" הזהרה! ביציאה מהדף הדו''ח לא ישמר");
     if (userConfirmed) {
@@ -89,7 +85,6 @@ async function fetchAndPopulateUsers(eventId) {
         console.error('Error fetching users:', error);
     }
 }
-
 function populateUserSelectBoxes(users) {
     const helpInput = document.querySelector('.help-input');
     const helpSelected = document.querySelector('.help-selected');
@@ -125,7 +120,6 @@ function populateUserSelectBoxes(users) {
         console.error('Select element with class "help-input" not found');
     }
 }
-
 function populateStaticOptions() {
     const helpSelected = document.querySelector('.help-selected');
     const options = [
@@ -143,7 +137,6 @@ function populateStaticOptions() {
         });
     }
 }
-
 function inputToTextBox() {
     const textWhen = document.getElementById("textareaWhen");
     const textExplain = document.getElementById("textareaExplain");
@@ -166,7 +159,6 @@ function createCharCountElement(textarea, placeholderId) {
     charCountElement.textContent = `0/${textarea.maxLength} מילים`;
     textareaContainer.appendChild(charCountElement);
 }
-
 function updateCharCount(textarea, placeholderId) {
     const usedChars = textarea.value.length;
     const maxChars = textarea.maxLength;
@@ -179,13 +171,10 @@ async function handleSubmitReport() {
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
     const urlParams = new URLSearchParams(window.location.search);
     const eventId = urlParams.get('eventId');
-    
     const eventWhen = document.getElementById("textareaWhen").value.trim();
     const eventExplain = document.getElementById("textareaExplain").value.trim();
     const userRegretsId = userDetails.user_id;
     const userRegrets = document.querySelector('.help-selected').value.trim();
-
-    // בדיקת שדות ריקים
     if (!eventWhen) {
         alert('נא למלא את שדה "מתי זה קרה".');
         return;
@@ -194,7 +183,6 @@ async function handleSubmitReport() {
         alert('נא למלא את שדה "תיאור האירוע".');
         return;
     }
-
     const requestData = {
         userId: userDetails.user_id,
         eventId: eventId,
@@ -203,7 +191,6 @@ async function handleSubmitReport() {
         userRegretsId: userRegretsId,
         userRegrets: userRegrets
     };
-
     try {
         const response = await fetch('https://proj-2-ffwz.onrender.com/api/user/', {
             method: 'POST',
@@ -212,7 +199,6 @@ async function handleSubmitReport() {
             },
             body: JSON.stringify(requestData)
         });
-
         const result = await response.json();
         if (response.ok) {
             alert('Report submitted successfully');

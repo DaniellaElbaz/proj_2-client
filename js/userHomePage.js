@@ -13,7 +13,6 @@ window.onload = () => {
             userNameElement.innerText = userName;
         }
     } else {
-        console.log('User details not found in local storage.');
     }
     fetchEventStats('all');
     getEventsType();
@@ -21,13 +20,11 @@ window.onload = () => {
     fetchUserEventsDetails(userDetails.user_id);
     document.getElementById('calcGraf').addEventListener('click', async () => {
         const eventType = document.getElementById('eventTypeUser').value;
-
         await fetchEventStats(eventType);
     });
 };
 async function getAllUserNotification() {
     const userNotification = document.getElementById('notification');
-
     if (!userNotification) {
         console.error('One or more elements not found in the DOM.');
         return;
@@ -43,7 +40,6 @@ async function getAllUserNotification() {
             throw new Error('Network response was not ok');
         }
         const result = await response.json();
-        console.log('Response from server:', result);
         if (result.success) {
             userNotification.innerHTML = '';
             const ul = document.createElement('ul');
@@ -54,7 +50,6 @@ async function getAllUserNotification() {
                 li.classList.add('eventItemNotificationUsr');
                 ul.appendChild(li);
             });
-
             userNotification.appendChild(ul);
         } else {
             alert(result.message || 'Load details failed');
@@ -73,13 +68,10 @@ async function fetchEventStats(eventType) {
         params.append('eventType', eventType);
     }
     url.search = params.toString();
-
     try {
         const response = await fetch(url);
-        console.log('URL:', url.toString());
         if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
         const result = await response.json();
-        console.log('Response from server:', result);
         if (result.success) {
             createChart(result.data);
         } else {
@@ -91,7 +83,6 @@ async function fetchEventStats(eventType) {
 }
 function createChart(data) {
     if (!data) {
-        console.log('No data received for chart');
         return;
     }
     const ctx = document.getElementById('eventStatsChart').getContext('2d');
@@ -161,7 +152,6 @@ async function getEventsType() {
                 'Content-Type': 'application/json'
             },
         });
-
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -188,10 +178,8 @@ async function getEventsType() {
         alert('An error occurred while loading types.');
     }
 }
-
 async function fetchUserEventsDetails(userId) {
     try {
-        console.log(`Fetching user events for userId: ${userId}`);
         const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventHistory/?userId=${userId}`, {
             method: 'GET',
             headers: {
@@ -202,13 +190,10 @@ async function fetchUserEventsDetails(userId) {
         if (!response.ok) {
             throw new Error('HTTP error! status: ' + response.status);
         }
-
         const result = await response.json();
-        console.log('API response:', result);
         const events = result.data;
 
         if (result.success && Array.isArray(events)) {
-            console.log('Event objects:', events);
             populateEventDetails(events);
         } else {
             console.error('No events found or invalid data format');
@@ -219,45 +204,28 @@ async function fetchUserEventsDetails(userId) {
 }
 function populateEventDetails(events) {
     const threeSentencesContainer = document.getElementById('threeSentences');
-
     if (!threeSentencesContainer) {
         console.error('threeSentences element not found');
         return;
     }
-
-    console.log('Populating event details:', events);
-
-    // Clear existing content
     threeSentencesContainer.innerHTML = '';
-
     if (events.length === 0) {
-        console.log('No events found');
         return;
     }
-
-    // Process only the first event
     const event = events[0];
-    console.log('Processing event:', event);
-
     const sentenceDiv = document.createElement('div');
-    sentenceDiv.className = 'firstSentence'; // Display only one event, so always use 'firstSentence'
-
+    sentenceDiv.className = 'firstSentence';
     const eventTypeSpan = document.createElement('span');
     eventTypeSpan.className = 'detailItem';
-    eventTypeSpan.textContent = event.event_name; // Assuming 'event_name' is the correct key
-
+    eventTypeSpan.textContent = event.event_name;
     const statusSpan = document.createElement('span');
     statusSpan.className = 'detailItem';
-    statusSpan.textContent = event.event_status; // Assuming 'event_status' is the correct key
-
+    statusSpan.textContent = event.event_status;
     const descriptionSpan = document.createElement('span');
     descriptionSpan.className = 'detailItem';
-    descriptionSpan.textContent = event.address; // Assuming 'address' is the correct key
-
+    descriptionSpan.textContent = event.address;
     sentenceDiv.appendChild(eventTypeSpan);
     sentenceDiv.appendChild(statusSpan);
     sentenceDiv.appendChild(descriptionSpan);
-
     threeSentencesContainer.appendChild(sentenceDiv);
-    console.log('Added sentenceDiv:', sentenceDiv);
 }

@@ -4,7 +4,6 @@ window.onload = () => {
         e.preventDefault();
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
-        console.log('Sending login request with:', { username, password });
         try {
             const response = await fetch('https://proj-2-ffwz.onrender.com/api/account/login', {
                 method: 'POST',
@@ -17,7 +16,6 @@ window.onload = () => {
                 throw new Error('Network response was not ok');
             }
             const result = await response.json();
-            console.log('Response from server:', result);
             if (result.success) {
                 const certificationType = result.user.certification_type;
                 const userImage = `images/${result.user.user_photo}`;

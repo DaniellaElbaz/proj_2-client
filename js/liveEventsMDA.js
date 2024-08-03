@@ -12,16 +12,13 @@ window.onload = () => {
             userNameElement.innerText = userName;
         }
     } else {
-        console.log('User details not found in local storage.');
     }
     getEvents();
     liveEventButton();
     fetchEventParticipants(eventId)
 };
-
 async function getEvents() {
     const eventMDAList = document.getElementById('eventMDAList');
-
     try {
         const response = await fetch('https://proj-2-ffwz.onrender.com/api/eventType/MDA', {
             method: 'GET',
@@ -29,15 +26,10 @@ async function getEvents() {
                 'Content-Type': 'application/json'
             },
         });
-
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-
         const result = await response.json();
-
-        console.log('Response from server:', result);
-
         if (result.success) {
             eventMDAList.innerHTML = '';
             result.events.forEach(event => {
@@ -54,7 +46,6 @@ async function getEvents() {
         alert('An error occurred while loading types.');
     }
 }
-
 function createEventHTML(event) {
     return `
         <div class="event-details" data-event-id="${event.event_id}">
@@ -78,7 +69,6 @@ function createEventHTML(event) {
 async function liveEventButton() {
     document.addEventListener('click', async function(event) {
         const eventId = event.target.getAttribute('data-event-id');
-        console.log('event id', eventId);
         if (event.target.classList.contains('btn-blue')) {
             window.location.href = 'MDAUpdate.html?id=' + eventId;
         } else if (event.target.classList.contains('btn-red') && eventId) {

@@ -3,7 +3,6 @@ window.onload = async () => {
     const userImage = localStorage.getItem('userImage');
     const userName = localStorage.getItem('userName');
     const urlParams = new URLSearchParams(window.location.search);
-
     if (userDetails && userImage && userName) {
         const managerImage = document.getElementById('user-image');
         const userNameElement = document.getElementById('user-name');
@@ -13,13 +12,10 @@ window.onload = async () => {
         if (userNameElement) {
             userNameElement.innerText = userName;
         }
-
         const eventAddress = urlParams.get('eventAddress');
-        console.log('Event address:', eventAddress);
         if (eventAddress) {
             const location = await getCoordinatesFromAddress(eventAddress);
             if (location) {
-                console.log('Location:', location);
                 initMap(location);
             } else {
                 console.error('Failed to get coordinates for the address');
@@ -28,7 +24,6 @@ window.onload = async () => {
             console.error('Event address not provided');
         }
     } else {
-        console.log('User details not found in local storage.');
     }
 };
 async function getCoordinatesFromAddress(address) {
@@ -38,8 +33,6 @@ async function getCoordinatesFromAddress(address) {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log('Nominatim response data:', data);
-
         if (data.length > 0) {
             const { lat, lon } = data[0];
             return { lat: parseFloat(lat), lng: parseFloat(lon) };
@@ -52,14 +45,11 @@ async function getCoordinatesFromAddress(address) {
         return null;
     }
 }
-
 function initMap(location) {
     const map = L.map('map').setView([location.lat, location.lng], 15);
-
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
-
     L.marker([location.lat, location.lng]).addTo(map)
         .bindPopup('Event Location')
         .openPopup();

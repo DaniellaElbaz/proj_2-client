@@ -1,6 +1,4 @@
-
 window.onload = () => {
-
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
     const userImage = localStorage.getItem('userImage');
     const userName = localStorage.getItem('userName');
@@ -14,22 +12,18 @@ window.onload = () => {
             userNameElement.innerText = userName;
         }
     } else {
-        console.log('User details not found in local storage.');
     }
     getAllNotification();
     fetchAndDisplayCharts();
 };
-
 async function getAllNotification() {
     const dateElement = document.getElementById('dataAndTime');
     const highPossibilityEventsElement = document.getElementById('highPossibilityEvents');
     const eventMapContainer = document.querySelector('.event-map-container');
-
     if (!dateElement || !highPossibilityEventsElement || !eventMapContainer) {
         console.error('One or more elements not found in the DOM.');
         return;
     }
-
     try {
         const response = await fetch('https://proj-2-ffwz.onrender.com/api/madaHomePage/', {
             method: 'GET',
@@ -37,38 +31,28 @@ async function getAllNotification() {
                 'Content-Type': 'application/json'
             },
         });
-
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-
         const result = await response.json();
-
-        console.log('Response from server:', result);
-
         if (result.success) {
             dateElement.innerHTML = '';
             highPossibilityEventsElement.innerHTML = '';
             eventMapContainer.innerHTML = '';
-
             const dateDiv = document.createElement('div');
             dateDiv.textContent = `${new Date(result.eventNotification[0].date).toLocaleDateString()}`;
             dateElement.appendChild(dateDiv);
-
             const mapDiv = document.createElement('div');
             mapDiv.innerHTML = `<img src="images/${result.eventNotification[0].day_map}" alt="Day Map" class="eventMap">`;
             eventMapContainer.appendChild(mapDiv);
-
             const ul = document.createElement('ul');
             ul.classList.add('eventListMDA');
-
             result.eventNotification.forEach(notification => {
                 const li = document.createElement('li');
                 li.textContent = notification.notfication;
                 li.classList.add('eventItemMDA');
                 ul.appendChild(li);
             });
-
             highPossibilityEventsElement.appendChild(ul);
         } else {
             alert(result.message || 'Load details failed');
@@ -91,7 +75,6 @@ async function fetchWeatherData() {
         throw error;
     }
 }
-
 async function createLineChart(ctx, data) {
     return new Chart(ctx, {
         type: 'line',
@@ -146,7 +129,6 @@ async function createLineChart(ctx, data) {
         }
     });
 }
-
 async function createUVChart(ctx, data) {
     return new Chart(ctx, {
         type: 'line',
@@ -194,13 +176,11 @@ async function createUVChart(ctx, data) {
         }
     });
 }
-
 async function fetchAndDisplayCharts() {
     try {
         const weatherData = await fetchWeatherData();
         const weatherCtx = document.getElementById('weatherChart').getContext('2d');
         const uvCtx = document.getElementById('uvChart').getContext('2d');
-
         await createLineChart(weatherCtx, weatherData);
         await createUVChart(uvCtx, weatherData);
     } catch (error) {

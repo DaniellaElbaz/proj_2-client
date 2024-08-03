@@ -12,13 +12,11 @@ window.onload = () => {
             userNameElement.innerText = userName;
         }
     } else {
-        console.log('User details not found in local storage.');
     }
     getEventsType();
     setupCharacterCounters();
     setupFormSubmission();
 };
-
 async function getEventsType() {
     const eventType = document.getElementById('eventType');
     try {
@@ -28,18 +26,12 @@ async function getEventsType() {
                 'Content-Type': 'application/json'
             },
         });
-
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-
         const result = await response.json();
-
-        console.log('Response from server:', result);
-
         if (result.success) {
             eventType.innerHTML = '';
-
             result.type.forEach(types => {
                 const eventOption = document.createElement('option');
                 eventOption.classList.add('eventOption');
@@ -55,14 +47,12 @@ async function getEventsType() {
         alert('An error occurred while loading types.');
     }
 }
-
 function setupCharacterCounters() {
     const inputs = [
         { input: document.getElementById('eventStatus'), counter: document.getElementById('eventStatusCounter') },
         { input: document.getElementById('eventName'), counter: document.getElementById('eventNameCounter') },
         { input: document.getElementById('eventPlace'), counter: document.getElementById('eventPlaceCounter') }
     ];
-
     inputs.forEach(({ input, counter }) => {
         input.addEventListener('input', () => {
             const length = input.value.length;
@@ -70,18 +60,14 @@ function setupCharacterCounters() {
         });
     });
 }
-
  function setupFormSubmission() {
     const formButton = document.getElementById('addEventFormButton');
     formButton.addEventListener('click', (event) => {
         event.preventDefault();
-        console.log('Button clicked');
         const inputs = document.querySelectorAll('#addEventForm input[required]');
         let allFilled = true;
         let emptyFields = [];
-
         inputs.forEach(input => {
-            console.log(`Checking field: ${input.id}, value: "${input.value.trim()}"`);
             if (!input.value.trim()) {
                 allFilled = false;
                 const label = document.querySelector(`label[for="${input.id}"]`);
@@ -92,7 +78,6 @@ function setupCharacterCounters() {
                 }
             }
         });
-
         if (allFilled) {
             alert('פרטי האירוע הוזנו בהצלחה', async function() {
                 await  addEvent();
@@ -103,7 +88,6 @@ function setupCharacterCounters() {
         }
     });
 }
-
 function alert(message, callback) {
     const alertBox = document.createElement('div');
     alertBox.classList.add('custom-alert-box');
@@ -122,7 +106,6 @@ function alert(message, callback) {
     document.body.appendChild(alertBox);
 }
 async function addEvent(){
-    
     const eventName = document.getElementById('eventName').value;
     const eventPlace = document.getElementById('eventPlace').value;
     const eventDate = "2024-07-24";
@@ -131,7 +114,6 @@ async function addEvent(){
     const eventType = document.getElementById('eventType').value;
     const maxHelper = document.getElementById('maxHelper').value;
     const eventPhotos = document.getElementById('eventPhotos').files;
-
     const formData = new FormData();
     formData.append('eventName', eventName);
     formData.append('eventPlace', eventPlace);
@@ -140,22 +122,15 @@ async function addEvent(){
     formData.append('eventStatus', eventStatus);
     formData.append('eventType', eventType);
     formData.append('maxHelper', maxHelper);
-
     for (let i = 0; i < eventPhotos.length; i++) {
         formData.append('eventPhotos', eventPhotos[i]);
     }
-
     try {
         const response = await fetch('https://proj-2-ffwz.onrender.com/api/eventType/add', {
             method: 'POST',
             body: formData
         });
-
-        // Log the raw response
         const text = await response.text();
-        console.log('Raw response:', text);
-
-        // Check if response is JSON
         try {
             const result = JSON.parse(text);
             if (response.ok) {
