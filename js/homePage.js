@@ -20,11 +20,13 @@ window.onload = () => {
         if (userEventMap && eventData.map) {
             userEventMap.src = `images/${eventData.map}`;
         }
-        
+        if(!eventData){
+            alert("no event");
+            window.location.href="userHomePage.html";
+        }
         fetchEventData(eventData.event_id);
         fetchUserEventsDetails(userDetails.user_id);
         setupButtonListener(eventData, userDetails.user_id);
-        
     } else {
         console.log('User details or event ID not found in local storage.');
     }
@@ -244,15 +246,15 @@ function populateEventDetails(events) {
     sentenceDiv.className = 'firstSentence'; // Display only one event, so always use 'firstSentence'
 
     const eventTypeSpan = document.createElement('span');
-    eventTypeSpan.className = 'detail';
+    eventTypeSpan.className = 'detailItem';
     eventTypeSpan.textContent = event.event_name; // Assuming 'event_name' is the correct key
 
     const statusSpan = document.createElement('span');
-    statusSpan.className = 'detail';
+    statusSpan.className = 'detailItem';
     statusSpan.textContent = event.event_status; // Assuming 'event_status' is the correct key
 
     const descriptionSpan = document.createElement('span');
-    descriptionSpan.className = 'detail';
+    descriptionSpan.className = 'detailItem';
     descriptionSpan.textContent = event.address; // Assuming 'address' is the correct key
 
     sentenceDiv.appendChild(eventTypeSpan);

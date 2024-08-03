@@ -18,6 +18,7 @@ window.onload = () => {
     fetchEventStats('all');
     getEventsType();
     getAllUserNotification();
+    fetchUserEventsDetails(userDetails.user_id);
     document.getElementById('calcGraf').addEventListener('click', async () => {
         const eventType = document.getElementById('eventTypeUser').value;
 
@@ -186,4 +187,77 @@ async function getEventsType() {
         console.error('Error:', error);
         alert('An error occurred while loading types.');
     }
+}
+
+async function fetchUserEventsDetails(userId) {
+    try {
+        console.log(`Fetching user events for userId: ${userId}`);
+        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventHistory/?userId=${userId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('HTTP error! status: ' + response.status);
+        }
+
+        const result = await response.json();
+        console.log('API response:', result);
+        const events = result.data;
+
+        if (result.success && Array.isArray(events)) {
+            console.log('Event objects:', events);
+            populateEventDetails(events);
+        } else {
+            console.error('No events found or invalid data format');
+        }
+    } catch (error) {
+        console.error('Error fetching user events:', error);
+    }
+}
+function populateEventDetails(events) {
+    const threeSentencesContainer = document.getElementById('threeSentences');
+
+    if (!threeSentencesContainer) {
+        console.error('threeSentences element not found');
+        return;
+    }
+
+    console.log('Populating event details:', events);
+
+    // Clear existing content
+    threeSentencesContainer.innerHTML = '';
+
+    if (events.length === 0) {
+        console.log('No events found');
+        return;
+    }
+
+    // Process only the first event
+    const event = events[0];
+    console.log('Processing event:', event);
+
+    const sentenceDiv = document.createElement('div');
+    sentenceDiv.className = 'firstSentence'; // Display only one event, so always use 'firstSentence'
+
+    const eventTypeSpan = document.createElement('span');
+    eventTypeSpan.className = 'detailItem';
+    eventTypeSpan.textContent = event.event_name; // Assuming 'event_name' is the correct key
+
+    const statusSpan = document.createElement('span');
+    statusSpan.className = 'detailItem';
+    statusSpan.textContent = event.event_status; // Assuming 'event_status' is the correct key
+
+    const descriptionSpan = document.createElement('span');
+    descriptionSpan.className = 'detailItem';
+    descriptionSpan.textContent = event.address; // Assuming 'address' is the correct key
+
+    sentenceDiv.appendChild(eventTypeSpan);
+    sentenceDiv.appendChild(statusSpan);
+    sentenceDiv.appendChild(descriptionSpan);
+
+    threeSentencesContainer.appendChild(sentenceDiv);
+    console.log('Added sentenceDiv:', sentenceDiv);
 }

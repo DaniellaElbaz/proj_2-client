@@ -26,8 +26,10 @@
                             aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div id="logo" class="order-2 ms-2"></div>
-                        <a class="navbar-brand mx-auto order-3" href="index.html">SAVE A LIFE</a>
+                        <div id="site-logo" class="mx-auto">
+                            <a id="logo" href="userHomePage.html"></a>
+                            <div class="navbar-brand-man">SAVE A LIFE</div>
+                        </div>
                     </div>
                     <div class="collapse navbar-collapse justify-content-center order-4 order-lg-2"
                         id="navbarSupportedContent">
@@ -111,19 +113,19 @@
                     </div>
                 </div>
             </section>
-            <section id="eventHistoryInfo">
-                <div class="eventHistoryContainer">
-                    <a href="eventList.html" class="allHistoryEventP">לכל היסטוריית האירועים</a>
-                    <div class="detailsContainer">
-                        <span class="detail">סוג אירוע</span>
-                        <span class="detail">סטטוס</span>
-                        <span class="detail">תיאור</span>
+            <section class="eventsHistory">
+                <div class="historyContainer">
+                    <div class="linkContainer">
+                        <a href="eventList.html" class="historyTitle">היסטוריית אירועים</a>
                     </div>
-                    <div class="historyHorizontalLine"></div>
-                    <div class="threeSentences" id="threeSentences">
-                        <div class="firstSentence"></div>
-                        <div class="secondSentence"></div>
-                        <div class="thirdSentence"></div>
+                    <div class="detailsContainer">
+                        <p class="detailItem">פרטי אירוע</p>
+                        <p class="detailItem">סטטוס</p>
+                        <p class="detailItem">תיאור</p>
+                    </div>
+                    <hr class="historyDivider">
+                    <hr class="middle-divider">
+                    <div id="threeSentences" class="threeSentences">
                     </div>
                 </div>
             </section>
