@@ -16,7 +16,9 @@ window.onload = () => {
     }
     getEvents();
     liveEventButton();
+    fetchEventParticipants(eventId)
 };
+
 async function getEvents() {
     const eventMDAList = document.getElementById('eventMDAList');
 

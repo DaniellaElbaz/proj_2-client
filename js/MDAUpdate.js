@@ -2,6 +2,9 @@ window.onload = function() {
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
     const userImage = localStorage.getItem('userImage');
     const userName = localStorage.getItem('userName');
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventId = urlParams.get('id'); // השגת ה-eventId מ-URL
+
     if (userDetails && userImage && userName) {
         const managerImage = document.getElementById('user-image');
         const userNameElement = document.getElementById('user-name');
@@ -14,8 +17,15 @@ window.onload = function() {
     } else {
         console.log('User details not found in local storage.');
     }
+
     initializeCharCount('.inputBox', '.charCount', 400);
     setupSubmitButton('#addEventupdateFormButton', '.inputBox', '#errorMessage', '#successMessage');
+
+    if (eventId) {
+        fetchEventParticipants(eventId);
+    } else {
+        console.error('Event ID not found in URL');
+    }
 };
 
 function initializeCharCount(inputSelector, countSelector, maxChars) {
@@ -70,6 +80,7 @@ function setupSubmitButton(buttonSelector, inputSelector, errorSelector, success
         window.location.href = 'liveEventsMDA.html';
     });
 }
+
 async function updateReportFromMada(eventId, newStatus) {
     try {
         const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventType/${eventId}`, {
@@ -92,4 +103,55 @@ async function updateReportFromMada(eventId, newStatus) {
         console.error('Error:', error);
         alert('An error occurred while updating the event.');
     }
+}
+
+async function fetchEventParticipants(eventId) {
+    try {
+        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventLive/eventParticipants/${eventId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('HTTP error! status: ' + response.status);
+        }
+
+        const result = await response.json();
+        if (result.success) {
+            console.log('Participants:', result.data);
+            displayParticipants(result.data);
+        } else {
+            console.error('No participants found:', result.message);
+        }
+    } catch (error) {
+        console.error('Error fetching participants:', error);
+    }
+}
+
+function displayParticipants(participants) {
+    const container = document.querySelector('.eventUserContainer');
+    if (!container) {
+        console.error('Container element not found');
+        return;
+    }
+
+    const numberOfUsers = container.querySelector('.numberOfUsers');
+    numberOfUsers.textContent += ` ${participants.length}`;
+
+    participants.forEach(participant => {
+        const participantDiv = container.querySelector('.participant');
+
+        const img = document.getElementById('participantImage');
+        img.src = `images/${participant.user_photo}`;
+        img.alt = `${participant.first_name} ${participant.last_name}`;
+        const name =document.getElementById('participantName');
+        name.textContent = `${participant.first_name} ${participant.last_name}`;
+
+        const phone = document.getElementById('participantPhone');
+        phone.textContent = participant.phone;
+        
+
+    });
 }

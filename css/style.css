@@ -92,6 +92,12 @@ body {
     border-radius: 50%;
 }
 
+#participantImage{
+    background-color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
 #user-image {
     background-color: #fff;
     width: 36px;
@@ -1954,9 +1960,7 @@ textarea {
     max-width: 600px;
     padding: 10px 20px;
     border-radius: 50px;
-    /* קצוות עגולים */
     border: 1px solid #ccc;
-    /* גבול */
     outline: none;
     font-size: 16px;
     text-align: right;
@@ -1968,8 +1972,57 @@ textarea {
     position: relative;
     left: 28px;
 }
+.alert-container {
+    width: 80%;
+    max-width: 600px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+.alert-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+.alert-message {
+    font-size: 18px;
+    color: #555;
+}
+.close-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.close-btn:hover {
+    background-color: #0056b3;
+}
 
 /**********************************************************************MDAUptade***********************************************/
+#greenPoint{
+    width: 10px;
+    height: 10px;
+    background-color: rgb(64, 223, 64);
+    border-radius: 50%;
+    display: inline-block;
+}
+.participant{
+    display: flex;
+    text-align:center;
+    justify-content: space-between;
+    align-items:center;
+    margin: 30px;
+
+}
+.participant p{
+    margin-bottom: 0;
+}
 .eventNavigator {
     display: flex;
     justify-content: flex-end;
