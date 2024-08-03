@@ -23,7 +23,7 @@ window.onload = () => {
         
         fetchEventData(eventData.event_id);
         setupButtonListener(eventData, userDetails.user_id);
-        fetchUserEvents(userDetails.user_id);
+       // fetchUserEvents(eventData.event_id, userDetails.user_id);
     } else {
         console.log('User details or event ID not found in local storage.');
     }
@@ -164,20 +164,23 @@ async function setupButtonListener(eventData, user_id) {
         }
     });
 }
-async function fetchUserEvents(userId) {
+async function fetchUserEvents(eventId, userId) {
     try {
-        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventHistory/`, {
+        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventHistory/?eventId=${eventId}&userId=${userId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         });
+
         if (!response.ok) {
             throw new Error('HTTP error! status: ' + response.status);
         }
+
         const result = await response.json();
         console.log('API response:', result);
-        const events = result.events || result.data || result.eventList;
+        const events = result.data;
+
         if (result.success && Array.isArray(events)) {
             populateEventDetails(events);
         } else {
