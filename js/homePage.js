@@ -1,4 +1,3 @@
-
 window.onload = () => {
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
     const userImage = localStorage.getItem('userImage');
@@ -24,7 +23,7 @@ window.onload = () => {
         
         fetchEventData(eventData.event_id);
         setupButtonListener(eventData, userDetails.user_id);
-        fetchUserEvents(userDetails.userId);
+        fetchUserEvents(userDetails.user_id);
     } else {
         console.log('User details or event ID not found in local storage.');
     }
@@ -101,7 +100,7 @@ function addDescriptionElements(eventLiveReports, recentReports) {
     });
 }
 
-function setupButtonListener(eventData, user_id) {
+async function setupButtonListener(eventData, user_id) {
     const declineButton = document.querySelector('.declineButton');
     const buttonContainer = document.querySelector('.buttonContainer');
     const buttonAccept = document.querySelector('.acceptButton');
@@ -120,20 +119,25 @@ function setupButtonListener(eventData, user_id) {
 
     buttonAccept.addEventListener('click', async function () {
         const userId = user_id;
-        const eventId = eventData.event_id;
-
-        console.log('User ID:', userId);
-        console.log('Event ID:', eventId);
-        
-        if (!userId || !eventId) {
-            console.error('User ID or Event ID not found in local storage');
-            return;
-        }
+        const place = eventData.place;
+        const event_name = eventData.event_name;
+        const date = eventData.date;
+        const time = eventData.time;
+        const status = eventData.status;
+        const map = eventData.map;
+        const event_type = eventData.event_type;
+        const max_helper = eventData.max_helper;
 
         const requestData = {
             user_id: userId,
-            event_id: eventId,
-            place: eventData.place // Replace 'yourPlaceValue' with the actual place value
+            place: place,
+            event_name: event_name,
+            date: date,
+            time: time,
+            status: status,
+            map: map,
+            event_type: event_type,
+            max_helper: max_helper
         };
 
         console.log('Request Data:', requestData);
