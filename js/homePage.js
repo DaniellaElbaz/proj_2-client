@@ -175,8 +175,7 @@ function setupButtonListener(eventData, user_id) {
                     eventDate: date,
                     eventId: eventId,
                     eventAddress: place,
-                    eventStatus: status,
-                    map: map // Include the map in the URL parameters
+                    eventStatus: status
                 }).toString();
                 window.location.href = `mapPage.html?${queryParams}`;
             } else {

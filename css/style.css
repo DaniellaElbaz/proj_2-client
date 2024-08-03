@@ -173,7 +173,10 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-
+#map {
+    height: 70vh;
+    width: 100%;
+}
 #searchInput {
     background-image: url("../images/search.png");
     background-position: 10px;

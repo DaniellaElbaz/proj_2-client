@@ -2,7 +2,7 @@ window.onload = async () => {
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
     const userImage = localStorage.getItem('userImage');
     const userName = localStorage.getItem('userName');
-    const eventData = JSON.parse(localStorage.getItem('eventData'));
+    const urlParams = new URLSearchParams(window.location.search);
 
     if (userDetails && userImage && userName) {
         const managerImage = document.getElementById('user-image');
@@ -13,11 +13,54 @@ window.onload = async () => {
         if (userNameElement) {
             userNameElement.innerText = userName;
         }
-        const map = urlParams.get('map');
-        if (map && document.getElementById('eventMap')) {
-            document.getElementById('eventMap').src = `images/${map}`;
+
+        const eventAddress = urlParams.get('eventAddress');
+        console.log('Event address:', eventAddress);
+        if (eventAddress) {
+            const location = await getCoordinatesFromAddress(eventAddress);
+            if (location) {
+                console.log('Location:', location);
+                initMap(location);
+            } else {
+                console.error('Failed to get coordinates for the address');
+            }
+        } else {
+            console.error('Event address not provided');
         }
     } else {
         console.log('User details not found in local storage.');
     }
 };
+async function getCoordinatesFromAddress(address) {
+    const encodedAddress = encodeURIComponent(address);
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodedAddress}&format=json&limit=1`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log('Nominatim response data:', data);
+
+        if (data.length > 0) {
+            const { lat, lon } = data[0];
+            return { lat: parseFloat(lat), lng: parseFloat(lon) };
+        } else {
+            console.error('No results found for the address');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching coordinates:', error);
+        return null;
+    }
+}
+
+function initMap(location) {
+    const map = L.map('map').setView([location.lat, location.lng], 15);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    L.marker([location.lat, location.lng]).addTo(map)
+        .bindPopup('Event Location')
+        .openPopup();
+}
