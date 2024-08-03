@@ -20,7 +20,7 @@ window.onload = () => {
         if (userEventMap && eventData.map) {
             userEventMap.src = `images/${eventData.map}`;
         }
-        if(!eventData){
+        if(userDetails.place== null){
             alert("no event");
             window.location.href="userHomePage.html";
         }
