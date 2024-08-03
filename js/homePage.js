@@ -3,32 +3,33 @@ window.onload = () => {
     const userImage = localStorage.getItem('userImage');
     const userName = localStorage.getItem('userName');
     const eventData = JSON.parse(localStorage.getItem('eventData'));
-    
+
     if (userDetails && userImage && userName && eventData) {
         const managerImage = document.getElementById('user-image');
         const userNameElement = document.getElementById('user-name');
         const userEventMap = document.getElementById('eventImage');
-        
+
         if (managerImage) {
             managerImage.src = userImage;
         }
-        
+
         if (userNameElement) {
             userNameElement.innerText = userName;
         }
-        
+
         if (userEventMap && eventData.map) {
             userEventMap.src = `images/${eventData.map}`;
         }
         
         fetchEventData(eventData.event_id);
-        console.log('eventData.event_id',eventData.event_id);
+        fetchUserEventsDetails(userDetails.user_id);
         setupButtonListener(eventData, userDetails.user_id);
-        fetchUserEvents(userDetails.user_id);
+        
     } else {
         console.log('User details or event ID not found in local storage.');
     }
 };
+
 async function fetchEventData(eventId) {
     try {
         const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventLive/${eventId}`, {
@@ -45,11 +46,10 @@ async function fetchEventData(eventId) {
 
         const data = await response.json();
         console.log('Live Reports:', data.recentReports);
-        
+
         if (data.success) {
-            const eventLiveReports = Array.isArray(data.eventLiveReports) ? data.eventLiveReports : [];
             const recentReports = Array.isArray(data.recentReports) ? data.recentReports : [];
-            addDescriptionElements(eventLiveReports, recentReports);
+            addDescriptionElements(recentReports);
         } else {
             console.error('Failed to fetch events:', data.message);
             alert(data.message || 'Failed to fetch events');
@@ -60,39 +60,30 @@ async function fetchEventData(eventId) {
     }
 }
 
-function addDescriptionElements(eventLiveReports, recentReports) {
-    const threeSentencesContainer = document.getElementById("threeSentences");
-    console.log('threeSentences element:', threeSentencesContainer);
-
-    if (!threeSentencesContainer) {
-        console.error('threeSentences element not found');
-        return;
-    }
-
-    threeSentencesContainer.innerHTML = "";
-    eventLiveReports.forEach((report, index) => {
-        console.log('Adding report:', report);
-        const sentenceClass = (index === 1) ? "secondSentence" : "sentence";
-        const sentenceDiv = document.createElement("div");
-        sentenceDiv.className = sentenceClass;
-        const eventDescription = `${report.event_name} - ${report.event_status} - ${report.type_event}`;
-        sentenceDiv.textContent = eventDescription;
-        threeSentencesContainer.appendChild(sentenceDiv);
-        console.log('Added element:', sentenceDiv);
-    });
+function addDescriptionElements(recentReports) {
 
     recentReports.forEach((report, index) => {
         const reportContainer = document.getElementById(`report${index + 1}`);
-        
+
         if (reportContainer) {
             const descriptionSpan = reportContainer.querySelector('.description');
             if (descriptionSpan) {
                 descriptionSpan.textContent = report.update_description;
             }
-            
+
             const timeSpan = reportContainer.querySelector('.time');
             if (timeSpan) {
-                timeSpan.textContent = report.time;
+                console.log(`Raw time data for report ${index + 1}: ${report.time}`);
+                try {
+                    // Assuming report.time is in "HH:MM:SS" format
+                    const [hours, minutes] = report.time.split(':');
+                    const formattedTime = `${hours}:${minutes}`;
+                    timeSpan.textContent = formattedTime;
+                    console.log(`Formatted time for report ${index + 1}: ${formattedTime}`);
+                } catch (error) {
+                    console.error(`Error formatting time for report ${index + 1}:`, error);
+                    timeSpan.textContent = 'Invalid time';
+                }
             }
         } else {
             console.error(`Report container with ID report${index + 1} not found`);
@@ -110,11 +101,28 @@ function setupButtonListener(eventData, user_id) {
         return;
     }
 
-    declineButton.addEventListener('click', function () {
-        const newButton = document.createElement('button');
-        newButton.textContent = 'אירוע פעיל, באפשרותך להצטרף בכל רגע נתון';
-        newButton.className = 'activeEventButton';
-        buttonContainer.appendChild(newButton); // Append the new button to the button container
+    declineButton.addEventListener('click', async function () {
+        try {
+            const response = await fetch('https://proj-2-ffwz.onrender.com/api/eventLive/', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user_id: user_id, place: null })
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                console.log('User place updated successfully:', result);
+                window.location.href = 'userHomePage.html';
+            } else {
+                console.error('Error updating user place:', result.message);
+                alert('Error updating user place: ' + result.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while updating user place: ' + error.message);
+        }
     });
 
     buttonAccept.addEventListener('click', async function () {
@@ -128,12 +136,12 @@ function setupButtonListener(eventData, user_id) {
         const map = eventData.map;
         const eventType = eventData.event_type;
         const maxHelper = eventData.max_helper;
-
+    
         if (!userId || !eventId || !place) {
             console.error('User ID, Event ID, or place is missing');
             return;
         }
-
+    
         const requestData = {
             user_id: userId,
             event_id: eventId,
@@ -146,22 +154,31 @@ function setupButtonListener(eventData, user_id) {
             event_type: eventType,
             max_helper: maxHelper
         };
-
+    
         console.log('Request Data:', requestData);
-
+    
         try {
-            const response = await fetch('https://proj-2-ffwz.onrender.com/api/eventLive', {
+            const response = await fetch('https://proj-2-ffwz.onrender.com/api/eventLive/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(requestData)
             });
-
+    
             const result = await response.json();
             if (response.ok) {
                 console.log('Data inserted successfully:', result);
-                window.location.href = 'userDetails.html';
+                const queryParams = new URLSearchParams({
+                    eventName: eventName,
+                    eventType: eventType,
+                    eventDate: date,
+                    eventId: eventId,
+                    eventAddress: place,
+                    eventStatus: status,
+                    map: map // Include the map in the URL parameters
+                }).toString();
+                window.location.href = `mapPage.html?${queryParams}`;
             } else {
                 console.error('Error inserting data:', result.message);
                 alert('Error inserting data: ' + result.message);
@@ -173,10 +190,10 @@ function setupButtonListener(eventData, user_id) {
     });
 }
 
-async function fetchUserEvents(userId) {
+async function fetchUserEventsDetails(userId) {
     try {
         console.log(`Fetching user events for userId: ${userId}`);
-        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventHistory?userId=${userId}`, {
+        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventHistory/?userId=${userId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -192,6 +209,7 @@ async function fetchUserEvents(userId) {
         const events = result.data;
 
         if (result.success && Array.isArray(events)) {
+            console.log('Event objects:', events);
             populateEventDetails(events);
         } else {
             console.error('No events found or invalid data format');
@@ -202,33 +220,46 @@ async function fetchUserEvents(userId) {
 }
 
 function populateEventDetails(events) {
-    const threeSentencesContainer = document.getElementById("threeSentences");
+    const threeSentencesContainer = document.getElementById('threeSentences');
+
     if (!threeSentencesContainer) {
         console.error('threeSentences element not found');
         return;
     }
 
-    const firstSentence = threeSentencesContainer.querySelector('.firstSentence');
-    const secondSentence = threeSentencesContainer.querySelector('.secondSentence');
-    const thirdSentence = threeSentencesContainer.querySelector('.thirdSentence');
-    firstSentence.innerHTML = "";
-    secondSentence.innerHTML = "";
-    thirdSentence.innerHTML = "";
+    console.log('Populating event details:', events);
 
-    events.slice(0, 3).forEach((event, index) => {
-        const eventDetail = `
-            <span>${event.event_type}</span>
-            <span>${event.status}</span>
-            <span>${event.description}</span>
-        `;
-        if (index === 0) {
-            firstSentence.innerHTML = eventDetail;
-        } else if (index === 1) {
-            secondSentence.innerHTML = eventDetail;
-        } else if (index === 2) {
-            thirdSentence.innerHTML = eventDetail;
-        }
-    });
+    // Clear existing content
+    threeSentencesContainer.innerHTML = '';
+
+    if (events.length === 0) {
+        console.log('No events found');
+        return;
+    }
+
+    // Process only the first event
+    const event = events[0];
+    console.log('Processing event:', event);
+
+    const sentenceDiv = document.createElement('div');
+    sentenceDiv.className = 'firstSentence'; // Display only one event, so always use 'firstSentence'
+
+    const eventTypeSpan = document.createElement('span');
+    eventTypeSpan.className = 'detail';
+    eventTypeSpan.textContent = event.event_name; // Assuming 'event_name' is the correct key
+
+    const statusSpan = document.createElement('span');
+    statusSpan.className = 'detail';
+    statusSpan.textContent = event.event_status; // Assuming 'event_status' is the correct key
+
+    const descriptionSpan = document.createElement('span');
+    descriptionSpan.className = 'detail';
+    descriptionSpan.textContent = event.address; // Assuming 'address' is the correct key
+
+    sentenceDiv.appendChild(eventTypeSpan);
+    sentenceDiv.appendChild(statusSpan);
+    sentenceDiv.appendChild(descriptionSpan);
+
+    threeSentencesContainer.appendChild(sentenceDiv);
+    console.log('Added sentenceDiv:', sentenceDiv);
 }
-
-

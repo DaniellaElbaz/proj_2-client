@@ -20,24 +20,28 @@ window.onload = () => {
     } else {
         console.log('User details not found in local storage.');
     }
-    eventErea = document.getElementById("events-container");
 };
 
 async function fetchUserEvents(userId) {
     try {
-        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventHistory/`, {
+        console.log(`Fetching user events for userId: ${userId}`);
+        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventHistory/?userId=${userId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         });
+
         if (!response.ok) {
             throw new Error('HTTP error! status: ' + response.status);
         }
+
         const result = await response.json();
         console.log('API response:', result);
-        const events = result.events || result.data || result.eventList;
+        const events = result.data;
+
         if (result.success && Array.isArray(events)) {
+            console.log('Event objects:', events);
             populateEventDetails(events);
         } else {
             console.error('No events found or invalid data format');
@@ -46,6 +50,7 @@ async function fetchUserEvents(userId) {
         console.error('Error fetching user events:', error);
     }
 }
+
 function populateEventDetails(events) {
     const eventsContainer = document.getElementById('events-container');
     const eventTemplate = document.querySelector('.events-item');
@@ -60,37 +65,20 @@ function populateEventDetails(events) {
         const eventItem = eventTemplate.cloneNode(true);
         eventItem.style.display = 'block';
         eventItem.querySelector('h1').textContent = event.event_name;
-        eventItem.querySelector('.spanDate').textContent = event.date_and_time;
+        eventItem.querySelector('.spanDate').textContent = new Date(event.date_and_time).toLocaleDateString();
         eventItem.querySelector('.spanPlace').textContent = event.address;
         eventItem.querySelector('.spanStatus').textContent = event.event_status;
 
-        const mapElement = eventItem.querySelector('td img');
+        const mapElement = eventItem.querySelector('.eventMap');
         if (mapElement) {
-            mapElement.src = event.map || '';
+            const mapPath = `images/${event.map}`; // Update with correct path
+            mapElement.src = mapPath;
             mapElement.alt = 'Event Map';
         } else {
             console.error('Map image element not found in template');
         }
 
-        const iconEventContainer = eventItem.querySelector('.iconEventContainer');
-        if (iconEventContainer) {
-            let eventPhotoElement = iconEventContainer.querySelector('img');
-            if (!eventPhotoElement) {
-                eventPhotoElement = document.createElement('img');
-                iconEventContainer.appendChild(eventPhotoElement);
-            }
-            eventPhotoElement.src = event.event_photo || '';
-            eventPhotoElement.alt = 'Event Photo';
-        } else {
-            console.error('IconEventContainer not found in template');
-        }
-
-        const eventPlaceElement = eventItem.querySelector('.event-item-container');
-        if (eventPlaceElement) {
-            eventPlaceElement.innerHTML = `<p>:זירת האירוע</p>${event.address}`;
-        } else {
-            console.error('Event item container not found in template');
-        }
+        
 
         const reportButton = eventItem.querySelector('#reportButton');
         if (reportButton) {

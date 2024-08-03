@@ -23,8 +23,14 @@ window.onload = async () => {
         if (eventName && document.getElementById('eventName')) {
             document.getElementById('eventName').innerText = `דו''ח אירוע: ${eventName}`;
         }
-        if (eventType && document.getElementById('selectType')) {
-            document.getElementById('selectType').value = eventType;
+        const selectTypeElement = document.getElementById('selectType');
+        if (selectTypeElement) {
+            selectTypeElement.innerHTML = ''; // Clear any existing options
+            const option = document.createElement('option');
+            option.value = eventType;
+            option.text = eventType;
+            option.selected = true; // Set the option as selected
+            selectTypeElement.appendChild(option);
         }
         if (eventDate && document.getElementById('inputDate')) {
             document.getElementById('inputDate').value = eventDate.split('T')[0];
@@ -41,7 +47,10 @@ window.onload = async () => {
             populateStaticOptions();
         }
         
-        // Add event listener for the report submission
+        const beckButton = document.querySelector('.button-back-report');
+        if (beckButton) {
+            beckButton.addEventListener('click', buttonBeck);
+        }
         const submitButton = document.querySelector('.button-send-report');
         if (submitButton) {
             submitButton.addEventListener('click', handleSubmitReport);
@@ -50,9 +59,14 @@ window.onload = async () => {
     } else {
         console.log('User details not found in local storage.');
     }
-    
 };
 
+function buttonBeck(){
+    const userConfirmed = confirm(" הזהרה! ביציאה מהדף הדו''ח לא ישמר");
+    if (userConfirmed) {
+        window.location.href = "eventList.html"
+    }
+}
 async function fetchAndPopulateUsers(eventId) {
     try {
         const response = await fetch(`https://proj-2-ffwz.onrender.com/api/user/?eventId=${eventId}`, {
@@ -161,10 +175,54 @@ function updateCharCount(textarea, placeholderId) {
         placeholderElement.textContent = `${usedChars}/${maxChars}`;
     }
 }
+async function handleSubmitReport() {
+    const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventId = urlParams.get('eventId');
+    
+    const eventWhen = document.getElementById("textareaWhen").value.trim();
+    const eventExplain = document.getElementById("textareaExplain").value.trim();
+    const userRegretsId = userDetails.user_id;
+    const userRegrets = document.querySelector('.help-selected').value.trim();
 
-function handleSubmitReport() {
-    alert('הדוח הוגש בהצלחה!');
+    // בדיקת שדות ריקים
+    if (!eventWhen) {
+        alert('נא למלא את שדה "מתי זה קרה".');
+        return;
+    }
+    if (!eventExplain) {
+        alert('נא למלא את שדה "תיאור האירוע".');
+        return;
+    }
 
+    const requestData = {
+        userId: userDetails.user_id,
+        eventId: eventId,
+        eventWhen: eventWhen,
+        eventExplain: eventExplain,
+        userRegretsId: userRegretsId,
+        userRegrets: userRegrets
+    };
 
-    window.location.href = 'eventList.html'; 
+    try {
+        const response = await fetch('https://proj-2-ffwz.onrender.com/api/user/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            alert('Report submitted successfully');
+            window.location.href = 'eventList.html';
+        } else {
+            console.error('Error submitting report:', result.message);
+            alert('Error submitting report: ' + result.message);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while submitting report: ' + error.message);
+    }
 }

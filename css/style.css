@@ -163,7 +163,7 @@ body {
     font-variation-settings: "slnt" 0;
     margin-top: 24px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
 }
@@ -183,26 +183,11 @@ body {
 
 .sort-item {
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
+    align-items: center;
+
     padding: 0;
 }
 
-[title~="checkbox"] {
-    width: 11px;
-    height: 8px;
-    margin-bottom: 0;
-}
-
-[title~="filter"] {
-    width: 24px;
-    height: 20px;
-}
-
-[title~="clock"] {
-    width: 20px;
-    height: 20px;
-}
 
 .sort input {
     width: 180px;
@@ -1469,19 +1454,20 @@ textarea {
     margin-right: 8px;
 }
 .detail{
-    font-size: 2vh;
+    display: inline-block;
+    margin-right: 10px;
 
+}
+
+.firstSentence, .secondSentence, .thirdSentence {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
 }
 .historyHorizontalLine{
     width: 100%;
     height: 3px;
     background-color: white;
-}
-.threeSentences {
-    display: flex;
-    justify-content: space-between;
-    margin-left: 6%;
-    margin-top: 8%;
 }
 
 .sentence, .secondSentence {
@@ -1643,10 +1629,6 @@ textarea {
     flex-direction: column;
     align-items: flex-end; 
     justify-content: center; 
-}
-
-.eventMap {
-    height: 80vh;
 }
 
 .dividerLeft {
