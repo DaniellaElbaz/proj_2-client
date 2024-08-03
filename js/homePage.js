@@ -22,8 +22,9 @@ window.onload = () => {
         }
         
         fetchEventData(eventData.event_id);
+        console.log('eventData.event_id',eventData.event_id);
         setupButtonListener(eventData, userDetails.user_id);
-       // fetchUserEvents(eventData.event_id, userDetails.user_id);
+        fetchUserEvents(userDetails.user_id);
     } else {
         console.log('User details or event ID not found in local storage.');
     }
@@ -99,11 +100,11 @@ function addDescriptionElements(eventLiveReports, recentReports) {
     });
 }
 
-async function setupButtonListener(eventData, user_id) {
+function setupButtonListener(eventData, user_id) {
     const declineButton = document.querySelector('.declineButton');
     const buttonContainer = document.querySelector('.buttonContainer');
     const buttonAccept = document.querySelector('.acceptButton');
-    
+
     if (!declineButton || !buttonContainer || !buttonAccept) {
         console.error('Required elements not found in the DOM');
         return;
@@ -118,38 +119,45 @@ async function setupButtonListener(eventData, user_id) {
 
     buttonAccept.addEventListener('click', async function () {
         const userId = user_id;
+        const eventId = eventData.event_id;
         const place = eventData.place;
-        const event_name = eventData.event_name;
+        const eventName = eventData.event_name;
         const date = eventData.date;
         const time = eventData.time;
         const status = eventData.status;
         const map = eventData.map;
-        const event_type = eventData.event_type;
-        const max_helper = eventData.max_helper;
+        const eventType = eventData.event_type;
+        const maxHelper = eventData.max_helper;
+
+        if (!userId || !eventId || !place) {
+            console.error('User ID, Event ID, or place is missing');
+            return;
+        }
 
         const requestData = {
             user_id: userId,
+            event_id: eventId,
             place: place,
-            event_name: event_name,
+            event_name: eventName,
             date: date,
             time: time,
             status: status,
             map: map,
-            event_type: event_type,
-            max_helper: max_helper
+            event_type: eventType,
+            max_helper: maxHelper
         };
 
         console.log('Request Data:', requestData);
-    
+
         try {
-            const response = await fetch('https://proj-2-ffwz.onrender.com/api/eventLive/', {
+            const response = await fetch('https://proj-2-ffwz.onrender.com/api/eventLive', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(requestData)
             });
-    
+
             const result = await response.json();
             if (response.ok) {
                 console.log('Data inserted successfully:', result);
@@ -164,9 +172,11 @@ async function setupButtonListener(eventData, user_id) {
         }
     });
 }
-async function fetchUserEvents(eventId, userId) {
+
+async function fetchUserEvents(userId) {
     try {
-        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventHistory/?eventId=${eventId}&userId=${userId}`, {
+        console.log(`Fetching user events for userId: ${userId}`);
+        const response = await fetch(`https://proj-2-ffwz.onrender.com/api/eventHistory?userId=${userId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -201,8 +211,6 @@ function populateEventDetails(events) {
     const firstSentence = threeSentencesContainer.querySelector('.firstSentence');
     const secondSentence = threeSentencesContainer.querySelector('.secondSentence');
     const thirdSentence = threeSentencesContainer.querySelector('.thirdSentence');
-
-    // Clear existing content
     firstSentence.innerHTML = "";
     secondSentence.innerHTML = "";
     thirdSentence.innerHTML = "";
