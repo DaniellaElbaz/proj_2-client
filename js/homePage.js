@@ -95,7 +95,7 @@ function setupButtonListener(eventData, user_id) {
             });
             const result = await response.json();
             if (response.ok) {
-                createMapButton(eventData, user_id);
+                window.location.href = 'userHomePage.html';
             } else {
                 console.error('Error updating user place:', result.message);
                 alert('Error updating user place: ' + result.message);
@@ -142,7 +142,6 @@ function setupButtonListener(eventData, user_id) {
             });
             const result = await response.json();
             if (response.ok) {
-                createMapButton(eventData, user_id);
                 const queryParams = new URLSearchParams({
                     eventName: eventName,
                     eventType: eventType,
